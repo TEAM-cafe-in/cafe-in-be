@@ -119,10 +119,22 @@ fabric.properties
 .idea/**/azureSettings.xml
 
 # Unnecessary Files
+.idea
+*.iws
+*.iml
+*.ipr
+out/
+!**/src/main/**/out/
+!**/src/test/**/out/
 *.bin
 *.lock
 *.probe
 *.iml
+/nbproject/private/
+/nbbuild/
+/dist/
+/nbdist/
+/.nb-gradle/
 
 ### Java ###
 # Compiled class file
