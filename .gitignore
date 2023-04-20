@@ -118,6 +118,12 @@ fabric.properties
 # https://plugins.jetbrains.com/plugin/8053-azure-toolkit-for-intellij
 .idea/**/azureSettings.xml
 
+# Unnecessary Files
+*.bin
+*.lock
+*.probe
+*.iml
+
 ### Java ###
 # Compiled class file
 *.class
