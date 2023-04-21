@@ -135,6 +135,7 @@ out/
 /dist/
 /nbdist/
 /.nb-gradle/
+build/
 
 ### Java ###
 # Compiled class file
