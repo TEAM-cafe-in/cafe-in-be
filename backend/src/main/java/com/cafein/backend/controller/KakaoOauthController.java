@@ -24,7 +24,6 @@ public class KakaoOauthController {
 	@GetMapping("/login/{provider}")
 	public ResponseEntity<LoginResponseDTO> login(@PathVariable String provider, @RequestParam String code) {
 		final LoginResponseDTO loginResponseDto = kakaoOathService.login(provider, code);
-		System.out.println(provider);
 		return ResponseEntity.ok().body(loginResponseDto);
 	}
 }
