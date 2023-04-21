@@ -32,4 +32,14 @@ public class User {
 	@Enumerated(EnumType.STRING)
 	private Provider provider;
 
+	@Override
+	public String toString() {
+		return "User{" +
+			"id=" + id +
+			", email='" + email + '\'' +
+			", name='" + name + '\'' +
+			", gender=" + gender +
+			", provider=" + provider +
+			'}';
+	}
 }
