@@ -37,6 +37,10 @@ dependencies {
 	implementation 'com.mysql:mysql-connector-j:8.0.33'
 
 	implementation 'io.jsonwebtoken:jjwt:0.9.1'
+
+	// https://mvnrepository.com/artifact/io.rest-assured/rest-assured
+	testImplementation 'io.rest-assured:rest-assured:4.4.0'
+
 }
 
 dependencyManagement {

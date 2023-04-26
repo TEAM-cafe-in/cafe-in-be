@@ -6,12 +6,12 @@ import java.util.Optional;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.cafein.backend.domain.member.entity.Member;
+import com.cafein.backend.domain.member.repository.MemberRepository;
 import com.cafein.backend.global.error.ErrorCode;
 import com.cafein.backend.global.error.exception.AuthenticationException;
 import com.cafein.backend.global.error.exception.BusinessException;
 import com.cafein.backend.global.error.exception.EntityNotFoundException;
-import com.cafein.backend.domain.member.entity.Member;
-import com.cafein.backend.domain.member.repository.MemberRepository;
 
 import lombok.RequiredArgsConstructor;
 
@@ -50,6 +50,7 @@ public class MemberService {
 		return member;
 	}
 
+	@Transactional(readOnly = true)
 	public Member findMemberByMemberId(final Long memberId) {
 		return memberRepository.findById(memberId)
 			.orElseThrow(() -> new EntityNotFoundException(ErrorCode.MEMBER_NOT_EXIST));

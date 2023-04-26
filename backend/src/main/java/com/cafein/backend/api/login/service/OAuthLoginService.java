@@ -6,15 +6,15 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.cafein.backend.api.login.dto.OAuthLoginDTO;
-import com.cafein.backend.domain.member.constant.Role;
-import com.cafein.backend.domain.member.service.MemberService;
-import com.cafein.backend.global.jwt.dto.JwtTokenDTO;
-import com.cafein.backend.global.jwt.service.TokenManager;
 import com.cafein.backend.domain.member.constant.MemberType;
+import com.cafein.backend.domain.member.constant.Role;
 import com.cafein.backend.domain.member.entity.Member;
+import com.cafein.backend.domain.member.service.MemberService;
 import com.cafein.backend.external.oauth.model.OAuthAttributes;
 import com.cafein.backend.external.oauth.service.SocialLoginApiService;
 import com.cafein.backend.external.oauth.service.SocialLoginApiServiceFactory;
+import com.cafein.backend.global.jwt.dto.JwtTokenDTO;
+import com.cafein.backend.global.jwt.service.TokenManager;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -28,9 +28,9 @@ public class OAuthLoginService {
 	private final MemberService memberService;
 	private final TokenManager tokenManager;
 
-	public OAuthLoginDTO.Response oauthLogin(String accesstoken, MemberType memberType) {
+	public OAuthLoginDTO.Response oauthLogin(String accessToken, MemberType memberType) {
 		SocialLoginApiService socialLoginApiService = SocialLoginApiServiceFactory.getSocialLoginApiService(memberType);
-		OAuthAttributes userInfo = socialLoginApiService.getUserInfo(accesstoken);
+		OAuthAttributes userInfo = socialLoginApiService.getUserInfo(accessToken);
 		log.info("userInfo : {}", userInfo);
 
 		JwtTokenDTO jwtTokenDTO;
