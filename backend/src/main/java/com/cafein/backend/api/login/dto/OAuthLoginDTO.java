@@ -5,24 +5,17 @@ import java.util.Date;
 import com.cafein.backend.global.jwt.dto.JwtTokenDTO;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
-import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 public class OAuthLoginDTO {
 
-	@Data
-	@Builder
-	@NoArgsConstructor
-	@AllArgsConstructor
+	@Data @Builder
 	public static class Request {
 		private String memberType;
 	}
 
 	@Data @Builder
-	@NoArgsConstructor
-	@AllArgsConstructor
 	public static class Response {
 		private String grantType;
 		private String accessToken;
