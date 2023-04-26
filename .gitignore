@@ -3,6 +3,7 @@
 
 ## Security ##
 application.properties
+*.yml
 
 
 ### Intellij ###

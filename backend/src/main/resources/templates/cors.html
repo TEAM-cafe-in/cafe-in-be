@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>CORS Test</title>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+</head>
+<body>
+<script>
+    $.ajax({
+        url      : "http://localhost:8080/api/health",
+        type     : "GET",
+        beforeSend: function(xhr) {
+            xhr.setRequestHeader("custom-header", "custom value");
+        },
+        success  : function(result){
+            console.log(result);
+        }
+    });
+</script>
+</body>
+</html>
