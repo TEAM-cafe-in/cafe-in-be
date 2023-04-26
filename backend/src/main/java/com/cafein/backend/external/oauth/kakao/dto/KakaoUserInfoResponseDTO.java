@@ -2,10 +2,15 @@ package com.cafein.backend.external.oauth.kakao.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
-@Data @Builder
+@Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class KakaoUserInfoResponseDTO {
 
 	private String id;
@@ -14,11 +19,17 @@ public class KakaoUserInfoResponseDTO {
 	private KakaoAccount kakaoAccount;
 
 	@Data
+	@Builder
+	@NoArgsConstructor
+	@AllArgsConstructor
 	public static class KakaoAccount {
 		private String email;
 		private Profile profile;
 
 		@Data
+		@Builder
+		@NoArgsConstructor
+		@AllArgsConstructor
 		public static class Profile {
 
 			private String nickname;

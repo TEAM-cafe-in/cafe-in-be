@@ -1,8 +1,8 @@
 package com.cafein.backend.external.oauth.model;
 
+import com.cafein.backend.domain.member.constant.MemberType;
 import com.cafein.backend.domain.member.constant.Role;
 import com.cafein.backend.domain.member.entity.Member;
-import com.cafein.backend.domain.member.constant.MemberType;
 
 import lombok.Builder;
 import lombok.Getter;
