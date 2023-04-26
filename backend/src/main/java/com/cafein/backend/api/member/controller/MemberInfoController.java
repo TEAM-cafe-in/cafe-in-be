@@ -11,8 +11,13 @@ import com.cafein.backend.api.member.service.MemberInfoService;
 import com.cafein.backend.global.jwt.service.TokenManager;
 
 import io.jsonwebtoken.Claims;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 
+@Tag(name = "member", description = "회원 API")
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/member")
@@ -21,6 +26,13 @@ public class MemberInfoController {
 	private final MemberInfoService memberInfoService;
 	private final TokenManager tokenManager;
 
+	@Tag(name = "member")
+	@Operation(summary = "회원 정보 조회 API", description = "회원 정보 조회 API")
+	@ApiResponses({
+		@ApiResponse(responseCode = "A-001", description = "토큰이 만료되었습니다."),
+		@ApiResponse(responseCode = "A-002", description = "해당 토큰은 유효한 토큰이 아닙니다."),
+		@ApiResponse(responseCode = "M-003", description = "해당 회원은 존재하지 않습니다.")
+	})
 	@GetMapping("/info")
 	public ResponseEntity<MemberInfoResponseDTO> getMemberInfo(
 		@RequestHeader("Authorization") String authorizationHeader) {
