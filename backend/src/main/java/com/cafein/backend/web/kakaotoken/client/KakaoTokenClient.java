@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestHeader;
 
 import com.cafein.backend.web.kakaotoken.dto.KakaoTokenDTO;
 
-@FeignClient(url = "https://kauth.kakao.com", name = "kakaoTokenclient")
+@FeignClient(url = "https://kauth.kakao.com", name = "kakaoTokenClient")
 public interface KakaoTokenClient {
 
 	@PostMapping(value = "/oauth/token", consumes = "application/json")

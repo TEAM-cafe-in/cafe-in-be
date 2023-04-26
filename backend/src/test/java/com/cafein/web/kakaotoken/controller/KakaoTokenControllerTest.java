@@ -23,27 +23,23 @@ import com.cafein.backend.domain.member.entity.Member;
 import com.cafein.backend.domain.member.service.MemberService;
 import com.cafein.backend.global.error.ErrorCode;
 import com.cafein.backend.global.error.exception.EntityNotFoundException;
-import com.cafein.backend.global.jwt.service.TokenManager;
 
 import io.restassured.RestAssured;
 import io.restassured.response.ExtractableResponse;
 import io.restassured.response.Response;
 
-@SpringBootTest
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT)
 @TestMethodOrder(value = MethodOrderer.OrderAnnotation.class)
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 class KakaoTokenControllerTest {
 
-	private static final String KAKAO_ACCESS_TOKEN = "4f1QiSQn3PfUd9xdY6u4nemdhAepa1YZVlerF94wCj102wAAAYe8MouK";
+	private static final String KAKAO_ACCESS_TOKEN = "NK16KvceY2WJ776OjrfOjCyGqxWYKPPq3sS-HMC-CisM0gAAAYe8ie5i";
 	private static final String EMAIL = "uichan293@naver.com";
 	private String CAFEIN_ACCESS_TOKEN = "";
-	private Map<String, String> paramBody = new HashMap<>();
+	private final Map<String, String> paramBody = new HashMap<>();
 
 	@Autowired
 	private MemberService memberService;
-
-	@Autowired
-	private TokenManager tokenManager;
 
 	@Autowired
 	private TokenService tokenService;
