@@ -15,7 +15,7 @@ import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @RestController
-@RequestMapping("/api/token-test")
+@RequestMapping("/test/api/token-test")
 @RequiredArgsConstructor
 public class TokenTestController {
 
