@@ -1,14 +1,11 @@
 package com.cafein.backend.web.kakaotoken.dto;
 
-import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 public class KakaoTokenDTO {
 
-	@Data
-	@Builder
+	@Data @Builder
 	public static class Request {
 		private String grant_type;
 		private String client_id;
@@ -17,10 +14,7 @@ public class KakaoTokenDTO {
 		private String client_secret;
 	}
 
-	@Data
-	@Builder
-	@NoArgsConstructor
-	@AllArgsConstructor
+	@Data @Builder
 	public static class Response {
 		private String token_type;
 		private String access_token;

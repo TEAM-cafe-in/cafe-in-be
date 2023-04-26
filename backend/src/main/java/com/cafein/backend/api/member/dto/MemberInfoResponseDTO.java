@@ -3,15 +3,10 @@ package com.cafein.backend.api.member.dto;
 import com.cafein.backend.domain.member.constant.Role;
 import com.cafein.backend.domain.member.entity.Member;
 
-import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
-@Data
-@Builder
-@NoArgsConstructor
-@AllArgsConstructor
+@Data @Builder
 public class MemberInfoResponseDTO {
 
 	private Long memberId;

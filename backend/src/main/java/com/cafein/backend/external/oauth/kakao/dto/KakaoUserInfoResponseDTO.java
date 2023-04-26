@@ -2,15 +2,10 @@ package com.cafein.backend.external.oauth.kakao.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
-@Data
-@Builder
-@NoArgsConstructor
-@AllArgsConstructor
+@Data @Builder
 public class KakaoUserInfoResponseDTO {
 
 	private String id;
