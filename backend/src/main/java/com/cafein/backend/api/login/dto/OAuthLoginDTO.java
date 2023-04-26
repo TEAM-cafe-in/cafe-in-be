@@ -7,19 +7,20 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.Getter;
+import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 public class OAuthLoginDTO {
 
-	@Getter @Setter
+	@Data
+	@Builder
+	@NoArgsConstructor
+	@AllArgsConstructor
 	public static class Request {
 		private String memberType;
 	}
 
-	@Getter @Setter
-	@Builder
+	@Data @Builder
 	@NoArgsConstructor
 	@AllArgsConstructor
 	public static class Response {

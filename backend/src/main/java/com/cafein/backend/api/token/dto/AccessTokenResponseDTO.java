@@ -4,10 +4,15 @@ import java.util.Date;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.Getter;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
-@Getter @Builder
+@Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class AccessTokenResponseDTO {
 
 	private String grantType;

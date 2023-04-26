@@ -5,10 +5,11 @@ import com.cafein.backend.domain.member.entity.Member;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.Getter;
+import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Getter @Builder
+@Data
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 public class MemberInfoResponseDTO {
