@@ -23,6 +23,7 @@ public class KakaoUserInfoResponseDTO {
 	@NoArgsConstructor
 	@AllArgsConstructor
 	public static class KakaoAccount {
+
 		private String email;
 		private Profile profile;
 

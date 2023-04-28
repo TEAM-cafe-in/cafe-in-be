@@ -20,6 +20,8 @@ public class SocialLoginApiServiceFactory {
 
 		if (MemberType.KAKAO.equals(memberType)) {
 			socialLoginApiServiceBeanName = "kakaoLoginApiServiceImpl";
+		} else if (MemberType.GOOGLE.equals(memberType)) {
+			socialLoginApiServiceBeanName = "googleLoginApiServiceImpl";
 		}
 		return socialLoginApiServices.get(socialLoginApiServiceBeanName);
 	}
