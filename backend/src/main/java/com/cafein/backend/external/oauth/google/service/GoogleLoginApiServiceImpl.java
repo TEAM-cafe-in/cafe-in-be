@@ -2,6 +2,7 @@ package com.cafein.backend.external.oauth.google.service;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.StringUtils;
 
 import com.cafein.backend.domain.member.constant.MemberType;
 import com.cafein.backend.external.oauth.google.client.GoogleUserInfoClient;
@@ -20,16 +21,15 @@ import lombok.extern.slf4j.Slf4j;
 public class GoogleLoginApiServiceImpl implements SocialLoginApiService {
 
 	private final GoogleUserInfoClient googleUserInfoClient;
-	private final String CONTENT_TYPE = "application/x-www-form-urlencoded;charset=utf8;";
-
 
 	@Override
 	public OAuthAttributes getUserInfo(final String accessToken) {
 		GoogleUserInfoResponseDTO googleUserInfoResponseDTO = googleUserInfoClient
-			.getGoogleUserInfo(CONTENT_TYPE, GrantType.BEARER.getType() + " " + accessToken);
+			.getGoogleUserInfo(GrantType.BEARER.getType() + " " + accessToken);
 
 		return OAuthAttributes.builder()
-			.email(googleUserInfoResponseDTO.getEmail())
+			.email(!StringUtils.hasText(googleUserInfoResponseDTO.getEmail()) ?
+				googleUserInfoResponseDTO.getId() : googleUserInfoResponseDTO.getEmail())
 			.name(googleUserInfoResponseDTO.getName())
 			.profile(googleUserInfoResponseDTO.getPicture())
 			.memberType(MemberType.GOOGLE)
