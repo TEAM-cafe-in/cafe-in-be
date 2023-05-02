@@ -19,7 +19,7 @@ public class OAuthAttributes {
 
 	public Member toMemberEntity(MemberType memberType, Role role) {
 		return Member.builder()
-			.memberName(name)
+			.name(name)
 			.email(email)
 			.memberType(memberType)
 			.profile(profile)
