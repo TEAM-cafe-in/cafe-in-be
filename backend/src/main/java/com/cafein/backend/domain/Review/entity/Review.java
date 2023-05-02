@@ -1,5 +1,7 @@
 package com.cafein.backend.domain.Review.entity;
 
+import static javax.persistence.FetchType.*;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -7,8 +9,11 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 import com.cafein.backend.domain.Review.constant.CafeCongestion;
+import com.cafein.backend.domain.cafe.entity.Cafe;
 import com.cafein.backend.domain.common.BaseEntity;
 
 import lombok.AccessLevel;
@@ -34,6 +39,10 @@ public class Review extends BaseEntity {
 
 	@Column(nullable = false)
 	private boolean hasPlug;
+
+	@ManyToOne(fetch = LAZY)
+	@JoinColumn(name = "cafe_id")
+	private Cafe cafe;
 
 	@Builder
 	public Review(final CafeCongestion cafeCongestion, final boolean isClean, final boolean hasPlug) {
