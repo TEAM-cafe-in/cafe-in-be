@@ -8,12 +8,15 @@ import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
 import com.cafein.backend.domain.Review.entity.Review;
+import com.cafein.backend.domain.cafe.constant.Local;
 import com.cafein.backend.domain.comment.entity.Comment;
 import com.cafein.backend.domain.common.Address;
 import com.cafein.backend.domain.common.BaseTimeEntity;
@@ -37,6 +40,10 @@ public class Cafe extends BaseTimeEntity {
 
 	@Column(nullable = false)
 	private String info;
+
+	@Enumerated(EnumType.STRING)
+	@Column(nullable = false, length = 10)
+	private Local local;
 
 	@Embedded
 	private Address address;
