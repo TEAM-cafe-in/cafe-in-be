@@ -4,6 +4,7 @@ import java.util.Date;
 
 import com.cafein.backend.global.jwt.dto.JwtTokenDTO;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
@@ -39,6 +40,7 @@ public class OAuthLoginDTO {
 		@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss", timezone = "Asia/Seoul")
 		private Date accessTokenExpireTime;
 
+		@JsonIgnore
 		@Schema(description = "Refresh Token", example = "yJ0asBlIjoiSldUIiwiYWxnIjoiSFM1MTIifQ.eyJzdWIiOiJSRUZSRVNIIiwiaWF0IjoxNjgyNDk4ODk2LCJleHAiOjE2ODM3MDg0OTUsIm1lbWJlcklkIjoxfQ.rzEIFZRIUPrSMJ1B5e-jnXU0L8QoTQE6Od89-fxCaNkhRqkmxWPze8YXGGEYmdXlZJ6e5qJXvXItnZ2aotmqFA", required = true)
 		private String refreshToken;
 
