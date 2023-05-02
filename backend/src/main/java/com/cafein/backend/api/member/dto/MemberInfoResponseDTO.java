@@ -33,7 +33,7 @@ public class MemberInfoResponseDTO {
 	public static MemberInfoResponseDTO of(final Member member) {
 		return MemberInfoResponseDTO.builder()
 			.memberId(member.getMemberId())
-			.memberName(member.getMemberName())
+			.memberName(member.getName())
 			.email(member.getEmail())
 			.profile(member.getProfile())
 			.role(member.getRole())

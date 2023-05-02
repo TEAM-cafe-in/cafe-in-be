@@ -1,7 +1,6 @@
 package com.cafein.backend.domain.member.entity;
 
 import java.time.LocalDateTime;
-import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -12,9 +11,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 import com.cafein.backend.domain.common.BaseEntity;
+import com.cafein.backend.domain.member.constant.MemberType;
 import com.cafein.backend.domain.member.constant.Role;
 import com.cafein.backend.global.jwt.dto.JwtTokenDTO;
-import com.cafein.backend.domain.member.constant.MemberType;
 import com.cafein.backend.global.util.DateTimeUtils;
 
 import lombok.AccessLevel;
@@ -42,7 +41,7 @@ public class Member extends BaseEntity {
 	private String password;
 
 	@Column(nullable = false, length = 20)
-	private String memberName;
+	private String name;
 
 	@Column(length = 200)
 	private String profile;
@@ -57,11 +56,11 @@ public class Member extends BaseEntity {
 	private LocalDateTime tokenExpirationTime;
 
 	@Builder
-	public Member(MemberType memberType, String email, String password, String memberName, String profile, Role role) {
+	public Member(MemberType memberType, String email, String password, String name, String profile, Role role) {
 		this.memberType = memberType;
 		this.email = email;
 		this.password = password;
-		this.memberName = memberName;
+		this.name = name;
 		this.profile = profile;
 		this.role = role;
 	}
