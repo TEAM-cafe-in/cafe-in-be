@@ -1,7 +1,11 @@
 package com.cafein.backend.api.login.controller;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.boot.web.server.Cookie;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.ResponseCookie;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -38,7 +42,7 @@ public class OAuthLoginController {
 	})
 	@PostMapping("/login")
 	public ResponseEntity<OAuthLoginDTO.Response> oauthLogin(@RequestBody OAuthLoginDTO.Request oauthLoginRequestDTO,
-		HttpServletRequest httpServletRequest) {
+		HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) {
 
 		String authorizationHeader = httpServletRequest.getHeader("Authorization");
 		AuthorizationHeaderUtils.validateAuthorization(authorizationHeader);
@@ -48,6 +52,14 @@ public class OAuthLoginController {
 		OAuthLoginDTO.Response jwtTokenResponseDTO = oAuthLoginService
 			.oauthLogin(accessToken, MemberType.from(oauthLoginRequestDTO.getMemberType()));
 
+		ResponseCookie responseCookie = ResponseCookie
+			.from("refresh_token", jwtTokenResponseDTO.getRefreshToken())
+			.httpOnly(true)
+			.sameSite("Strict")
+			.maxAge(60 * 60 * 24 * 14)		//2주
+			.build();
+
+		httpServletResponse.setHeader(HttpHeaders.SET_COOKIE, responseCookie.toString());
 		return ResponseEntity.ok(jwtTokenResponseDTO);
 	}
 }
