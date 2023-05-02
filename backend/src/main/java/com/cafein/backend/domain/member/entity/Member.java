@@ -10,6 +10,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+import org.hibernate.annotations.ColumnDefault;
+
 import com.cafein.backend.domain.common.BaseEntity;
 import com.cafein.backend.domain.member.constant.MemberType;
 import com.cafein.backend.domain.member.constant.Role;
@@ -45,6 +47,9 @@ public class Member extends BaseEntity {
 
 	@Column(length = 200)
 	private String profile;
+
+	@ColumnDefault("100") // TODO 커피콩 초깃값 설정 필요
+	private Integer coffeeBean;
 
 	@Enumerated(EnumType.STRING)
 	@Column(nullable = false, length = 10)
