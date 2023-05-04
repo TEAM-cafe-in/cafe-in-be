@@ -16,7 +16,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 import com.cafein.backend.domain.cafe.entity.Cafe;
-import com.cafein.backend.domain.common.BaseEntity;
 
 import lombok.AccessLevel;
 import lombok.Builder;
@@ -26,7 +25,7 @@ import lombok.NoArgsConstructor;
 @Entity
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class OpeningHour extends BaseEntity {
+public class OpeningHour {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -47,8 +46,7 @@ public class OpeningHour extends BaseEntity {
 	private Cafe cafe;
 
 	@Builder
-	public OpeningHour(final Cafe cafe, final DayOfWeek dayOfWeek, final LocalTime openTime, final LocalTime closeTime) {
-		this.cafe = cafe;
+	public OpeningHour(final DayOfWeek dayOfWeek, final LocalTime openTime, final LocalTime closeTime) {
 		this.dayOfWeek = dayOfWeek;
 		this.openTime = openTime;
 		this.closeTime = closeTime;

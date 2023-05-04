@@ -14,7 +14,6 @@ import javax.persistence.ManyToOne;
 
 import com.cafein.backend.domain.Review.constant.CafeCongestion;
 import com.cafein.backend.domain.cafe.entity.Cafe;
-import com.cafein.backend.domain.common.BaseEntity;
 
 import lombok.AccessLevel;
 import lombok.Builder;
@@ -24,7 +23,7 @@ import lombok.NoArgsConstructor;
 @Entity
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class Review extends BaseEntity {
+public class Review {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

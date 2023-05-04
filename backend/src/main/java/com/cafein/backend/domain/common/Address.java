@@ -4,6 +4,7 @@ import javax.persistence.Column;
 import javax.persistence.Embeddable;
 
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -31,4 +32,12 @@ public class Address {
 
 	@Column(nullable = false)
 	private String houseNumber;
+
+	@Builder
+	public Address(String sido, String sigungu, String roadName, String houseNumber) {
+		this.sido = sido;
+		this.sigungu = sigungu;
+		this.roadName = roadName;
+		this.houseNumber = houseNumber;
+	}
 }
