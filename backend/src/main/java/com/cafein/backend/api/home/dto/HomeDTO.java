@@ -2,8 +2,6 @@ package com.cafein.backend.api.home.dto;
 
 import java.util.List;
 
-import org.springframework.data.domain.Page;
-
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -29,7 +27,7 @@ public class HomeDTO {
 	@AllArgsConstructor
 	public static class Response {
 
-		private List<CafeDTO> cafeList;
+		private List<CafeDTO> cafes;
 		private Integer coffeeBean;
 	}
 }

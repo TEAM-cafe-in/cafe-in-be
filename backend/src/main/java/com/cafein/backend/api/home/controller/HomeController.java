@@ -3,7 +3,6 @@ package com.cafein.backend.api.home.controller;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
@@ -15,7 +14,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.cafein.backend.api.home.dto.CafeDTO;
 import com.cafein.backend.api.home.dto.HomeDTO;
-import com.cafein.backend.domain.cafe.entity.Cafe;
 import com.cafein.backend.domain.cafe.service.CafeService;
 import com.cafein.backend.domain.member.entity.Member;
 import com.cafein.backend.domain.member.service.MemberService;
@@ -49,7 +47,7 @@ public class HomeController {
 
 		HomeDTO.Response homeResponseDTO = HomeDTO.Response.builder()
 			.coffeeBean(findMember.getCoffeeBean())
-			.cafeList(cafes)
+			.cafes(cafes)
 			.build();
 
 		return ResponseEntity.ok(homeResponseDTO);
