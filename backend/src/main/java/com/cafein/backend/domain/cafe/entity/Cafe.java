@@ -23,13 +23,14 @@ import com.cafein.backend.domain.common.BaseTimeEntity;
 import com.cafein.backend.domain.openinghours.entity.OpeningHour;
 
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 @Entity
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class Cafe extends BaseTimeEntity {
+public class Cafe extends BaseTimeEntity{
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -56,4 +57,16 @@ public class Cafe extends BaseTimeEntity {
 
 	@OneToMany(mappedBy = "cafe", cascade = ALL)
 	private List<Comment> comments = new ArrayList<>();
+
+	@Builder
+	public Cafe(String name, String info, Local local, Address address, List<OpeningHour> openingHours,
+		List<Review> reviews, List<Comment> comments) {
+		this.name = name;
+		this.info = info;
+		this.local = local;
+		this.address = address;
+		this.openingHours = openingHours;
+		this.reviews = reviews;
+		this.comments = comments;
+	}
 }

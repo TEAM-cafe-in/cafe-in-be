@@ -11,8 +11,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 import org.hibernate.annotations.ColumnDefault;
+import org.hibernate.annotations.DynamicInsert;
 
-import com.cafein.backend.domain.common.BaseEntity;
+import com.cafein.backend.domain.common.BaseTimeEntity;
 import com.cafein.backend.domain.member.constant.MemberType;
 import com.cafein.backend.domain.member.constant.Role;
 import com.cafein.backend.global.jwt.dto.JwtTokenDTO;
@@ -25,8 +26,9 @@ import lombok.NoArgsConstructor;
 
 @Entity
 @Getter
+@DynamicInsert
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class Member extends BaseEntity {
+public class Member extends BaseTimeEntity {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

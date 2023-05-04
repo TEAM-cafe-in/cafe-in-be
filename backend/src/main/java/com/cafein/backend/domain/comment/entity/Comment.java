@@ -12,16 +12,17 @@ import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 
 import com.cafein.backend.domain.cafe.entity.Cafe;
-import com.cafein.backend.domain.common.BaseEntity;
+import com.cafein.backend.domain.common.BaseTimeEntity;
 
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 @Entity
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class Comment extends BaseEntity {
+public class Comment extends BaseTimeEntity {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -34,4 +35,9 @@ public class Comment extends BaseEntity {
 	@ManyToOne(fetch = LAZY)
 	@JoinColumn(name = "cafe_id")
 	private Cafe cafe;
+
+	@Builder
+	public Comment(String content) {
+		this.content = content;
+	}
 }
