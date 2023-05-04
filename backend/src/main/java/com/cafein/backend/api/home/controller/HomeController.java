@@ -25,7 +25,7 @@ import lombok.RequiredArgsConstructor;
 @RequestMapping("/api")
 public class HomeController {
 
-	private static final int PAGE_SIZE = 20;
+	private static final int PAGE_SIZE = 5;
 
 	private final CafeService cafeService;
 	private final MemberService memberService;

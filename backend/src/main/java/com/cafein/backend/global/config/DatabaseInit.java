@@ -47,7 +47,6 @@ public class DatabaseInit {
 	static class InitService {
 
 		private final CafeRepository cafeRepository;
-		private final MemberRepository memberRepository;
 		private final ReviewRepository reviewRepository;
 		private final CommentRepository commentRepository;
 		private final OpeningHourRepository openingHourRepository;
@@ -89,11 +88,7 @@ public class DatabaseInit {
 				.reviews(reviews)
 				.comments(comments)
 				.build();
-			try {
-				cafeRepository.save(cafe1);
-			} catch (Exception e) {
-				System.out.println(e.getMessage());
-			}
+			cafeRepository.save(cafe1);
 		}
 
 		private Address createAddress(String sido, String sigungu, String roadName, String houseNumber) {
