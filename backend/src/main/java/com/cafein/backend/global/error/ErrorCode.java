@@ -19,7 +19,7 @@ public enum ErrorCode {
 	NOT_ACCESS_TOKEN_TYPE(HttpStatus.UNAUTHORIZED, "A-007", "해당 토큰은 Access Token이 아닙니다."),
 
 	//회원
-	INVALID_MEMBER_TYPE(HttpStatus.BAD_REQUEST, "M-001", "잘못된 회원 타입 입니다. (memberType : Kakao"),
+	INVALID_MEMBER_TYPE(HttpStatus.BAD_REQUEST, "M-001", "잘못된 회원 타입 입니다. (memberType : Kakao)"),
 	ALREADY_REGISTERED_MEMBER(HttpStatus.BAD_REQUEST, "M-002", "이미 가입된 회원입니다."),
 	MEMBER_NOT_EXIST(HttpStatus.BAD_REQUEST, "M-003", "해당 회원은 존재하지 않습니다.")
 	;
