@@ -1,14 +1,17 @@
 package com.cafein.backend.global.error;
 
-import com.cafein.backend.global.error.exception.BusinessException;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.validation.BindException;
 import org.springframework.web.HttpRequestMethodNotSupportedException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
+
+import com.cafein.backend.global.error.exception.BusinessException;
+
+import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @RestControllerAdvice
@@ -21,8 +24,17 @@ public class GlobalExceptionHandler {
     protected ResponseEntity<ErrorResponse> handleBindException(BindException e) {
         log.error("handleBindException", e);
         ErrorResponse errorResponse = ErrorResponse.of(HttpStatus.BAD_REQUEST.toString(), e.getBindingResult());
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST)
-                .body(errorResponse);
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errorResponse);
+    }
+
+    /**
+     * HTTP 요청 본문의 내용을 읽을 수 없을 때 발생
+     */
+    @ExceptionHandler(HttpMessageNotReadableException.class)
+    protected ResponseEntity<ErrorResponse> handleHttpMessageNotReadableException(HttpMessageNotReadableException e) {
+        log.error("handleBindException", e);
+        ErrorResponse errorResponse = ErrorResponse.of(HttpStatus.BAD_REQUEST.toString(), e.getMessage());
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errorResponse);
     }
 
     /**
@@ -32,8 +44,7 @@ public class GlobalExceptionHandler {
     protected ResponseEntity<ErrorResponse> handleMethodArgumentTypeMismatchException(MethodArgumentTypeMismatchException e) {
         log.error("handleMethodArgumentTypeMismatchException", e);
         ErrorResponse errorResponse = ErrorResponse.of(HttpStatus.BAD_REQUEST.toString(), e.getMessage());
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST)
-                .body(errorResponse);
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errorResponse);
     }
 
     /**
@@ -53,8 +64,7 @@ public class GlobalExceptionHandler {
     protected ResponseEntity<ErrorResponse> handleConflict(BusinessException e) {
         log.error("BusinessException", e);
         ErrorResponse errorResponse = ErrorResponse.of(e.getErrorCode().getErrorCode(), e.getMessage());
-        return ResponseEntity.status(e.getErrorCode().getHttpStatus())
-                .body(errorResponse);
+        return ResponseEntity.status(e.getErrorCode().getHttpStatus()).body(errorResponse);
     }
 
     /**

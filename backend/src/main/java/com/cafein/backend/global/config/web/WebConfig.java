@@ -14,6 +14,7 @@ import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import com.cafein.backend.global.interceptor.AuthenticationInterceptor;
+import com.cafein.backend.global.resolver.MemberInfoArgumentResolver;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import lombok.RequiredArgsConstructor;
@@ -25,6 +26,7 @@ import com.navercorp.lucy.security.xss.servletfilter.XssEscapeServletFilter;
 public class WebConfig implements WebMvcConfigurer {
 
 	private final AuthenticationInterceptor authenticationInterceptor;
+	private final MemberInfoArgumentResolver memberInfoArgumentResolver;
 	private final ObjectMapper objectMapper;
 
 	@Override
@@ -50,6 +52,11 @@ public class WebConfig implements WebMvcConfigurer {
 			.excludePathPatterns("/api/oauth/login",
 				"/api/access-token/issue",
 				"/api/logout");
+	}
+
+	@Override
+	public void addArgumentResolvers(final List<HandlerMethodArgumentResolver> resolvers) {
+		resolvers.add(memberInfoArgumentResolver);
 	}
 
 	@Bean
