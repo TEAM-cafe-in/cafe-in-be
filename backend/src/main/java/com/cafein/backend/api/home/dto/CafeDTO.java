@@ -2,15 +2,10 @@ package com.cafein.backend.api.home.dto;
 
 import com.cafein.backend.domain.cafe.entity.Cafe;
 
-import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.Getter;
 
-@Data
-@Builder
-@NoArgsConstructor
-@AllArgsConstructor
+@Getter @Builder
 public class CafeDTO {
 
 	private String name;

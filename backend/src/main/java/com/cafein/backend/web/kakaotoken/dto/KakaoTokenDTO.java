@@ -1,15 +1,12 @@
 package com.cafein.backend.web.kakaotoken.dto;
 
-import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.Getter;
+import lombok.ToString;
 
 public class KakaoTokenDTO {
 
-	@Data @Builder
-	@NoArgsConstructor
-	@AllArgsConstructor
+	@Getter @Builder
 	public static class Request {
 
 		private String grant_type;
@@ -19,9 +16,8 @@ public class KakaoTokenDTO {
 		private String client_secret;
 	}
 
-	@Data @Builder
-	@NoArgsConstructor
-	@AllArgsConstructor
+	@Getter @Builder
+	@ToString
 	public static class Response {
 
 		private String token_type;

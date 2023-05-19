@@ -1,14 +1,11 @@
 package com.cafein.backend.web.googletoken.dto;
 
-import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.Getter;
 
 public class GoogleTokenDTO {
 
-	@Data @Builder
-	@NoArgsConstructor @AllArgsConstructor
+	@Getter @Builder
 	public static class Request {
 
 		private String code;
@@ -18,8 +15,7 @@ public class GoogleTokenDTO {
 		private String redirect_uri;
 	}
 
-	@Data @Builder
-	@NoArgsConstructor @AllArgsConstructor
+	@Getter @Builder
 	public static class Response {
 
 		private String access_token;

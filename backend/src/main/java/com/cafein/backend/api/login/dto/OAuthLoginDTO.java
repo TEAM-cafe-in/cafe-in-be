@@ -7,27 +7,19 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import io.swagger.v3.oas.annotations.media.Schema;
-import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.Data;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 public class OAuthLoginDTO {
 
-	@Data @Builder
-	@NoArgsConstructor
-	@AllArgsConstructor
+	@Getter
 	public static class Request {
 
 		@Schema(description = "소셜 로그인 회원 타입", example = "KAKAO", required = true)
 		private String memberType;
 	}
 
-	@Data @Builder
-	@NoArgsConstructor
-	@AllArgsConstructor
+	@Getter @Builder
 	public static class Response {
 
 		@Schema(description = "Grant Type", example = "Bearer", required = true)

@@ -5,15 +5,10 @@ import java.util.Date;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 import io.swagger.v3.oas.annotations.media.Schema;
-import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.Getter;
 
-@Data
-@Builder
-@NoArgsConstructor
-@AllArgsConstructor
+@Getter @Builder
 public class AccessTokenResponseDTO {
 
 	@Schema(description = "Grant Type", example = "Bearer", required = true)

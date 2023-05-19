@@ -5,17 +5,12 @@ import java.util.List;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 
-import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.Getter;
 
 public class HomeDTO {
 
-	@Data
-	@Builder
-	@NoArgsConstructor
-	@AllArgsConstructor
+	@Getter
 	public static class Request {
 
 		@NotNull
@@ -31,10 +26,7 @@ public class HomeDTO {
 		private String memberEmail;
 	}
 
-	@Data
-	@Builder
-	@NoArgsConstructor
-	@AllArgsConstructor
+	@Getter @Builder
 	public static class Response {
 
 		private List<CafeDTO> cafes;
