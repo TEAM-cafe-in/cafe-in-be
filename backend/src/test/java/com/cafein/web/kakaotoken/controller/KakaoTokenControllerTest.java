@@ -33,7 +33,7 @@ import io.restassured.response.Response;
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 class KakaoTokenControllerTest {
 
-	private static final String KAKAO_ACCESS_TOKEN = "NK16KvceY2WJ776OjrfOjCyGqxWYKPPq3sS-HMC-CisM0gAAAYe8ie5i";
+	private static final String KAKAO_ACCESS_TOKEN = "woPPn2hsXhlcICfKVw4IPYEWij00MlHD7oeboATXCj10mQAAAYf_dH_K";
 	private static final String EMAIL = "uichan293@naver.com";
 	private String CAFEIN_ACCESS_TOKEN = "";
 	private final Map<String, String> paramBody = new HashMap<>();

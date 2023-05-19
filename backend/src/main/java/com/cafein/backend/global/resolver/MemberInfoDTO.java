@@ -2,15 +2,10 @@ package com.cafein.backend.global.resolver;
 
 import com.cafein.backend.domain.member.constant.Role;
 
-import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.Getter;
 
-@Data
-@Builder
-@NoArgsConstructor
-@AllArgsConstructor
+@Getter @Builder
 public class MemberInfoDTO {
 
 	private Long memberId;

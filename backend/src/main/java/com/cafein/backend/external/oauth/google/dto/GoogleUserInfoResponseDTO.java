@@ -1,14 +1,9 @@
 package com.cafein.backend.external.oauth.google.dto;
 
-import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.Getter;
 
-@Data
-@Builder
-@NoArgsConstructor
-@AllArgsConstructor
+@Getter @Builder
 public class GoogleUserInfoResponseDTO {
 
 	private String id;

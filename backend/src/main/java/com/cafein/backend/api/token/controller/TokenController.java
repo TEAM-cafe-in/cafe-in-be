@@ -26,7 +26,7 @@ public class TokenController {
 	private final TokenService tokenService;
 
 	@Tag(name = "authentication")
-	@Operation(summary = "Access Token 재발급 API", description = "Access Token을 재발급 해주는 API입니다.")
+	@Operation(summary = "Access Token 재발급 API", description = "Refresh Token으로 Access Token을 재발급 해주는 API입니다.")
 	@ApiResponses({
 		@ApiResponse(responseCode = "A-001", description = "토큰이 만료되었습니다."),
 		@ApiResponse(responseCode = "A-002", description = "해당 토큰은 유효한 토큰이 아닙니다."),

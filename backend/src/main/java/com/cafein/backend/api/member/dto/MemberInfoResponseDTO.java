@@ -4,15 +4,10 @@ import com.cafein.backend.domain.member.constant.Role;
 import com.cafein.backend.domain.member.entity.Member;
 
 import io.swagger.v3.oas.annotations.media.Schema;
-import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.Getter;
 
-@Data
-@Builder
-@NoArgsConstructor
-@AllArgsConstructor
+@Getter @Builder
 public class MemberInfoResponseDTO {
 
 	@Schema(description = "회원 아이디", example = "1", required = true)

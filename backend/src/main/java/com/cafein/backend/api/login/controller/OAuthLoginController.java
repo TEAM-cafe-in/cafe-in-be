@@ -3,7 +3,6 @@ package com.cafein.backend.api.login.controller;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.springframework.boot.web.server.Cookie;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseCookie;
 import org.springframework.http.ResponseEntity;
@@ -34,7 +33,10 @@ public class OAuthLoginController {
 	private final OAuthLoginService oAuthLoginService;
 
 	@Tag(name = "authentication")
-	@Operation(summary = "소셜 로그인 API", description = "소셜 로그인 API")
+	@Operation(summary = "소셜 로그인 API",
+		description = "refresh token 예시 쿠키 값입니다." +
+			"Set-Cookie: refresh_token= eyJ0eXBlIjoiSldUIiwiYWxnIjoiSFM1MTIifQ.eyJzdWIiOiJSRUZSRVNIIiwiaWF0IjoxNjg0NDc3NDkyLCJleHAiOjE2ODU2ODcwOTIsIm1lbWJlcklkIjoxfQ.VoaLQEd4QkQ5Q7pzrkQbfRVdYcX2flmdP4fELrn5J2_4T0lfuhcrB1r5Ma5F7YyqKzyMGR-Ol30wMS_VDsf0mg " +
+			"HttpOnly; SameSite=Strict; Max-Age=60 * 60 * 24 * 14; Expires=Thu, 31 Mar 2023 14:24:52 GMT;")
 	@ApiResponses({
 		@ApiResponse(responseCode = "M-001", description = "잘못된 회원 타입 입니다. (memberType : Kakao"),
 		@ApiResponse(responseCode = "A-003", description = "Authorization Header가 빈값입니다."),
