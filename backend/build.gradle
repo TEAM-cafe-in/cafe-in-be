@@ -47,6 +47,8 @@ dependencies {
 
 	// XSS 방어
 	implementation 'com.navercorp.lucy:lucy-xss-servlet:2.0.1'
+
+	implementation 'com.google.guava:guava:31.1-jre'
 }
 
 dependencyManagement {
