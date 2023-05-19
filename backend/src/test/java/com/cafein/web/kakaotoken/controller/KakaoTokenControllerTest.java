@@ -13,10 +13,10 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 import org.junit.jupiter.api.TestMethodOrder;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 
+import com.cafein.backend.acceptance.ApiTest;
 import com.cafein.backend.api.token.dto.AccessTokenResponseDTO;
 import com.cafein.backend.api.token.service.TokenService;
 import com.cafein.backend.domain.member.entity.Member;
@@ -28,10 +28,10 @@ import io.restassured.RestAssured;
 import io.restassured.response.ExtractableResponse;
 import io.restassured.response.Response;
 
-@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT)
+
 @TestMethodOrder(value = MethodOrderer.OrderAnnotation.class)
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
-class KakaoTokenControllerTest {
+class KakaoTokenControllerTest extends ApiTest {
 
 	private static final String KAKAO_ACCESS_TOKEN = "woPPn2hsXhlcICfKVw4IPYEWij00MlHD7oeboATXCj10mQAAAYf_dH_K";
 	private static final String EMAIL = "uichan293@naver.com";
