@@ -1,5 +1,9 @@
 package com.cafein.backend.api;
 
+import static com.cafein.backend.support.fixture.MemberFixture.*;
+import static org.mockito.ArgumentMatchers.*;
+import static org.mockito.BDDMockito.*;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
@@ -21,6 +25,7 @@ import com.cafein.backend.external.oauth.kakao.service.KakaoLoginApiServiceImpl;
 import com.cafein.backend.external.oauth.service.SocialLoginApiServiceFactory;
 import com.cafein.backend.global.interceptor.AuthenticationInterceptor;
 import com.cafein.backend.global.jwt.service.TokenManager;
+import com.cafein.backend.global.resolver.MemberInfoArgumentResolver;
 import com.cafein.backend.web.googletoken.client.GoogleTokenClient;
 import com.cafein.backend.web.kakaotoken.client.KakaoTokenClient;
 
@@ -28,6 +33,24 @@ import com.cafein.backend.web.kakaotoken.client.KakaoTokenClient;
 public class ControllerTestSupporter {
 
 	protected MockMvc mockMvc;
+
+	@BeforeEach
+	void setUp(final WebApplicationContext context) throws Exception {
+		this.mockMvc = MockMvcBuilders.webAppContextSetup(context)
+			.alwaysDo(MockMvcResultHandlers.print())
+			.build();
+
+		// 테스트를 위해 인터셉터 bypass
+		given(authenticationInterceptor.preHandle(any(), any(), any()))
+			.willReturn(true);
+
+		// MemberInfoArgumentResolver 테스트를 위한 설정
+		given(memberInfoArgumentResolver.supportsParameter(any()))
+			.willReturn(true);
+
+		given(memberInfoArgumentResolver.resolveArgument(any(), any(), any(), any()))
+			.willReturn(memberInfoDTO());
+	}
 
 	@MockBean
 	protected OAuthLoginService oAuthLoginService;
@@ -69,15 +92,11 @@ public class ControllerTestSupporter {
 	protected SocialLoginApiServiceFactory socialLoginApiServiceFactory;
 
 	@MockBean
+	protected MemberInfoArgumentResolver memberInfoArgumentResolver;
+
+	@MockBean
 	protected GoogleTokenClient googleTokenClient;
 
 	@MockBean
 	protected KakaoTokenClient kakaoTokenClient;
-
-	@BeforeEach
-	void setUp(final WebApplicationContext context) {
-		this.mockMvc = MockMvcBuilders.webAppContextSetup(context)
-			.alwaysDo(MockMvcResultHandlers.print())
-			.build();
-	}
 }
