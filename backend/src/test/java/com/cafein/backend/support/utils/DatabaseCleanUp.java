@@ -1,4 +1,4 @@
-package com.cafein.backend.acceptance;
+package com.cafein.backend.support.utils;
 
 import java.util.List;
 import java.util.Set;
@@ -17,7 +17,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.google.common.base.CaseFormat;
 
 @Component
-public class DatabaseCleaUp implements InitializingBean {
+public class DatabaseCleanUp implements InitializingBean {
 
 	@PersistenceContext
 	private EntityManager entityManager;
@@ -52,7 +52,7 @@ public class DatabaseCleaUp implements InitializingBean {
 	}
 
 	@Transactional
-	public void execute() {
+	public void cleanDatabase() {
 		entityManager.flush();
 		entityManager.createNativeQuery("SET FOREIGN_KEY_CHECKS=0").executeUpdate();
 
