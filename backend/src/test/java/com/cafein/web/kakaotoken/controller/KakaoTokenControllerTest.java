@@ -16,7 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 
-import com.cafein.backend.acceptance.ApiTest;
+import com.cafein.backend.acceptance.AcceptanceSupporter;
 import com.cafein.backend.api.token.dto.AccessTokenResponseDTO;
 import com.cafein.backend.api.token.service.TokenService;
 import com.cafein.backend.domain.member.entity.Member;
@@ -31,7 +31,7 @@ import io.restassured.response.Response;
 
 @TestMethodOrder(value = MethodOrderer.OrderAnnotation.class)
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
-class KakaoTokenControllerTest extends ApiTest {
+class KakaoTokenControllerTest extends AcceptanceSupporter {
 
 	private static final String KAKAO_ACCESS_TOKEN = "woPPn2hsXhlcICfKVw4IPYEWij00MlHD7oeboATXCj10mQAAAYf_dH_K";
 	private static final String EMAIL = "uichan293@naver.com";
