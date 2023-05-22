@@ -10,22 +10,14 @@ import javax.annotation.PostConstruct;
 
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
-import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.cafein.backend.domain.Review.constant.CafeCongestion;
-import com.cafein.backend.domain.Review.entity.Review;
 import com.cafein.backend.domain.Review.respository.ReviewRepository;
 import com.cafein.backend.domain.cafe.constant.Local;
 import com.cafein.backend.domain.cafe.entity.Cafe;
 import com.cafein.backend.domain.cafe.repository.CafeRepository;
-import com.cafein.backend.domain.comment.entity.Comment;
 import com.cafein.backend.domain.comment.repository.CommentRepository;
 import com.cafein.backend.domain.common.Address;
-import com.cafein.backend.domain.member.constant.MemberType;
-import com.cafein.backend.domain.member.constant.Role;
-import com.cafein.backend.domain.member.entity.Member;
-import com.cafein.backend.domain.member.repository.MemberRepository;
 import com.cafein.backend.domain.openinghours.entity.OpeningHour;
 import com.cafein.backend.domain.openinghours.repository.OpeningHourRepository;
 
@@ -91,6 +83,23 @@ public class DatabaseInit {
 					.local(Local.YEONNAM)
 					.address(
 						createAddress("서울", "서울시 마포구", "연희로1길", "45-6")
+					)
+					.openingHours(openingHours)
+					.reviews(new ArrayList<>())
+					.comments(new ArrayList<>())
+					.build()
+			);
+
+			cafeRepository.save(
+				Cafe.builder()
+					.name("노티드 연남")
+					.info("사람과 사람, 사람과 디저트를 잇는 프리미엄 디저트 카페 노티드입니다."
+					+ "*노티드 연남 층별 영업시간 안내"
+					+ "연남 2층 (Eat-in) : 12:00 - 21:00"
+					+ "연남 지하1층 (To-go) : 11:00 - 21:00")
+					.local(Local.YEONNAM)
+					.address(
+						createAddress("서울", "서울시 마포구", "월드컵북로6길", "12-13")
 					)
 					.openingHours(openingHours)
 					.reviews(new ArrayList<>())
@@ -387,7 +396,224 @@ public class DatabaseInit {
 					.build()
 			);
 
+			cafeRepository.save(
+				Cafe.builder()
+					.name("1984")
+					.info("편집샵과 북카페로 유명한 연남동 카페")
+					.local(Local.HONGDAE)
+					.address(
+						createAddress("서울", "서울시 마포구", "동교로", "194 혜원빌딩 1층")
+					)
+					.openingHours(openingHours)
+					.reviews(new ArrayList<>())
+					.comments(new ArrayList<>())
+					.build()
+			);
+
 			// 홍대 카페
+			cafeRepository.save(
+				Cafe.builder()
+					.name("츄로101 홍대본점")
+					.info("블루리본 12년 연속등재! 주문즉시 만들어지는 다양한 츄러스를 즐겨보세요!")
+					.local(Local.HONGDAE)
+					.address(
+						createAddress("서울", "서울시 마포구", "어울마당로", "128")
+					)
+					.openingHours(openingHours)
+					.reviews(new ArrayList<>())
+					.comments(new ArrayList<>())
+					.build()
+			);
+
+			cafeRepository.save(
+				Cafe.builder()
+					.name("라헬의부엌 홍대점")
+					.info("라헬의부엌은 계절마다 준비되는 정성담은 메뉴를 선보이는 수플레 브런치 맛집 겸 카페(cate + meal)입니다.")
+					.local(Local.HONGDAE)
+					.address(
+						createAddress("서울", "서울시 마포구", "와우산로29길", "47 1,2층")
+					)
+					.openingHours(openingHours)
+					.reviews(new ArrayList<>())
+					.comments(new ArrayList<>())
+					.build()
+			);
+
+			cafeRepository.save(
+				Cafe.builder()
+					.name("콤파일")
+					.info("훌륭한 커피만 모아 소개할 수 있도록 노력하겠습니다."
+					+ "방문 해주신 모든분들의 한모금에 위로가 될 수 있도록. 고맙습니다.")
+					.local(Local.HONGDAE)
+					.address(
+						createAddress("서울", "서울시 마포구", "잔다리로73", "1F")
+					)
+					.openingHours(openingHours)
+					.reviews(new ArrayList<>())
+					.comments(new ArrayList<>())
+					.build()
+			);
+
+			cafeRepository.save(
+				Cafe.builder()
+					.name("아벨롭")
+					.info("카페, 그리고 베이커리 <아벨롭>입니다."
+					+ "저희는 단순한 카페 & 베이커리가 아닌 감각적인 공간과 스페셜티, 그리고 그 밖에 음료를 제공합니다.")
+					.local(Local.HONGDAE)
+					.address(
+						createAddress("서울", "서울시 마포구", "양화로15안길 6", "Avelop")
+					)
+					.openingHours(openingHours)
+					.reviews(new ArrayList<>())
+					.comments(new ArrayList<>())
+					.build()
+			);
+
+			cafeRepository.save(
+				Cafe.builder()
+					.name("오퍼 카페")
+					.info("더 많은 이야기와 디자인을 경험할 수 있는 공간, 홍대카페 오퍼카페를 소개합니다."
+					+ "Offet는 따스하고 부드러운 분위기에서 쉴 수 있는 쉼터입니다.")
+					.local(Local.HONGDAE)
+					.address(
+						createAddress("서울", "서울시 마포구", "홍익로5길", "19")
+					)
+					.openingHours(openingHours)
+					.reviews(new ArrayList<>())
+					.comments(new ArrayList<>())
+					.build()
+			);
+
+			cafeRepository.save(
+				Cafe.builder()
+					.name("아오이토리")
+					.info("야끼소바빵과 명란바게트가 맛있는 홍대 빵집"
+					+ "공지사항 및 최신 소식은 인스타그램에서 확인하실 수 있습니다:)")
+					.local(Local.HONGDAE)
+					.address(
+						createAddress("서울", "서울시 마포구", "와우산로28길", "8 K.C 빌딩")
+					)
+					.openingHours(openingHours)
+					.reviews(new ArrayList<>())
+					.comments(new ArrayList<>())
+					.build()
+			);
+
+			cafeRepository.save(
+				Cafe.builder()
+					.name("카페 공명 홍대점")
+					.info("공명만의 예술적인 분위기, 진심을 다해 내린 커피 한 잔, 정성을 듬뿍 담은 베이커리를 즐겨보세요.")
+					.local(Local.HONGDAE)
+					.address(
+						createAddress("서울", "서울시 마포구", "와우산로17길", "11-8 지하1층, 1층")
+					)
+					.openingHours(openingHours)
+					.reviews(new ArrayList<>())
+					.comments(new ArrayList<>())
+					.build()
+			);
+
+			cafeRepository.save(
+				Cafe.builder()
+					.name("모센즈스위트")
+					.info("가장 맛있는 아랍 디저트, 모센즈스위트에서 즐겨보세요!"
+					+ "모센즈스위트는 게이마르(카이막), 쿠나파 등 중동의 유명 디저트를 만들고 있어요.")
+					.local(Local.HONGDAE)
+					.address(
+						createAddress("서울", "서울시 마포구", "어울마당로", "51-1 1층")
+					)
+					.openingHours(openingHours)
+					.reviews(new ArrayList<>())
+					.comments(new ArrayList<>())
+					.build()
+			);
+
+			cafeRepository.save(
+				Cafe.builder()
+					.name("스탠스커피")
+					.info("아인슈페너가 맛있는 고즈넉한 카페")
+					.local(Local.HONGDAE)
+					.address(
+						createAddress("서울", "서울시 마포구", "와우산로11길", "9 1층")
+					)
+					.openingHours(openingHours)
+					.reviews(new ArrayList<>())
+					.comments(new ArrayList<>())
+					.build()
+			);
+
+			cafeRepository.save(
+				Cafe.builder()
+					.name("트라이브 홍대점")
+					.info("수플레 전문점 트라이브 홍대점입니다."
+					+ "제주에서만 맛 볼수 있던 트라이브의 시그니처 수플레를 서울에서 인사드립니다.")
+					.local(Local.HONGDAE)
+					.address(
+						createAddress("서울", "서울시 마포구", "어울마당로", "100-12 지1층")
+					)
+					.openingHours(openingHours)
+					.reviews(new ArrayList<>())
+					.comments(new ArrayList<>())
+					.build()
+			);
+
+			cafeRepository.save(
+				Cafe.builder()
+					.name("콜린")
+					.info("분위기 좋고 음료가 맛있는 홍대 플라워 카페")
+					.local(Local.HONGDAE)
+					.address(
+						createAddress("서울", "서울시 마포구", "어울마당로", "45")
+					)
+					.openingHours(openingHours)
+					.reviews(new ArrayList<>())
+					.comments(new ArrayList<>())
+					.build()
+			);
+
+			cafeRepository.save(
+				Cafe.builder()
+					.name("퍼스트커피랩 홍대점")
+					.info("전문 바리스타 양성 기관인 [퍼스트 아카데미]에서 운영하는 카페입니다."
+					+ "퍼스트커피랩은 최상의 커피와 직접 생산한 다양한 디저트를 제공하고 있습니다.")
+					.local(Local.HONGDAE)
+					.address(
+						createAddress("서울", "서울시 마포구", "신촌로4길", "9")
+					)
+					.openingHours(openingHours)
+					.reviews(new ArrayList<>())
+					.comments(new ArrayList<>())
+					.build()
+			);
+
+			cafeRepository.save(
+				Cafe.builder()
+					.name("더블유오앤")
+					.info("W:ON COFFEE 매일 12시부터 새벽 3시까지 운영합니다!")
+					.local(Local.HONGDAE)
+					.address(
+						createAddress("서울", "서울시 마포구", "잔다리로6길", "20-9 1층, B1층")
+					)
+					.openingHours(openingHours)
+					.reviews(new ArrayList<>())
+					.comments(new ArrayList<>())
+					.build()
+			);
+
+			cafeRepository.save(
+				Cafe.builder()
+					.name("멧라운지")
+					.info("METLOUNGE는 커피와 음료, 와인과 맥주 등 다양한 음료가 있어 원하는 모든 취향을 저격하며 방문해주시는 모든 분들께 편안한 휴식을 제공하는 곳입니다."
+						+ "매장에서 명함을 받아 미리 예약을 해주시면 02시까지 영업합니다.")
+					.local(Local.HONGDAE)
+					.address(
+						createAddress("서울", "서울시 마포구", "어울마당로5길", "42 1층 멧라운지 metlounge")
+					)
+					.openingHours(openingHours)
+					.reviews(new ArrayList<>())
+					.comments(new ArrayList<>())
+					.build()
+			);
 		}
 
 		private Address createAddress(String sido, String sigungu, String roadName, String houseNumber) {
