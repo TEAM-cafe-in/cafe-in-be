@@ -72,6 +72,249 @@ public class DatabaseInit {
 					.build()
 			);
 
+			cafeRepository.save(
+				Cafe.builder()
+					.name("블루보틀 성수")
+					.info("블루보틀 성수 카페는 주차 공간이 많이 협소합니다."
+					+ "근처 공영주차장 또는 유료 주차장을 이용해 주세요.")
+					.local(Local.SEONGSU)
+					.address(
+						createAddress("서울", "서울시 성동구", "아차산로", "7 케이티링커스")
+					)
+					.openingHours(openingHours)
+					.reviews(new ArrayList<>())
+					.comments(new ArrayList<>())
+					.build()
+			);
+
+			cafeRepository.save(
+				Cafe.builder()
+					.name("서울앵무새")
+					.info("그릇에 그림 그리는 성수동 신상 카페")
+					.local(Local.SEONGSU)
+					.address(
+						createAddress("서울", "서울시 성동구", "서울숲9길", "3 B1~2F")
+					)
+					.openingHours(openingHours)
+					.reviews(new ArrayList<>())
+					.comments(new ArrayList<>())
+					.build()
+			);
+
+			cafeRepository.save(
+				Cafe.builder()
+					.name("묘사서울")
+					.info("붕어빵과 앙큐브 맛있는 핫한 성수동 카페")
+					.local(Local.SEONGSU)
+					.address(
+						createAddress("서울", "서울시 성동구", "서울숲2길", "2 2층")
+					)
+					.openingHours(openingHours)
+					.reviews(new ArrayList<>())
+					.comments(new ArrayList<>())
+					.build()
+			);
+
+			cafeRepository.save(
+				Cafe.builder()
+					.name("라프레플루트")
+					.info("다양한 과일을 쉽고 간편하게 접할 수 있는 프리미엄 과일가게 라프레플루트입니다:)")
+					.local(Local.SEONGSU)
+					.address(
+						createAddress("서울", "서울시 성동구", "서울숲2길", "8-8 2층")
+					)
+					.openingHours(openingHours)
+					.reviews(new ArrayList<>())
+					.comments(new ArrayList<>())
+					.build()
+			);
+
+			cafeRepository.save(
+				Cafe.builder()
+					.name("DYI WORKSHOP")
+					.info("다양한 원두 라인업과 다양한 초콜릿의 페어링이 가능한 공간")
+					.local(Local.SEONGSU)
+					.address(
+						createAddress("서울", "서울시 성동구", "서울숲2길", "15-14 2층")
+					)
+					.openingHours(openingHours)
+					.reviews(new ArrayList<>())
+					.comments(new ArrayList<>())
+					.build()
+			);
+
+			cafeRepository.save(
+				Cafe.builder()
+					.name("하프커피 성수")
+					.info("서울숲 도넛이 맛있는 하프커피")
+					.local(Local.SEONGSU)
+					.address(
+						createAddress("서울", "서울시 성동구", "서울숲4길", "12 지하1층")
+					)
+					.openingHours(openingHours)
+					.reviews(new ArrayList<>())
+					.comments(new ArrayList<>())
+					.build()
+			);
+
+			cafeRepository.save(
+				Cafe.builder()
+					.name("구욱희씨 서울숲점")
+					.info("수제쿠키와 디저트가 가득한 서울숲 루프탑 카페")
+					.local(Local.SEONGSU)
+					.address(
+						createAddress("서울", "서울시 성동구", "서울숲4길", "12-22 1, 2층")
+					)
+					.openingHours(openingHours)
+					.reviews(new ArrayList<>())
+					.comments(new ArrayList<>())
+					.build()
+			);
+
+			cafeRepository.save(
+				Cafe.builder()
+					.name("어라운드데이")
+					.info("서울숲의 방앗간 같은 공간 카페 어라운드데이입니다."
+					+ "도심 속 휴양, 방문해주시는 모든 손님과 반려동물이 함께 편히 쉬다 가실 수 있는 공간입니다.")
+					.local(Local.SEONGSU)
+					.address(
+						createAddress("서울", "서울시 성동구", "서울숲2길", "24-1")
+					)
+					.openingHours(openingHours)
+					.reviews(new ArrayList<>())
+					.comments(new ArrayList<>())
+					.build()
+			);
+
+			cafeRepository.save(
+				Cafe.builder()
+					.name("LOWIDE")
+					.info("서울숲 베이커리 카페 LOWIDE")
+					.local(Local.SEONGSU)
+					.address(
+						createAddress("서울", "서울시 성동구", "서울숲2길", "22-1")
+					)
+					.openingHours(openingHours)
+					.reviews(new ArrayList<>())
+					.comments(new ArrayList<>())
+					.build()
+			);
+
+			cafeRepository.save(
+				Cafe.builder()
+					.name("퍼먼트")
+					.info("좋은 재료 정직한 공정으로 맛있는 베이커리들을 구워냅니다.")
+					.local(Local.SEONGSU)
+					.address(
+						createAddress("서울", "서울시 성동구", "서울숲2길", "22-1")
+					)
+					.openingHours(openingHours)
+					.reviews(new ArrayList<>())
+					.comments(new ArrayList<>())
+					.build()
+			);
+
+			cafeRepository.save(
+				Cafe.builder()
+					.name("센터커피 서울숲점")
+					.info("서울숲이 보이는 루프탑 카페"
+					+ "최고 수준의 생두와 로스팅, 추출을 고집하며 지속 가능한 스페셜티커피 문화 확산에 힘쓰고 있습니다.")
+					.local(Local.SEONGSU)
+					.address(
+						createAddress("서울", "서울시 성동구", "서울숲2길", "28-11")
+					)
+					.openingHours(openingHours)
+					.reviews(new ArrayList<>())
+					.comments(new ArrayList<>())
+					.build()
+			);
+
+			cafeRepository.save(
+				Cafe.builder()
+					.name("체다앤올리")
+					.info("맛있는 딸기우유와 서울숲을 바라보며 즐기는 브런치 맛집")
+					.local(Local.SEONGSU)
+					.address(
+						createAddress("서울", "서울시 성동구", "서울숲2길", "32-14 갤러리아포레 상가 102동 113호")
+					)
+					.openingHours(openingHours)
+					.reviews(new ArrayList<>())
+					.comments(new ArrayList<>())
+					.build()
+			);
+
+			cafeRepository.save(
+				Cafe.builder()
+					.name("5to7")
+					.info("수플레가 맛있는 서울숲 카페")
+					.local(Local.SEONGSU)
+					.address(
+						createAddress("서울", "서울시 성동구", "서울숲2길", "44-13 1층")
+					)
+					.openingHours(openingHours)
+					.reviews(new ArrayList<>())
+					.comments(new ArrayList<>())
+					.build()
+			);
+
+			cafeRepository.save(
+				Cafe.builder()
+					.name("밀도 성수점")
+					.info("밀도 빵집 성수동 서울숲 귀여운 큐브식빵"
+					+ "그날의 온도와 습도를 세심하게 고려하여 매일 매일 맛있는 식빵을 구워냅니다.")
+					.local(Local.SEONGSU)
+					.address(
+						createAddress("서울", "서울시 성동구", "왕십리로", "96")
+					)
+					.openingHours(openingHours)
+					.reviews(new ArrayList<>())
+					.comments(new ArrayList<>())
+					.build()
+			);
+
+			cafeRepository.save(
+				Cafe.builder()
+					.name("노티드 성수")
+					.info("노티드 성수에서는 노티드 도넛과 브레드, 성수에서만 만나볼 수 있는 젤라또가 준비되어있습니다!")
+					.local(Local.SEONGSU)
+					.address(
+						createAddress("서울", "서울시 성동구", "연무장길", "29-17 1층")
+					)
+					.openingHours(openingHours)
+					.reviews(new ArrayList<>())
+					.comments(new ArrayList<>())
+					.build()
+			);
+
+			cafeRepository.save(
+				Cafe.builder()
+					.name("멜로워 성수 더 플래그쉽")
+					.info("성수동카페 멜로워 빵이 정말 맛있는곳")
+					.local(Local.SEONGSU)
+					.address(
+						createAddress("서울", "서울시 성동구", "성수이로7길", "39")
+					)
+					.openingHours(openingHours)
+					.reviews(new ArrayList<>())
+					.comments(new ArrayList<>())
+					.build()
+			);
+
+			cafeRepository.save(
+				Cafe.builder()
+					.name("도토루커피os")
+					.info("20년이 넘은 커피오스1997은 커피와 리얼수제tea, 수제 샌드위치가 최고입니다."
+					+ "성수동 카페중 가장 오래된 손가락에 꼽히는 핫플레이스 커피오스.")
+					.local(Local.SEONGSU)
+					.address(
+						createAddress("서울", "서울시 성동구", "서울숲2길", "22-1")
+					)
+					.openingHours(openingHours)
+					.reviews(new ArrayList<>())
+					.comments(new ArrayList<>())
+					.build()
+			);
+
 			// 연남동 카페
 			cafeRepository.save(
 				Cafe.builder()
