@@ -27,6 +27,8 @@ import com.cafein.backend.domain.openinghours.entity.OpeningHour;
 import com.cafein.backend.domain.openinghours.repository.OpeningHourRepository;
 import com.cafein.backend.domain.viewedcafe.entity.ViewedCafe;
 import com.cafein.backend.domain.viewedcafe.repository.ViewedCafeRepository;
+import com.cafein.backend.global.jwt.dto.JwtTokenDTO;
+import com.cafein.backend.global.jwt.service.TokenManager;
 
 import lombok.RequiredArgsConstructor;
 
@@ -53,17 +55,24 @@ public class DatabaseInitializer {
 		private final OpeningHourRepository openingHourRepository;
 		private final MemberRepository memberRepository;
 		private final ViewedCafeRepository viewedCafeRepository;
+		private final TokenManager tokenManager;
 
 		public void dbInit() {
 			// Sample 회원 추가
+
 			Member member1 = memberRepository.save(
 				Member.builder()
 					.memberType(MemberType.KAKAO)
 					.email("testuser1@email.com")
 					.name("장원준")
 					.role(Role.USER)
+					.coffeeBean(100)
 					.build()
 			);
+
+			final JwtTokenDTO jwtTokenDto = tokenManager.createJwtTokenDto(member1.getMemberId(), member1.getRole());
+			System.out.println(jwtTokenDto.getAccessToken() + " member1 jwtTokenDto");
+			member1.updateRefreshToken(jwtTokenDto);
 
 			Member member2 = memberRepository.save(
 				Member.builder()
@@ -71,6 +80,7 @@ public class DatabaseInitializer {
 					.email("testuser2@email.com")
 					.name("황의찬")
 					.role(Role.USER)
+					.coffeeBean(100)
 					.build()
 			);
 
@@ -80,6 +90,7 @@ public class DatabaseInitializer {
 					.email("testuser3@email.com")
 					.name("유성민")
 					.role(Role.USER)
+					.coffeeBean(100)
 					.build()
 			);
 
@@ -89,6 +100,7 @@ public class DatabaseInitializer {
 					.email("testuser4@email.com")
 					.name("강신혁")
 					.role(Role.USER)
+					.coffeeBean(100)
 					.build()
 			);
 
@@ -98,6 +110,7 @@ public class DatabaseInitializer {
 					.email("testuser5@email.com")
 					.name("이동훈")
 					.role(Role.USER)
+					.coffeeBean(100)
 					.build()
 			);
 
