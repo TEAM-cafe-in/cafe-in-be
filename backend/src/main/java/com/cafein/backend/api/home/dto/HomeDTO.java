@@ -30,6 +30,8 @@ public class HomeDTO {
 	public static class Response {
 
 		private List<CafeDTO> cafes;
+		private List<String> viewedCafesName;
+		private Integer countCafe;
 		private Integer coffeeBean;
 	}
 }

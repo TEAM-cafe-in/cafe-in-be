@@ -57,7 +57,7 @@ public class Member extends BaseTimeEntity {
 	@Column(length = 200)
 	private String profile;
 
-	@ColumnDefault("100") // TODO 커피콩 초깃값 설정 필요
+	@ColumnDefault("100")
 	private Integer coffeeBean;
 
 	@Enumerated(EnumType.STRING)
@@ -76,13 +76,14 @@ public class Member extends BaseTimeEntity {
 	private List<Comment> comments = new ArrayList<>();
 
 	@Builder
-	public Member(MemberType memberType, String email, String password, String name, String profile, Role role) {
+	public Member(MemberType memberType, String email, String password, String name, String profile, Role role, Integer coffeeBean) {
 		this.memberType = memberType;
 		this.email = email;
 		this.password = password;
 		this.name = name;
 		this.profile = profile;
 		this.role = role;
+		this.coffeeBean = coffeeBean;
 	}
 
 	public void updateRefreshToken(final JwtTokenDTO jwtTokenDto) {
