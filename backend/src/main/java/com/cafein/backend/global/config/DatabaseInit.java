@@ -3,8 +3,6 @@ package com.cafein.backend.global.config;
 import java.time.DayOfWeek;
 import java.time.LocalTime;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 import javax.annotation.PostConstruct;
 
@@ -12,12 +10,19 @@ import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.cafein.backend.domain.Review.constant.CafeCongestion;
+import com.cafein.backend.domain.Review.entity.Review;
 import com.cafein.backend.domain.Review.respository.ReviewRepository;
 import com.cafein.backend.domain.cafe.constant.Local;
 import com.cafein.backend.domain.cafe.entity.Cafe;
 import com.cafein.backend.domain.cafe.repository.CafeRepository;
+import com.cafein.backend.domain.comment.entity.Comment;
 import com.cafein.backend.domain.comment.repository.CommentRepository;
 import com.cafein.backend.domain.common.Address;
+import com.cafein.backend.domain.member.constant.MemberType;
+import com.cafein.backend.domain.member.constant.Role;
+import com.cafein.backend.domain.member.entity.Member;
+import com.cafein.backend.domain.member.repository.MemberRepository;
 import com.cafein.backend.domain.openinghours.entity.OpeningHour;
 import com.cafein.backend.domain.openinghours.repository.OpeningHourRepository;
 
@@ -44,17 +49,53 @@ public class DatabaseInit {
 		private final ReviewRepository reviewRepository;
 		private final CommentRepository commentRepository;
 		private final OpeningHourRepository openingHourRepository;
+		private final MemberRepository memberRepository;
 
 		public void dbInit() {
-			// OpeningHour Sample Data
-			List<OpeningHour> openingHours = Arrays.asList(
-				new OpeningHour(DayOfWeek.MONDAY, LocalTime.of(9, 0), LocalTime.of(20, 0)),
-				new OpeningHour(DayOfWeek.TUESDAY, LocalTime.of(9, 0), LocalTime.of(20, 0)),
-				new OpeningHour(DayOfWeek.WEDNESDAY, LocalTime.of(9, 0), LocalTime.of(20, 0)),
-				new OpeningHour(DayOfWeek.THURSDAY, LocalTime.of(9, 0), LocalTime.of(20, 0)),
-				new OpeningHour(DayOfWeek.FRIDAY, LocalTime.of(9, 0), LocalTime.of(20, 0)),
-				new OpeningHour(DayOfWeek.SATURDAY, LocalTime.of(0, 0), LocalTime.of(0, 0)),
-				new OpeningHour(DayOfWeek.SUNDAY, LocalTime.of(0, 0), LocalTime.of(0, 0))
+			// Sample 회원 추가
+			Member member1 = memberRepository.save(
+				Member.builder()
+					.memberType(MemberType.KAKAO)
+					.email("testuser1@email.com")
+					.name("장원준")
+					.role(Role.USER)
+					.build()
+			);
+
+			Member member2 = memberRepository.save(
+				Member.builder()
+					.memberType(MemberType.KAKAO)
+					.email("testuser2@email.com")
+					.name("황의찬")
+					.role(Role.USER)
+					.build()
+			);
+
+			Member member3 = memberRepository.save(
+				Member.builder()
+					.memberType(MemberType.KAKAO)
+					.email("testuser3@email.com")
+					.name("유성민")
+					.role(Role.USER)
+					.build()
+			);
+
+			Member member4 = memberRepository.save(
+				Member.builder()
+					.memberType(MemberType.KAKAO)
+					.email("testuser4@email.com")
+					.name("강신혁")
+					.role(Role.USER)
+					.build()
+			);
+
+			Member member5 = memberRepository.save(
+				Member.builder()
+					.memberType(MemberType.KAKAO)
+					.email("testuser5@email.com")
+					.name("이동훈")
+					.role(Role.USER)
+					.build()
 			);
 
 			// 성수동 카페
@@ -66,11 +107,19 @@ public class DatabaseInit {
 					.address(
 						createAddress("서울", "서울시 성동구", "상원1길", "5 1층")
 					)
-					.openingHours(openingHours)
+					.openingHours(new ArrayList<>())
 					.reviews(new ArrayList<>())
 					.comments(new ArrayList<>())
 					.build()
 			);
+			Cafe cafe = cafeRepository.findByName("브레디포스트 성수").get();
+			addCommentsToCafe(member1, cafe);
+			addOpeningHoursToCafe(cafe);
+			addReviewsToCafe(member1, cafe);
+			addReviewsToCafe(member2, cafe);
+			addReviewsToCafe(member3, cafe);
+			addReviewsToCafe(member4, cafe);
+			addReviewsToCafe(member5, cafe);
 
 			cafeRepository.save(
 				Cafe.builder()
@@ -81,11 +130,18 @@ public class DatabaseInit {
 					.address(
 						createAddress("서울", "서울시 성동구", "아차산로", "7 케이티링커스")
 					)
-					.openingHours(openingHours)
+					.openingHours(new ArrayList<>())
 					.reviews(new ArrayList<>())
 					.comments(new ArrayList<>())
 					.build()
 			);
+			cafe = cafeRepository.findByName("블루보틀 성수").get();
+			addOpeningHoursToCafe(cafe);
+			addReviewsToCafe(member1, cafe);
+			addReviewsToCafe(member2, cafe);
+			addReviewsToCafe(member3, cafe);
+			addReviewsToCafe(member4, cafe);
+			addReviewsToCafe(member5, cafe);
 
 			cafeRepository.save(
 				Cafe.builder()
@@ -95,11 +151,19 @@ public class DatabaseInit {
 					.address(
 						createAddress("서울", "서울시 성동구", "서울숲9길", "3 B1~2F")
 					)
-					.openingHours(openingHours)
+					.openingHours(new ArrayList<>())
 					.reviews(new ArrayList<>())
 					.comments(new ArrayList<>())
 					.build()
 			);
+			cafe = cafeRepository.findByName("서울앵무새").get();
+			addCommentsToCafe(member1, cafe);
+			addOpeningHoursToCafe(cafe);
+			addReviewsToCafe(member1, cafe);
+			addReviewsToCafe(member2, cafe);
+			addReviewsToCafe(member3, cafe);
+			addReviewsToCafe(member4, cafe);
+			addReviewsToCafe(member5, cafe);
 
 			cafeRepository.save(
 				Cafe.builder()
@@ -109,11 +173,19 @@ public class DatabaseInit {
 					.address(
 						createAddress("서울", "서울시 성동구", "서울숲2길", "2 2층")
 					)
-					.openingHours(openingHours)
+					.openingHours(new ArrayList<>())
 					.reviews(new ArrayList<>())
 					.comments(new ArrayList<>())
 					.build()
 			);
+			cafe = cafeRepository.findByName("묘사서울").get();
+			addCommentsToCafe(member1, cafe);
+			addOpeningHoursToCafe(cafe);
+			addReviewsToCafe(member1, cafe);
+			addReviewsToCafe(member2, cafe);
+			addReviewsToCafe(member3, cafe);
+			addReviewsToCafe(member4, cafe);
+			addReviewsToCafe(member5, cafe);
 
 			cafeRepository.save(
 				Cafe.builder()
@@ -123,11 +195,19 @@ public class DatabaseInit {
 					.address(
 						createAddress("서울", "서울시 성동구", "서울숲2길", "8-8 2층")
 					)
-					.openingHours(openingHours)
+					.openingHours(new ArrayList<>())
 					.reviews(new ArrayList<>())
 					.comments(new ArrayList<>())
 					.build()
 			);
+			cafe = cafeRepository.findByName("라프레플루트").get();
+			addCommentsToCafe(member1, cafe);
+			addOpeningHoursToCafe(cafe);
+			addReviewsToCafe(member1, cafe);
+			addReviewsToCafe(member2, cafe);
+			addReviewsToCafe(member3, cafe);
+			addReviewsToCafe(member4, cafe);
+			addReviewsToCafe(member5, cafe);
 
 			cafeRepository.save(
 				Cafe.builder()
@@ -137,11 +217,19 @@ public class DatabaseInit {
 					.address(
 						createAddress("서울", "서울시 성동구", "서울숲2길", "15-14 2층")
 					)
-					.openingHours(openingHours)
+					.openingHours(new ArrayList<>())
 					.reviews(new ArrayList<>())
 					.comments(new ArrayList<>())
 					.build()
 			);
+			cafe = cafeRepository.findByName("DYI WORKSHOP").get();
+			addCommentsToCafe(member1, cafe);
+			addOpeningHoursToCafe(cafe);
+			addReviewsToCafe(member1, cafe);
+			addReviewsToCafe(member2, cafe);
+			addReviewsToCafe(member3, cafe);
+			addReviewsToCafe(member4, cafe);
+			addReviewsToCafe(member5, cafe);
 
 			cafeRepository.save(
 				Cafe.builder()
@@ -151,11 +239,18 @@ public class DatabaseInit {
 					.address(
 						createAddress("서울", "서울시 성동구", "서울숲4길", "12 지하1층")
 					)
-					.openingHours(openingHours)
+					.openingHours(new ArrayList<>())
 					.reviews(new ArrayList<>())
 					.comments(new ArrayList<>())
 					.build()
 			);
+			cafe = cafeRepository.findByName("하프커피 성수").get();
+			addOpeningHoursToCafe(cafe);
+			addReviewsToCafe(member1, cafe);
+			addReviewsToCafe(member2, cafe);
+			addReviewsToCafe(member3, cafe);
+			addReviewsToCafe(member4, cafe);
+			addReviewsToCafe(member5, cafe);
 
 			cafeRepository.save(
 				Cafe.builder()
@@ -165,11 +260,19 @@ public class DatabaseInit {
 					.address(
 						createAddress("서울", "서울시 성동구", "서울숲4길", "12-22 1, 2층")
 					)
-					.openingHours(openingHours)
+					.openingHours(new ArrayList<>())
 					.reviews(new ArrayList<>())
 					.comments(new ArrayList<>())
 					.build()
 			);
+			cafe = cafeRepository.findByName("구욱희씨 서울숲점").get();
+			addCommentsToCafe(member1, cafe);
+			addOpeningHoursToCafe(cafe);
+			addReviewsToCafe(member1, cafe);
+			addReviewsToCafe(member2, cafe);
+			addReviewsToCafe(member3, cafe);
+			addReviewsToCafe(member4, cafe);
+			addReviewsToCafe(member5, cafe);
 
 			cafeRepository.save(
 				Cafe.builder()
@@ -180,11 +283,19 @@ public class DatabaseInit {
 					.address(
 						createAddress("서울", "서울시 성동구", "서울숲2길", "24-1")
 					)
-					.openingHours(openingHours)
+					.openingHours(new ArrayList<>())
 					.reviews(new ArrayList<>())
 					.comments(new ArrayList<>())
 					.build()
 			);
+			cafe = cafeRepository.findByName("어라운드데이").get();
+			addCommentsToCafe(member1, cafe);
+			addOpeningHoursToCafe(cafe);
+			addReviewsToCafe(member1, cafe);
+			addReviewsToCafe(member2, cafe);
+			addReviewsToCafe(member3, cafe);
+			addReviewsToCafe(member4, cafe);
+			addReviewsToCafe(member5, cafe);
 
 			cafeRepository.save(
 				Cafe.builder()
@@ -194,11 +305,19 @@ public class DatabaseInit {
 					.address(
 						createAddress("서울", "서울시 성동구", "서울숲2길", "22-1")
 					)
-					.openingHours(openingHours)
+					.openingHours(new ArrayList<>())
 					.reviews(new ArrayList<>())
 					.comments(new ArrayList<>())
 					.build()
 			);
+			cafe = cafeRepository.findByName("LOWIDE").get();
+			addCommentsToCafe(member1, cafe);
+			addOpeningHoursToCafe(cafe);
+			addReviewsToCafe(member1, cafe);
+			addReviewsToCafe(member2, cafe);
+			addReviewsToCafe(member3, cafe);
+			addReviewsToCafe(member4, cafe);
+			addReviewsToCafe(member5, cafe);
 
 			cafeRepository.save(
 				Cafe.builder()
@@ -208,11 +327,18 @@ public class DatabaseInit {
 					.address(
 						createAddress("서울", "서울시 성동구", "서울숲2길", "22-1")
 					)
-					.openingHours(openingHours)
+					.openingHours(new ArrayList<>())
 					.reviews(new ArrayList<>())
 					.comments(new ArrayList<>())
 					.build()
 			);
+			cafe = cafeRepository.findByName("퍼먼트").get();
+			addOpeningHoursToCafe(cafe);
+			addReviewsToCafe(member1, cafe);
+			addReviewsToCafe(member2, cafe);
+			addReviewsToCafe(member3, cafe);
+			addReviewsToCafe(member4, cafe);
+			addReviewsToCafe(member5, cafe);
 
 			cafeRepository.save(
 				Cafe.builder()
@@ -223,11 +349,14 @@ public class DatabaseInit {
 					.address(
 						createAddress("서울", "서울시 성동구", "서울숲2길", "28-11")
 					)
-					.openingHours(openingHours)
+					.openingHours(new ArrayList<>())
 					.reviews(new ArrayList<>())
 					.comments(new ArrayList<>())
 					.build()
 			);
+			cafe = cafeRepository.findByName("센터커피 서울숲점").get();
+			addCommentsToCafe(member1, cafe);
+			addOpeningHoursToCafe(cafe);
 
 			cafeRepository.save(
 				Cafe.builder()
@@ -237,11 +366,14 @@ public class DatabaseInit {
 					.address(
 						createAddress("서울", "서울시 성동구", "서울숲2길", "32-14 갤러리아포레 상가 102동 113호")
 					)
-					.openingHours(openingHours)
+					.openingHours(new ArrayList<>())
 					.reviews(new ArrayList<>())
 					.comments(new ArrayList<>())
 					.build()
 			);
+			cafe = cafeRepository.findByName("체다앤올리").get();
+			addCommentsToCafe(member1, cafe);
+			addOpeningHoursToCafe(cafe);
 
 			cafeRepository.save(
 				Cafe.builder()
@@ -251,11 +383,19 @@ public class DatabaseInit {
 					.address(
 						createAddress("서울", "서울시 성동구", "서울숲2길", "44-13 1층")
 					)
-					.openingHours(openingHours)
+					.openingHours(new ArrayList<>())
 					.reviews(new ArrayList<>())
 					.comments(new ArrayList<>())
 					.build()
 			);
+			cafe = cafeRepository.findByName("5to7").get();
+			addCommentsToCafe(member1, cafe);
+			addOpeningHoursToCafe(cafe);
+			addReviewsToCafe(member1, cafe);
+			addReviewsToCafe(member2, cafe);
+			addReviewsToCafe(member3, cafe);
+			addReviewsToCafe(member4, cafe);
+			addReviewsToCafe(member5, cafe);
 
 			cafeRepository.save(
 				Cafe.builder()
@@ -266,11 +406,14 @@ public class DatabaseInit {
 					.address(
 						createAddress("서울", "서울시 성동구", "왕십리로", "96")
 					)
-					.openingHours(openingHours)
+					.openingHours(new ArrayList<>())
 					.reviews(new ArrayList<>())
 					.comments(new ArrayList<>())
 					.build()
 			);
+			cafe = cafeRepository.findByName("밀도 성수점").get();
+			addCommentsToCafe(member1, cafe);
+			addOpeningHoursToCafe(cafe);
 
 			cafeRepository.save(
 				Cafe.builder()
@@ -280,11 +423,13 @@ public class DatabaseInit {
 					.address(
 						createAddress("서울", "서울시 성동구", "연무장길", "29-17 1층")
 					)
-					.openingHours(openingHours)
+					.openingHours(new ArrayList<>())
 					.reviews(new ArrayList<>())
 					.comments(new ArrayList<>())
 					.build()
 			);
+			cafe = cafeRepository.findByName("노티드 성수").get();
+			addOpeningHoursToCafe(cafe);
 
 			cafeRepository.save(
 				Cafe.builder()
@@ -294,11 +439,19 @@ public class DatabaseInit {
 					.address(
 						createAddress("서울", "서울시 성동구", "성수이로7길", "39")
 					)
-					.openingHours(openingHours)
+					.openingHours(new ArrayList<>())
 					.reviews(new ArrayList<>())
 					.comments(new ArrayList<>())
 					.build()
 			);
+			cafe = cafeRepository.findByName("멜로워 성수 더 플래그쉽").get();
+			addCommentsToCafe(member3, cafe);
+			addOpeningHoursToCafe(cafe);
+			addReviewsToCafe(member1, cafe);
+			addReviewsToCafe(member2, cafe);
+			addReviewsToCafe(member3, cafe);
+			addReviewsToCafe(member4, cafe);
+			addReviewsToCafe(member5, cafe);
 
 			cafeRepository.save(
 				Cafe.builder()
@@ -309,11 +462,14 @@ public class DatabaseInit {
 					.address(
 						createAddress("서울", "서울시 성동구", "서울숲2길", "22-1")
 					)
-					.openingHours(openingHours)
+					.openingHours(new ArrayList<>())
 					.reviews(new ArrayList<>())
 					.comments(new ArrayList<>())
 					.build()
 			);
+			cafe = cafeRepository.findByName("도토루커피os").get();
+			addCommentsToCafe(member4, cafe);
+			addOpeningHoursToCafe(cafe);
 
 			// 연남동 카페
 			cafeRepository.save(
@@ -327,11 +483,18 @@ public class DatabaseInit {
 					.address(
 						createAddress("서울", "서울시 마포구", "연희로1길", "45-6")
 					)
-					.openingHours(openingHours)
+					.openingHours(new ArrayList<>())
 					.reviews(new ArrayList<>())
 					.comments(new ArrayList<>())
 					.build()
 			);
+			cafe = cafeRepository.findByName("하우에버 연남").get();
+			addOpeningHoursToCafe(cafe);
+			addReviewsToCafe(member1, cafe);
+			addReviewsToCafe(member2, cafe);
+			addReviewsToCafe(member3, cafe);
+			addReviewsToCafe(member4, cafe);
+			addReviewsToCafe(member5, cafe);
 
 			cafeRepository.save(
 				Cafe.builder()
@@ -344,11 +507,14 @@ public class DatabaseInit {
 					.address(
 						createAddress("서울", "서울시 마포구", "월드컵북로6길", "12-13")
 					)
-					.openingHours(openingHours)
+					.openingHours(new ArrayList<>())
 					.reviews(new ArrayList<>())
 					.comments(new ArrayList<>())
 					.build()
 			);
+			cafe = cafeRepository.findByName("노티드 연남").get();
+			addCommentsToCafe(member5, cafe);
+			addOpeningHoursToCafe(cafe);
 
 			cafeRepository.save(
 				Cafe.builder()
@@ -359,11 +525,19 @@ public class DatabaseInit {
 					.address(
 						createAddress("서울", "서울시 마포구", "연남로1길", "44 1층")
 					)
-					.openingHours(openingHours)
+					.openingHours(new ArrayList<>())
 					.reviews(new ArrayList<>())
 					.comments(new ArrayList<>())
 					.build()
 			);
+			cafe = cafeRepository.findByName("터틀힙").get();
+			addCommentsToCafe(member3, cafe);
+			addOpeningHoursToCafe(cafe);
+			addReviewsToCafe(member1, cafe);
+			addReviewsToCafe(member2, cafe);
+			addReviewsToCafe(member3, cafe);
+			addReviewsToCafe(member4, cafe);
+			addReviewsToCafe(member5, cafe);
 
 			cafeRepository.save(
 				Cafe.builder()
@@ -374,11 +548,19 @@ public class DatabaseInit {
 					.address(
 						createAddress("서울", "서울시 마포구", "성미산로", "170 102호")
 					)
-					.openingHours(openingHours)
+					.openingHours(new ArrayList<>())
 					.reviews(new ArrayList<>())
 					.comments(new ArrayList<>())
 					.build()
 			);
+			cafe = cafeRepository.findByName("버터앤쉘터 연남점").get();
+			addCommentsToCafe(member4, cafe);
+			addOpeningHoursToCafe(cafe);
+			addReviewsToCafe(member1, cafe);
+			addReviewsToCafe(member2, cafe);
+			addReviewsToCafe(member3, cafe);
+			addReviewsToCafe(member4, cafe);
+			addReviewsToCafe(member5, cafe);
 
 			cafeRepository.save(
 				Cafe.builder()
@@ -390,11 +572,13 @@ public class DatabaseInit {
 					.address(
 						createAddress("서울", "서울시 마포구", "동교로41길", "31")
 					)
-					.openingHours(openingHours)
+					.openingHours(new ArrayList<>())
 					.reviews(new ArrayList<>())
 					.comments(new ArrayList<>())
 					.build()
 			);
+			cafe = cafeRepository.findByName("조앤도슨").get();
+			addOpeningHoursToCafe(cafe);
 
 			cafeRepository.save(
 				Cafe.builder()
@@ -407,11 +591,14 @@ public class DatabaseInit {
 					.address(
 						createAddress("서울", "서울시 마포구", "성미산로", "190-31 2층")
 					)
-					.openingHours(openingHours)
+					.openingHours(new ArrayList<>())
 					.reviews(new ArrayList<>())
 					.comments(new ArrayList<>())
 					.build()
 			);
+			cafe = cafeRepository.findByName("누크녹").get();
+			addCommentsToCafe(member5, cafe);
+			addOpeningHoursToCafe(cafe);
 
 			cafeRepository.save(
 				Cafe.builder()
@@ -421,11 +608,19 @@ public class DatabaseInit {
 					.address(
 						createAddress("서울", "서울시 마포구", "성미산로", "152")
 					)
-					.openingHours(openingHours)
+					.openingHours(new ArrayList<>())
 					.reviews(new ArrayList<>())
 					.comments(new ArrayList<>())
 					.build()
 			);
+			cafe = cafeRepository.findByName("청수당공명").get();
+			addCommentsToCafe(member2, cafe);
+			addOpeningHoursToCafe(cafe);
+			addReviewsToCafe(member1, cafe);
+			addReviewsToCafe(member2, cafe);
+			addReviewsToCafe(member3, cafe);
+			addReviewsToCafe(member4, cafe);
+			addReviewsToCafe(member5, cafe);
 
 			cafeRepository.save(
 				Cafe.builder()
@@ -435,11 +630,13 @@ public class DatabaseInit {
 					.address(
 						createAddress("서울", "서울시 마포구", "성미산로27길", "26")
 					)
-					.openingHours(openingHours)
+					.openingHours(new ArrayList<>())
 					.reviews(new ArrayList<>())
 					.comments(new ArrayList<>())
 					.build()
 			);
+			cafe = cafeRepository.findByName("파이인더샵").get();
+			addOpeningHoursToCafe(cafe);
 
 			cafeRepository.save(
 				Cafe.builder()
@@ -449,11 +646,19 @@ public class DatabaseInit {
 					.address(
 						createAddress("서울", "서울시 마포구", "연남로1길", "41")
 					)
-					.openingHours(openingHours)
+					.openingHours(new ArrayList<>())
 					.reviews(new ArrayList<>())
 					.comments(new ArrayList<>())
 					.build()
 			);
+			cafe = cafeRepository.findByName("코코로카라").get();
+			addCommentsToCafe(member2, cafe);
+			addOpeningHoursToCafe(cafe);
+			addReviewsToCafe(member1, cafe);
+			addReviewsToCafe(member2, cafe);
+			addReviewsToCafe(member3, cafe);
+			addReviewsToCafe(member4, cafe);
+			addReviewsToCafe(member5, cafe);
 
 			cafeRepository.save(
 				Cafe.builder()
@@ -463,11 +668,14 @@ public class DatabaseInit {
 					.address(
 						createAddress("서울", "서울시 마포구", "동교로", "247")
 					)
-					.openingHours(openingHours)
+					.openingHours(new ArrayList<>())
 					.reviews(new ArrayList<>())
 					.comments(new ArrayList<>())
 					.build()
 			);
+			cafe = cafeRepository.findByName("랜디스도넛 연남점").get();
+			addCommentsToCafe(member3, cafe);
+			addOpeningHoursToCafe(cafe);
 
 			cafeRepository.save(
 				Cafe.builder()
@@ -477,11 +685,19 @@ public class DatabaseInit {
 					.address(
 						createAddress("서울", "서울시 마포구", "성미산로29안길", "8")
 					)
-					.openingHours(openingHours)
+					.openingHours(new ArrayList<>())
 					.reviews(new ArrayList<>())
 					.comments(new ArrayList<>())
 					.build()
 			);
+			cafe = cafeRepository.findByName("파롤앤랑그").get();
+			addCommentsToCafe(member4, cafe);
+			addOpeningHoursToCafe(cafe);
+			addReviewsToCafe(member1, cafe);
+			addReviewsToCafe(member2, cafe);
+			addReviewsToCafe(member3, cafe);
+			addReviewsToCafe(member4, cafe);
+			addReviewsToCafe(member5, cafe);
 
 			cafeRepository.save(
 				Cafe.builder()
@@ -491,11 +707,14 @@ public class DatabaseInit {
 					.address(
 						createAddress("서울", "서울시 마포구", "연희로", "3층")
 					)
-					.openingHours(openingHours)
+					.openingHours(new ArrayList<>())
 					.reviews(new ArrayList<>())
 					.comments(new ArrayList<>())
 					.build()
 			);
+			cafe = cafeRepository.findByName("에브리데이해피벌스데이").get();
+			addCommentsToCafe(member2, cafe);
+			addOpeningHoursToCafe(cafe);
 
 			cafeRepository.save(
 				Cafe.builder()
@@ -505,11 +724,19 @@ public class DatabaseInit {
 					.address(
 						createAddress("서울", "서울시 마포구", "성미산로23길", "68")
 					)
-					.openingHours(openingHours)
+					.openingHours(new ArrayList<>())
 					.reviews(new ArrayList<>())
 					.comments(new ArrayList<>())
 					.build()
 			);
+			cafe = cafeRepository.findByName("땡스오트 연남").get();
+			addCommentsToCafe(member5, cafe);
+			addOpeningHoursToCafe(cafe);
+			addReviewsToCafe(member1, cafe);
+			addReviewsToCafe(member2, cafe);
+			addReviewsToCafe(member3, cafe);
+			addReviewsToCafe(member4, cafe);
+			addReviewsToCafe(member5, cafe);
 
 			cafeRepository.save(
 				Cafe.builder()
@@ -519,11 +746,14 @@ public class DatabaseInit {
 					.address(
 						createAddress("서울", "서울시 마포구", "성미산로29길", "지하1층")
 					)
-					.openingHours(openingHours)
+					.openingHours(new ArrayList<>())
 					.reviews(new ArrayList<>())
 					.comments(new ArrayList<>())
 					.build()
 			);
+			cafe = cafeRepository.findByName("잼잼").get();
+			addCommentsToCafe(member2, cafe);
+			addOpeningHoursToCafe(cafe);
 
 			cafeRepository.save(
 				Cafe.builder()
@@ -533,11 +763,19 @@ public class DatabaseInit {
 					.address(
 						createAddress("서울", "서울시 마포구", "동교로", "262-9 1층")
 					)
-					.openingHours(openingHours)
+					.openingHours(new ArrayList<>())
 					.reviews(new ArrayList<>())
 					.comments(new ArrayList<>())
 					.build()
 			);
+			cafe = cafeRepository.findByName("치플레").get();
+			addCommentsToCafe(member2, cafe);
+			addOpeningHoursToCafe(cafe);
+			addReviewsToCafe(member1, cafe);
+			addReviewsToCafe(member2, cafe);
+			addReviewsToCafe(member3, cafe);
+			addReviewsToCafe(member4, cafe);
+			addReviewsToCafe(member5, cafe);
 
 			cafeRepository.save(
 				Cafe.builder()
@@ -547,11 +785,14 @@ public class DatabaseInit {
 					.address(
 						createAddress("서울", "서울시 마포구", "성미산로", "147 1층")
 					)
-					.openingHours(openingHours)
+					.openingHours(new ArrayList<>())
 					.reviews(new ArrayList<>())
 					.comments(new ArrayList<>())
 					.build()
 			);
+			cafe = cafeRepository.findByName("티크닉").get();
+			addCommentsToCafe(member3, cafe);
+			addOpeningHoursToCafe(cafe);
 
 			cafeRepository.save(
 				Cafe.builder()
@@ -561,11 +802,19 @@ public class DatabaseInit {
 					.address(
 						createAddress("서울", "서울시 마포구", "동교로41길", "10 1층")
 					)
-					.openingHours(openingHours)
+					.openingHours(new ArrayList<>())
 					.reviews(new ArrayList<>())
 					.comments(new ArrayList<>())
 					.build()
 			);
+			cafe = cafeRepository.findByName("서울페이스트리 연남점").get();
+			addCommentsToCafe(member5, cafe);
+			addOpeningHoursToCafe(cafe);
+			addReviewsToCafe(member1, cafe);
+			addReviewsToCafe(member2, cafe);
+			addReviewsToCafe(member3, cafe);
+			addReviewsToCafe(member4, cafe);
+			addReviewsToCafe(member5, cafe);
 
 			cafeRepository.save(
 				Cafe.builder()
@@ -575,11 +824,14 @@ public class DatabaseInit {
 					.address(
 						createAddress("서울", "서울시 마포구", "동교로", "266-6 1층")
 					)
-					.openingHours(openingHours)
+					.openingHours(new ArrayList<>())
 					.reviews(new ArrayList<>())
 					.comments(new ArrayList<>())
 					.build()
 			);
+			cafe = cafeRepository.findByName("씨스루 홍대연남점").get();
+			addCommentsToCafe(member2, cafe);
+			addOpeningHoursToCafe(cafe);
 
 			cafeRepository.save(
 				Cafe.builder()
@@ -589,11 +841,19 @@ public class DatabaseInit {
 					.address(
 						createAddress("서울", "서울시 마포구", "성미산로", "150")
 					)
-					.openingHours(openingHours)
+					.openingHours(new ArrayList<>())
 					.reviews(new ArrayList<>())
 					.comments(new ArrayList<>())
 					.build()
 			);
+			cafe = cafeRepository.findByName("얼스어스").get();
+			addCommentsToCafe(member3, cafe);
+			addOpeningHoursToCafe(cafe);
+			addReviewsToCafe(member1, cafe);
+			addReviewsToCafe(member2, cafe);
+			addReviewsToCafe(member3, cafe);
+			addReviewsToCafe(member4, cafe);
+			addReviewsToCafe(member5, cafe);
 
 			cafeRepository.save(
 				Cafe.builder()
@@ -603,11 +863,19 @@ public class DatabaseInit {
 					.address(
 						createAddress("서울", "서울시 마포구", "동교로", "256-10 2층")
 					)
-					.openingHours(openingHours)
+					.openingHours(new ArrayList<>())
 					.reviews(new ArrayList<>())
 					.comments(new ArrayList<>())
 					.build()
 			);
+			cafe = cafeRepository.findByName("믜요").get();
+			addCommentsToCafe(member3, cafe);
+			addOpeningHoursToCafe(cafe);
+			addReviewsToCafe(member1, cafe);
+			addReviewsToCafe(member2, cafe);
+			addReviewsToCafe(member3, cafe);
+			addReviewsToCafe(member4, cafe);
+			addReviewsToCafe(member5, cafe);
 
 			cafeRepository.save(
 				Cafe.builder()
@@ -617,11 +885,14 @@ public class DatabaseInit {
 					.address(
 						createAddress("서울", "서울시 마포구", "동교로46길", "20 1층")
 					)
-					.openingHours(openingHours)
+					.openingHours(new ArrayList<>())
 					.reviews(new ArrayList<>())
 					.comments(new ArrayList<>())
 					.build()
 			);
+			cafe = cafeRepository.findByName("꽈페 연남본점").get();
+			addCommentsToCafe(member5, cafe);
+			addOpeningHoursToCafe(cafe);
 
 			cafeRepository.save(
 				Cafe.builder()
@@ -633,11 +904,19 @@ public class DatabaseInit {
 					.address(
 						createAddress("서울", "서울시 마포구", "동교로", "255-1 1층")
 					)
-					.openingHours(openingHours)
+					.openingHours(new ArrayList<>())
 					.reviews(new ArrayList<>())
 					.comments(new ArrayList<>())
 					.build()
 			);
+			cafe = cafeRepository.findByName("꿀넹쿠키 연남점").get();
+			addCommentsToCafe(member5, cafe);
+			addOpeningHoursToCafe(cafe);
+			addReviewsToCafe(member1, cafe);
+			addReviewsToCafe(member2, cafe);
+			addReviewsToCafe(member3, cafe);
+			addReviewsToCafe(member4, cafe);
+			addReviewsToCafe(member5, cafe);
 
 			cafeRepository.save(
 				Cafe.builder()
@@ -647,11 +926,14 @@ public class DatabaseInit {
 					.address(
 						createAddress("서울", "서울시 마포구", "동교로", "194 혜원빌딩 1층")
 					)
-					.openingHours(openingHours)
+					.openingHours(new ArrayList<>())
 					.reviews(new ArrayList<>())
 					.comments(new ArrayList<>())
 					.build()
 			);
+			cafe = cafeRepository.findByName("1984").get();
+			addCommentsToCafe(member5, cafe);
+			addOpeningHoursToCafe(cafe);
 
 			// 홍대 카페
 			cafeRepository.save(
@@ -662,11 +944,19 @@ public class DatabaseInit {
 					.address(
 						createAddress("서울", "서울시 마포구", "어울마당로", "128")
 					)
-					.openingHours(openingHours)
+					.openingHours(new ArrayList<>())
 					.reviews(new ArrayList<>())
 					.comments(new ArrayList<>())
 					.build()
 			);
+			cafe = cafeRepository.findByName("츄로101 홍대본점").get();
+			addCommentsToCafe(member2, cafe);
+			addOpeningHoursToCafe(cafe);
+			addReviewsToCafe(member1, cafe);
+			addReviewsToCafe(member2, cafe);
+			addReviewsToCafe(member3, cafe);
+			addReviewsToCafe(member4, cafe);
+			addReviewsToCafe(member5, cafe);
 
 			cafeRepository.save(
 				Cafe.builder()
@@ -676,11 +966,19 @@ public class DatabaseInit {
 					.address(
 						createAddress("서울", "서울시 마포구", "와우산로29길", "47 1,2층")
 					)
-					.openingHours(openingHours)
+					.openingHours(new ArrayList<>())
 					.reviews(new ArrayList<>())
 					.comments(new ArrayList<>())
 					.build()
 			);
+			cafe = cafeRepository.findByName("라헬의부엌 홍대점").get();
+			addCommentsToCafe(member3, cafe);
+			addOpeningHoursToCafe(cafe);
+			addReviewsToCafe(member1, cafe);
+			addReviewsToCafe(member2, cafe);
+			addReviewsToCafe(member3, cafe);
+			addReviewsToCafe(member4, cafe);
+			addReviewsToCafe(member5, cafe);
 
 			cafeRepository.save(
 				Cafe.builder()
@@ -691,11 +989,14 @@ public class DatabaseInit {
 					.address(
 						createAddress("서울", "서울시 마포구", "잔다리로73", "1F")
 					)
-					.openingHours(openingHours)
+					.openingHours(new ArrayList<>())
 					.reviews(new ArrayList<>())
 					.comments(new ArrayList<>())
 					.build()
 			);
+			cafe = cafeRepository.findByName("콤파일").get();
+			addCommentsToCafe(member1, cafe);
+			addOpeningHoursToCafe(cafe);
 
 			cafeRepository.save(
 				Cafe.builder()
@@ -706,11 +1007,19 @@ public class DatabaseInit {
 					.address(
 						createAddress("서울", "서울시 마포구", "양화로15안길 6", "Avelop")
 					)
-					.openingHours(openingHours)
+					.openingHours(new ArrayList<>())
 					.reviews(new ArrayList<>())
 					.comments(new ArrayList<>())
 					.build()
 			);
+			cafe = cafeRepository.findByName("아벨롭").get();
+			addCommentsToCafe(member3, cafe);
+			addOpeningHoursToCafe(cafe);
+			addReviewsToCafe(member1, cafe);
+			addReviewsToCafe(member2, cafe);
+			addReviewsToCafe(member3, cafe);
+			addReviewsToCafe(member4, cafe);
+			addReviewsToCafe(member5, cafe);
 
 			cafeRepository.save(
 				Cafe.builder()
@@ -721,11 +1030,14 @@ public class DatabaseInit {
 					.address(
 						createAddress("서울", "서울시 마포구", "홍익로5길", "19")
 					)
-					.openingHours(openingHours)
+					.openingHours(new ArrayList<>())
 					.reviews(new ArrayList<>())
 					.comments(new ArrayList<>())
 					.build()
 			);
+			cafe = cafeRepository.findByName("오퍼 카페").get();
+			addCommentsToCafe(member4, cafe);
+			addOpeningHoursToCafe(cafe);
 
 			cafeRepository.save(
 				Cafe.builder()
@@ -736,11 +1048,19 @@ public class DatabaseInit {
 					.address(
 						createAddress("서울", "서울시 마포구", "와우산로28길", "8 K.C 빌딩")
 					)
-					.openingHours(openingHours)
+					.openingHours(new ArrayList<>())
 					.reviews(new ArrayList<>())
 					.comments(new ArrayList<>())
 					.build()
 			);
+			cafe = cafeRepository.findByName("아오이토리").get();
+			addCommentsToCafe(member5, cafe);
+			addOpeningHoursToCafe(cafe);
+			addReviewsToCafe(member1, cafe);
+			addReviewsToCafe(member2, cafe);
+			addReviewsToCafe(member3, cafe);
+			addReviewsToCafe(member4, cafe);
+			addReviewsToCafe(member5, cafe);
 
 			cafeRepository.save(
 				Cafe.builder()
@@ -750,11 +1070,14 @@ public class DatabaseInit {
 					.address(
 						createAddress("서울", "서울시 마포구", "와우산로17길", "11-8 지하1층, 1층")
 					)
-					.openingHours(openingHours)
+					.openingHours(new ArrayList<>())
 					.reviews(new ArrayList<>())
 					.comments(new ArrayList<>())
 					.build()
 			);
+			cafe = cafeRepository.findByName("카페 공명 홍대점").get();
+			addCommentsToCafe(member3, cafe);
+			addOpeningHoursToCafe(cafe);
 
 			cafeRepository.save(
 				Cafe.builder()
@@ -765,11 +1088,14 @@ public class DatabaseInit {
 					.address(
 						createAddress("서울", "서울시 마포구", "어울마당로", "51-1 1층")
 					)
-					.openingHours(openingHours)
+					.openingHours(new ArrayList<>())
 					.reviews(new ArrayList<>())
 					.comments(new ArrayList<>())
 					.build()
 			);
+			cafe = cafeRepository.findByName("모센즈스위트").get();
+			addCommentsToCafe(member2, cafe);
+			addOpeningHoursToCafe(cafe);
 
 			cafeRepository.save(
 				Cafe.builder()
@@ -779,11 +1105,19 @@ public class DatabaseInit {
 					.address(
 						createAddress("서울", "서울시 마포구", "와우산로11길", "9 1층")
 					)
-					.openingHours(openingHours)
+					.openingHours(new ArrayList<>())
 					.reviews(new ArrayList<>())
 					.comments(new ArrayList<>())
 					.build()
 			);
+			cafe = cafeRepository.findByName("스탠스커피").get();
+			addCommentsToCafe(member4, cafe);
+			addOpeningHoursToCafe(cafe);
+			addReviewsToCafe(member1, cafe);
+			addReviewsToCafe(member2, cafe);
+			addReviewsToCafe(member3, cafe);
+			addReviewsToCafe(member4, cafe);
+			addReviewsToCafe(member5, cafe);
 
 			cafeRepository.save(
 				Cafe.builder()
@@ -794,11 +1128,14 @@ public class DatabaseInit {
 					.address(
 						createAddress("서울", "서울시 마포구", "어울마당로", "100-12 지1층")
 					)
-					.openingHours(openingHours)
+					.openingHours(new ArrayList<>())
 					.reviews(new ArrayList<>())
 					.comments(new ArrayList<>())
 					.build()
 			);
+			cafe = cafeRepository.findByName("트라이브 홍대점").get();
+			addCommentsToCafe(member2, cafe);
+			addOpeningHoursToCafe(cafe);
 
 			cafeRepository.save(
 				Cafe.builder()
@@ -808,11 +1145,18 @@ public class DatabaseInit {
 					.address(
 						createAddress("서울", "서울시 마포구", "어울마당로", "45")
 					)
-					.openingHours(openingHours)
+					.openingHours(new ArrayList<>())
 					.reviews(new ArrayList<>())
 					.comments(new ArrayList<>())
 					.build()
 			);
+			cafe = cafeRepository.findByName("콜린").get();
+			addOpeningHoursToCafe(cafe);
+			addReviewsToCafe(member1, cafe);
+			addReviewsToCafe(member2, cafe);
+			addReviewsToCafe(member3, cafe);
+			addReviewsToCafe(member4, cafe);
+			addReviewsToCafe(member5, cafe);
 
 			cafeRepository.save(
 				Cafe.builder()
@@ -823,11 +1167,18 @@ public class DatabaseInit {
 					.address(
 						createAddress("서울", "서울시 마포구", "신촌로4길", "9")
 					)
-					.openingHours(openingHours)
+					.openingHours(new ArrayList<>())
 					.reviews(new ArrayList<>())
 					.comments(new ArrayList<>())
 					.build()
 			);
+			cafe = cafeRepository.findByName("퍼스트커피랩 홍대점").get();
+			addOpeningHoursToCafe(cafe);
+			addReviewsToCafe(member1, cafe);
+			addReviewsToCafe(member2, cafe);
+			addReviewsToCafe(member3, cafe);
+			addReviewsToCafe(member4, cafe);
+			addReviewsToCafe(member5, cafe);
 
 			cafeRepository.save(
 				Cafe.builder()
@@ -837,11 +1188,13 @@ public class DatabaseInit {
 					.address(
 						createAddress("서울", "서울시 마포구", "잔다리로6길", "20-9 1층, B1층")
 					)
-					.openingHours(openingHours)
+					.openingHours(new ArrayList<>())
 					.reviews(new ArrayList<>())
 					.comments(new ArrayList<>())
 					.build()
 			);
+			cafe = cafeRepository.findByName("더블유오앤").get();
+			addOpeningHoursToCafe(cafe);
 
 			cafeRepository.save(
 				Cafe.builder()
@@ -852,9 +1205,143 @@ public class DatabaseInit {
 					.address(
 						createAddress("서울", "서울시 마포구", "어울마당로5길", "42 1층 멧라운지 metlounge")
 					)
-					.openingHours(openingHours)
+					.openingHours(new ArrayList<>())
 					.reviews(new ArrayList<>())
 					.comments(new ArrayList<>())
+					.build()
+			);
+			cafe = cafeRepository.findByName("멧라운지").get();
+			addOpeningHoursToCafe(cafe);
+		}
+
+		// Methods
+		private void addReviewsToCafe(Member member, Cafe cafe) {
+			if (cafe.getCafeId() % 3 == 1) {
+				reviewRepository.save(
+					Review.builder()
+						.cafeCongestion(CafeCongestion.HIGH)
+						.isClean(true)
+						.hasPlug(true)
+						.cafe(cafe)
+						.member(member)
+						.build()
+				);
+			} else if (cafe.getCafeId() % 3 == 2) {
+				reviewRepository.save(
+					Review.builder()
+						.cafeCongestion(CafeCongestion.MEDIUM)
+						.isClean(true)
+						.hasPlug(false)
+						.cafe(cafe)
+						.member(member)
+						.build()
+				);
+			} else if (cafe.getCafeId() % 3 == 0) {
+				reviewRepository.save(
+					Review.builder()
+						.cafeCongestion(CafeCongestion.LOW)
+						.isClean(false)
+						.hasPlug(false)
+						.cafe(cafe)
+						.member(member)
+						.build()
+				);
+			}
+		}
+
+		private void addOpeningHoursToCafe(Cafe cafe) {
+			openingHourRepository.save(
+				OpeningHour.builder()
+					.dayOfWeek(DayOfWeek.MONDAY)
+					.openTime(LocalTime.of(9, 0))
+					.closeTime(LocalTime.of(20, 0))
+					.cafe(cafe)
+					.build()
+			);
+			openingHourRepository.save(
+				OpeningHour.builder()
+					.dayOfWeek(DayOfWeek.TUESDAY)
+					.openTime(LocalTime.of(9, 0))
+					.closeTime(LocalTime.of(20, 0))
+					.cafe(cafe)
+					.build()
+			);
+			openingHourRepository.save(
+				OpeningHour.builder()
+					.dayOfWeek(DayOfWeek.WEDNESDAY)
+					.openTime(LocalTime.of(9, 0))
+					.closeTime(LocalTime.of(20, 0))
+					.cafe(cafe)
+					.build()
+			);
+			openingHourRepository.save(
+				OpeningHour.builder()
+					.dayOfWeek(DayOfWeek.THURSDAY)
+					.openTime(LocalTime.of(9, 0))
+					.closeTime(LocalTime.of(20, 0))
+					.cafe(cafe)
+					.build()
+			);
+			openingHourRepository.save(
+				OpeningHour.builder()
+					.dayOfWeek(DayOfWeek.FRIDAY)
+					.openTime(LocalTime.of(9, 0))
+					.closeTime(LocalTime.of(20, 0))
+					.cafe(cafe)
+					.build()
+			);
+			openingHourRepository.save(
+				OpeningHour.builder()
+					.dayOfWeek(DayOfWeek.SATURDAY)
+					.openTime(LocalTime.of(9, 0))
+					.closeTime(LocalTime.of(20, 0))
+					.cafe(cafe)
+					.build()
+			);
+			openingHourRepository.save(
+				OpeningHour.builder()
+					.dayOfWeek(DayOfWeek.SUNDAY)
+					.openTime(LocalTime.of(9, 0))
+					.closeTime(LocalTime.of(20, 0))
+					.cafe(cafe)
+					.build()
+			);
+		}
+
+		private void addCommentsToCafe(Member member, Cafe cafe) {
+			commentRepository.save(
+				Comment.builder()
+					.content("여기 카페 너무 트렌디해요!")
+					.cafe(cafe)
+					.member(member)
+					.build()
+			);
+			commentRepository.save(
+				Comment.builder()
+					.content("카페가 너무 깨끗하고 좋아요~ <3")
+					.cafe(cafe)
+					.member(member)
+					.build()
+			);
+			commentRepository.save(
+				Comment.builder()
+					.content("여기 사장님이 너무 잘생겼어요.")
+					.cafe(cafe)
+					.member(member)
+					.build()
+			);
+			commentRepository.save(
+				Comment.builder()
+					.content("공부하기 좋아요!")
+					.cafe(cafe)
+					.member(member)
+					.build()
+			);
+			commentRepository.save(
+				Comment.builder()
+					.content("케이크가 정말 맛있어요!!!")
+					.cafe(cafe)
+					.member(member)
 					.build()
 			);
 		}
