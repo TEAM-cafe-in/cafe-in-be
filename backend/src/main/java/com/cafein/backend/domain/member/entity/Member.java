@@ -1,6 +1,10 @@
 package com.cafein.backend.domain.member.entity;
 
+import static javax.persistence.CascadeType.*;
+
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -9,10 +13,13 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.DynamicInsert;
 
+import com.cafein.backend.domain.Review.entity.Review;
+import com.cafein.backend.domain.comment.entity.Comment;
 import com.cafein.backend.domain.common.BaseTimeEntity;
 import com.cafein.backend.domain.member.constant.MemberType;
 import com.cafein.backend.domain.member.constant.Role;
@@ -61,6 +68,12 @@ public class Member extends BaseTimeEntity {
 	private String refreshToken;
 
 	private LocalDateTime tokenExpirationTime;
+
+	@OneToMany(mappedBy = "member", cascade = ALL)
+	private List<Review> reviews = new ArrayList<>();
+
+	@OneToMany(mappedBy = "member", cascade = ALL)
+	private List<Comment> comments = new ArrayList<>();
 
 	@Builder
 	public Member(MemberType memberType, String email, String password, String name, String profile, Role role) {

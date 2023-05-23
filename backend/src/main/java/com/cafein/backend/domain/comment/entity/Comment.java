@@ -13,6 +13,7 @@ import javax.persistence.ManyToOne;
 
 import com.cafein.backend.domain.cafe.entity.Cafe;
 import com.cafein.backend.domain.common.BaseTimeEntity;
+import com.cafein.backend.domain.member.entity.Member;
 
 import lombok.AccessLevel;
 import lombok.Builder;
@@ -36,8 +37,14 @@ public class Comment extends BaseTimeEntity {
 	@JoinColumn(name = "cafe_id")
 	private Cafe cafe;
 
+	@ManyToOne(fetch = LAZY)
+	@JoinColumn(name = "member_id")
+	private Member member;
+
 	@Builder
-	public Comment(String content) {
+	public Comment(String content, Cafe cafe, Member member) {
 		this.content = content;
+		this.cafe = cafe;
+		this.member = member;
 	}
 }
