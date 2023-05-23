@@ -31,7 +31,7 @@ public class ViewedCafe extends BaseTimeEntity {
 	private Long cafeId;
 
 	@ManyToOne(fetch = LAZY)
-	@JoinColumn(name = "member_id")
+	@JoinColumn(name = "member_id", nullable = false, updatable = false)
 	private Member member;
 
 	@Builder
