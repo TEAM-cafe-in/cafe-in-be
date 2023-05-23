@@ -12,4 +12,5 @@ public interface CafeRepository extends JpaRepository<Cafe, Long> {
 
 	Optional<Cafe> findByName(String name);
 	List<Cafe> findAllByLocal(Local local);
+	int countByLocal(Local local);
 }
