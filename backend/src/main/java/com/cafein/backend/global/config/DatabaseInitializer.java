@@ -25,13 +25,15 @@ import com.cafein.backend.domain.member.entity.Member;
 import com.cafein.backend.domain.member.repository.MemberRepository;
 import com.cafein.backend.domain.openinghours.entity.OpeningHour;
 import com.cafein.backend.domain.openinghours.repository.OpeningHourRepository;
+import com.cafein.backend.domain.viewedcafe.entity.ViewedCafe;
+import com.cafein.backend.domain.viewedcafe.repository.ViewedCafeRepository;
 
 import lombok.RequiredArgsConstructor;
 
 @Profile({"dev"})
 @Component
 @RequiredArgsConstructor
-public class DatabaseInit {
+public class DatabaseInitializer {
 
 	private final InitService initService;
 
@@ -50,6 +52,7 @@ public class DatabaseInit {
 		private final CommentRepository commentRepository;
 		private final OpeningHourRepository openingHourRepository;
 		private final MemberRepository memberRepository;
+		private final ViewedCafeRepository viewedCafeRepository;
 
 		public void dbInit() {
 			// Sample 회원 추가
@@ -95,6 +98,27 @@ public class DatabaseInit {
 					.email("testuser5@email.com")
 					.name("이동훈")
 					.role(Role.USER)
+					.build()
+			);
+
+			viewedCafeRepository.save(
+				ViewedCafe.builder()
+					.cafeId(1L)
+					.member(member1)
+					.build()
+			);
+
+			viewedCafeRepository.save(
+				ViewedCafe.builder()
+					.cafeId(2L)
+					.member(member1)
+					.build()
+			);
+
+			viewedCafeRepository.save(
+				ViewedCafe.builder()
+					.cafeId(3L)
+					.member(member1)
 					.build()
 			);
 
