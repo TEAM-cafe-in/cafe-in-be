@@ -1,5 +1,6 @@
 package com.cafein.backend.api.home.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -18,6 +19,8 @@ import com.cafein.backend.domain.cafe.service.CafeService;
 import com.cafein.backend.domain.comment.service.CommentService;
 import com.cafein.backend.domain.member.entity.Member;
 import com.cafein.backend.domain.member.service.MemberService;
+import com.cafein.backend.domain.viewedcafe.ViewedCafeService;
+import com.cafein.backend.domain.viewedcafe.entity.ViewedCafe;
 import com.cafein.backend.global.resolver.MemberInfo;
 import com.cafein.backend.global.resolver.MemberInfoDTO;
 
@@ -32,6 +35,8 @@ public class HomeController {
 
 	private final CafeService cafeService;
 	private final MemberService memberService;
+	private final CommentService commentService;
+	private final ViewedCafeService viewedCafeService;
 
 	@GetMapping("/home")
 	public ResponseEntity<HomeDTO.Response> home(final @Valid @RequestBody HomeDTO.Request homeRequestDTO,
