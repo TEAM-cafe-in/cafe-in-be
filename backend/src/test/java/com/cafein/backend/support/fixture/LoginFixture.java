@@ -9,6 +9,7 @@ import com.cafein.backend.external.oauth.model.OAuthAttributes;
 
 public class LoginFixture {
 
+	public static final String ACCESS = "ACCESS";
 	public static final String ACCESS_TOKEN = "access_token";
 	public static final String REFRESH_TOKEN = "refresh_token";
 	public static final String AUTHORIZATION_HEADER_ACCESS = "Bearer access_token";
@@ -24,7 +25,7 @@ public class LoginFixture {
 	private static OAuthAttributes createKakaoOauthAttributes() {
 		return OAuthAttributes.builder()
 			.name("chan")
-			.email("test@cafein.com")
+			.email("cafein@kakao.com")
 			.profile("profile")
 			.memberType(MemberType.KAKAO)
 			.build();
@@ -33,7 +34,7 @@ public class LoginFixture {
 	private static OAuthAttributes createGoogleOauthAttributes() {
 		return OAuthAttributes.builder()
 			.name("chan")
-			.email("test@cafein.com")
+			.email("cafein@google.com")
 			.profile("profile")
 			.memberType(MemberType.GOOGLE)
 			.build();
