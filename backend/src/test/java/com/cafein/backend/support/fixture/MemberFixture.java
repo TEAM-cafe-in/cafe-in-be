@@ -8,9 +8,11 @@ import com.cafein.backend.global.resolver.MemberInfoDTO;
 
 public class MemberFixture {
 
-	public static String member = "{\"memberId\" : \"1L\", \"role\" : \"ADMIN\"}";
+	public static final Member MEMBER = createMember();
+	public static final MemberInfoDTO MEMBER_INFO_DTO = memberInfoDTO();
+	public static final MemberInfoResponseDTO MEMBER_INFO_RESPONSE_DTO = memberInfoResponseDTO();
 
-	public static Member createMember() {
+	private static Member createMember() {
 		return Member.builder()
 			.memberType(MemberType.KAKAO)
 			.name("홍길동")
@@ -19,22 +21,14 @@ public class MemberFixture {
 			.build();
 	}
 
-	public static MemberInfoDTO memberInfoDTO() {
-		return createMemberInfoDTO();
-	}
-
-	private static MemberInfoDTO createMemberInfoDTO() {
+	private static MemberInfoDTO memberInfoDTO() {
 		return MemberInfoDTO.builder()
 			.memberId(1L)
 			.role(Role.USER)
 			.build();
 	}
 
-	public static MemberInfoResponseDTO memberInfoResponseDTO() {
-		return createMemberInfoResponse();
-	}
-
-	private static MemberInfoResponseDTO createMemberInfoResponse() {
+	private static MemberInfoResponseDTO memberInfoResponseDTO() {
 		return MemberInfoResponseDTO.builder()
 			.memberId(1L)
 			.memberName("홍길동")
