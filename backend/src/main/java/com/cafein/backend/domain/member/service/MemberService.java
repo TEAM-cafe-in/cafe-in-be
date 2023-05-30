@@ -18,7 +18,7 @@ import lombok.RequiredArgsConstructor;
 @Service
 @Transactional
 @RequiredArgsConstructor
-public class MemberService { //TODO : MemberService 테스트 코드 작성
+public class MemberService {
 
 	private final MemberRepository memberRepository;
 
