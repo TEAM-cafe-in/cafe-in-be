@@ -1,4 +1,4 @@
-package com.cafein.backend.domain;
+package com.cafein.backend.core.member.domain;
 
 import static org.assertj.core.api.Assertions.*;
 
