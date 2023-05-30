@@ -1,10 +1,12 @@
 package com.cafein.backend.api;
 
 import static com.cafein.backend.support.fixture.MemberFixture.*;
+import static org.junit.jupiter.api.DisplayNameGenerator.*;
 import static org.mockito.ArgumentMatchers.*;
 import static org.mockito.BDDMockito.*;
 
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayNameGeneration;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.web.servlet.MockMvc;
@@ -30,6 +32,7 @@ import com.cafein.backend.web.googletoken.client.GoogleTokenClient;
 import com.cafein.backend.web.kakaotoken.client.KakaoTokenClient;
 
 @WebMvcTest
+@DisplayNameGeneration(ReplaceUnderscores.class)
 public class ControllerTestSupporter {
 
 	protected MockMvc mockMvc;
@@ -49,7 +52,7 @@ public class ControllerTestSupporter {
 			.willReturn(true);
 
 		given(memberInfoArgumentResolver.resolveArgument(any(), any(), any(), any()))
-			.willReturn(memberInfoDTO());
+			.willReturn(MEMBER_INFO_DTO);
 	}
 
 	@MockBean
