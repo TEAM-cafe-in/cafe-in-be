@@ -21,7 +21,7 @@ import com.cafein.backend.support.utils.DataBaseSupporter;
 import com.cafein.backend.support.utils.ServiceTest;
 
 @ServiceTest
-class OAuthLoginServiceTest extends DataBaseSupporter {
+class OAuthLoginServiceTest {
 
 	@Autowired
 	private OAuthLoginService oAuthLoginService;

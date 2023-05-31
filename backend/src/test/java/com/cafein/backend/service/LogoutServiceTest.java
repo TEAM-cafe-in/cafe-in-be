@@ -25,7 +25,7 @@ import io.jsonwebtoken.Claims;
 
 @ServiceTest
 @ExtendWith(MockitoExtension.class)
-class LogoutServiceTest extends DataBaseSupporter {
+class LogoutServiceTest {
 
 	@Autowired
 	private LogoutService logoutService;
