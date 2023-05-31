@@ -18,7 +18,7 @@ class MemberTest {
 
 		assertThat(MEMBER.getRefreshToken()).isEqualTo(JWT_TOKEN_DTO.getRefreshToken());
 		assertThat(MEMBER.getTokenExpirationTime()).isEqualTo
-			(DateTimeUtils.convertToLoalDateTime(JWT_TOKEN_DTO.getRefreshTokenExpireTime()));
+			(DateTimeUtils.convertDateToLocalDateTime(JWT_TOKEN_DTO.getRefreshTokenExpireTime()));
 	}
 
 	@Test
