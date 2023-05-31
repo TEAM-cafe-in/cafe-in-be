@@ -63,6 +63,21 @@ public class Member extends BaseTimeEntity {
 	private LocalDateTime tokenExpirationTime;
 
 	@Builder
+	public Member(Long memberId, MemberType memberType, String email, String password, String name, String profile,
+		Integer coffeeBean, Role role, String refreshToken, LocalDateTime tokenExpirationTime) {
+		this.memberId = memberId;
+		this.memberType = memberType;
+		this.email = email;
+		this.password = password;
+		this.name = name;
+		this.profile = profile;
+		this.coffeeBean = coffeeBean;
+		this.role = role;
+		this.refreshToken = refreshToken;
+		this.tokenExpirationTime = tokenExpirationTime;
+	}
+
+	@Builder
 	public Member(MemberType memberType, String email, String password, String name, String profile, Role role) {
 		this.memberType = memberType;
 		this.email = email;
