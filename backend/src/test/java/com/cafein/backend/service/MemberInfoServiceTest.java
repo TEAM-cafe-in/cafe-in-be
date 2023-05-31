@@ -15,7 +15,7 @@ import com.cafein.backend.support.utils.DataBaseSupporter;
 import com.cafein.backend.support.utils.ServiceTest;
 
 @ServiceTest
-class MemberInfoServiceTest extends DataBaseSupporter {
+class MemberInfoServiceTest {
 
 	@Autowired
 	private MemberInfoService memberInfoService;

@@ -55,10 +55,4 @@ public class MemberService {
 		return memberRepository.findById(memberId)
 			.orElseThrow(() -> new EntityNotFoundException(ErrorCode.MEMBER_NOT_EXIST));
 	}
-
-	@Transactional(readOnly = true)
-	public Member getMemberByEmail(String memberEmail) {
-		return memberRepository.findByEmail(memberEmail)
-			.orElseThrow(() -> new EntityNotFoundException(ErrorCode.MEMBER_NOT_EXIST));
-	}
 }
