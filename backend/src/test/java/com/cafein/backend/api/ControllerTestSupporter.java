@@ -16,7 +16,6 @@ import org.springframework.web.context.WebApplicationContext;
 
 import com.cafein.backend.api.home.service.HomeService;
 import com.cafein.backend.api.login.service.OAuthLoginService;
-import com.cafein.backend.api.login.validator.OAuthValidator;
 import com.cafein.backend.api.logout.service.LogoutService;
 import com.cafein.backend.api.member.service.MemberInfoService;
 import com.cafein.backend.api.token.service.TokenService;
@@ -57,9 +56,6 @@ public class ControllerTestSupporter {
 
 	@MockBean
 	protected OAuthLoginService oAuthLoginService;
-
-	@MockBean
-	protected OAuthValidator oAuthValidator;
 
 	@MockBean
 	protected MemberService memberService;

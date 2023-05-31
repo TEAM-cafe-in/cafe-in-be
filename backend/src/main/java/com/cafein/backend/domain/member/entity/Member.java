@@ -89,7 +89,7 @@ public class Member extends BaseTimeEntity {
 
 	public void updateRefreshToken(final JwtTokenDTO jwtTokenDto) {
 		this.refreshToken = jwtTokenDto.getRefreshToken();
-		this.tokenExpirationTime = DateTimeUtils.convertToLoalDateTime(jwtTokenDto.getRefreshTokenExpireTime());
+		this.tokenExpirationTime = DateTimeUtils.convertDateToLocalDateTime(jwtTokenDto.getRefreshTokenExpireTime());
 	}
 
 	public void expireRefreshToken(final LocalDateTime now) {
