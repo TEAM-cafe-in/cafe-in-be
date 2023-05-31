@@ -13,7 +13,7 @@ import com.cafein.backend.global.resolver.MemberInfoDTO;
 public class MemberFixture {
 
 	public static final Member MEMBER = createMember();
-	public static final Member MEMBER_2 = createMemberWithExpiredRefreshToken();
+	public static final Member MEMBER_WITH_EXPIRED_REFRESH_TOKEN = createMemberWithExpiredRefreshToken();
 	public static final MemberInfoDTO MEMBER_INFO_DTO = memberInfoDTO();
 	public static final MemberInfoResponseDTO MEMBER_INFO_RESPONSE_DTO = memberInfoResponseDTO();
 

@@ -65,9 +65,9 @@ class MemberServiceTest {
 
 	@Test
 	void 만료된_refresh_Token으로_회원을_조회시_예외를_던진다() {
-		given(memberRepository.findByRefreshToken(any())).willReturn(Optional.of(MEMBER_2));
+		given(memberRepository.findByRefreshToken(any())).willReturn(Optional.of(MEMBER_WITH_EXPIRED_REFRESH_TOKEN));
 
-		assertThatThrownBy(() -> memberService.findMemberByRefreshToken(MEMBER_2.getRefreshToken()))
+		assertThatThrownBy(() -> memberService.findMemberByRefreshToken(MEMBER_WITH_EXPIRED_REFRESH_TOKEN.getRefreshToken()))
 			.isInstanceOf(AuthenticationException.class)
 			.hasMessage("해당 Refresh Token은 만료 되었습니다.");
 	}
