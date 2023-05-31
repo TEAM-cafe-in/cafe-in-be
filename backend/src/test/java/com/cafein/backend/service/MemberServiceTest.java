@@ -55,7 +55,7 @@ class MemberServiceTest {
 	}
 
 	@Test
-	void refreshToken으로_회원을_조회한다() {
+	void refresh_Token으로_회원을_조회한다() {
 		given(memberRepository.findByRefreshToken(any())).willReturn(Optional.of(MEMBER));
 
 		memberService.findMemberByRefreshToken(MEMBER.getRefreshToken());
@@ -64,7 +64,7 @@ class MemberServiceTest {
 	}
 
 	@Test
-	void 만료된_refreshToken으로_회원을_조회시_예외를_던진다() {
+	void 만료된_refresh_Token으로_회원을_조회시_예외를_던진다() {
 		given(memberRepository.findByRefreshToken(any())).willReturn(Optional.of(MEMBER_2));
 
 		assertThatThrownBy(() -> memberService.findMemberByRefreshToken(MEMBER_2.getRefreshToken()))
@@ -73,7 +73,7 @@ class MemberServiceTest {
 	}
 
 	@Test
-	void 존재하지_않는_refreshToken으로_회원을_조회시_예외를_던진다() {
+	void 존재하지_않는_refresh_Token으로_회원을_조회시_예외를_던진다() {
 		assertThatThrownBy(() -> memberService.findMemberByRefreshToken("wrong_token"))
 			.isInstanceOf(AuthenticationException.class)
 			.hasMessage("해당 Refresh Token은 존재하지 않습니다.");
