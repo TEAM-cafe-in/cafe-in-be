@@ -13,6 +13,7 @@ import com.cafein.backend.global.resolver.MemberInfoDTO;
 public class MemberFixture {
 
 	public static final Member MEMBER = createMember();
+	public static final Member MEMBER_2 = createMemberWithExpiredRefreshToken();
 	public static final MemberInfoDTO MEMBER_INFO_DTO = memberInfoDTO();
 	public static final MemberInfoResponseDTO MEMBER_INFO_RESPONSE_DTO = memberInfoResponseDTO();
 
@@ -25,6 +26,18 @@ public class MemberFixture {
 			.profile("http://k.kakaocdn.net/img_110x110.jpg")
 			.refreshToken(REFRESH_TOKEN)
 			.tokenExpirationTime(LocalDateTime.now().plusDays(14))
+			.build();
+	}
+
+	private static Member createMemberWithExpiredRefreshToken() {
+		return Member.builder()
+			.memberId(1L)
+			.memberType(MemberType.KAKAO)
+			.name("황의찬")
+			.email("chan@test.com")
+			.profile("http://k.kakaocdn.net/img_110x110.jpg")
+			.refreshToken(REFRESH_TOKEN)
+			.tokenExpirationTime(LocalDateTime.now().minusDays(1))
 			.build();
 	}
 
