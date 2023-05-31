@@ -15,8 +15,8 @@ public class MemberFixture {
 	private static Member createMember() {
 		return Member.builder()
 			.memberType(MemberType.KAKAO)
-			.name("홍길동")
-			.email("test@test.com")
+			.name("황의찬")
+			.email("chan@test.com")
 			.profile("http://k.kakaocdn.net/img_110x110.jpg")
 			.build();
 	}
