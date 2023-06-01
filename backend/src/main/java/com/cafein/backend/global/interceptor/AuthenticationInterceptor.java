@@ -1,8 +1,11 @@
 package com.cafein.backend.global.interceptor;
 
+import java.util.Objects;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
 
@@ -14,7 +17,9 @@ import com.cafein.backend.global.util.AuthorizationHeaderUtils;
 
 import io.jsonwebtoken.Claims;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 @Component
 @RequiredArgsConstructor
 public class AuthenticationInterceptor implements HandlerInterceptor {
@@ -23,7 +28,11 @@ public class AuthenticationInterceptor implements HandlerInterceptor {
 
 	@Override
 	public boolean preHandle(final HttpServletRequest request, final HttpServletResponse response,
-		final Object handler) throws Exception {
+		final Object handler) {
+		if (isPreflightRequest(request)) {
+			log.info("Preflight Request Approved");
+			return true;
+		}
 
 		// Authorization Header 검증
 		String authorizationHeader = request.getHeader("Authorization");
@@ -41,5 +50,25 @@ public class AuthenticationInterceptor implements HandlerInterceptor {
 		}
 
 		return true;
+	}
+
+	private boolean isPreflightRequest(HttpServletRequest request) {
+		return isOptions(request) && hasHeaders(request) && hasMethod(request) && hasOrigin(request);
+	}
+
+	private boolean isOptions(HttpServletRequest request) {
+		return request.getMethod().equalsIgnoreCase(HttpMethod.OPTIONS.toString());
+	}
+
+	private boolean hasHeaders(HttpServletRequest request) {
+		return Objects.nonNull(request.getHeader("Access-Control-Request-Headers"));
+	}
+
+	private boolean hasMethod(HttpServletRequest request) {
+		return Objects.nonNull(request.getHeader("Access-Control-Request-Method"));
+	}
+
+	private boolean hasOrigin(HttpServletRequest request) {
+		return Objects.nonNull(request.getHeader("Origin"));
 	}
 }
