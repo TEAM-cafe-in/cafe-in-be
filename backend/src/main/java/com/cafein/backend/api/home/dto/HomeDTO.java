@@ -1,7 +1,5 @@
 package com.cafein.backend.api.home.dto;
 
-import java.util.List;
-
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 
@@ -29,9 +27,21 @@ public class HomeDTO {
 	@Getter @Builder
 	public static class Response {
 
-		private List<CafeDTO> cafes;
-		private List<String> viewedCafesName;
-		private Integer countCafe;
-		private Integer coffeeBean;
+		private String name;
+		private String address;
+		private String commentReviewCount;
+		private String status;
+		private String averageCongestion;
+
+		@Override
+		public String toString() {
+			return "Response{" +
+				"name='" + name + '\'' +
+				", address='" + address + '\'' +
+				", commentReviewCount='" + commentReviewCount + '\'' +
+				", status='" + status + '\'' +
+				", averageCongestion='" + averageCongestion + '\'' +
+				'}';
+		}
 	}
 }
