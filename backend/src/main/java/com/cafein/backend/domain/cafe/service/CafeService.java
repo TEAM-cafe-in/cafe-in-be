@@ -1,10 +1,12 @@
 package com.cafein.backend.domain.cafe.service;
 
+import java.util.Collection;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.cafein.backend.api.home.dto.HomeResponseDTO;
 import com.cafein.backend.domain.cafe.constant.Local;
 import com.cafein.backend.domain.cafe.entity.Cafe;
 import com.cafein.backend.domain.cafe.repository.CafeRepository;
@@ -19,6 +21,11 @@ import lombok.RequiredArgsConstructor;
 public class CafeService {
 
 	private final CafeRepository cafeRepository;
+
+	@Transactional(readOnly = true)
+	public Collection<HomeResponseDTO> getHomeDTO(String localName) {
+		return cafeRepository.getCustomData(localName);
+	}
 
 	@Transactional(readOnly = true)
 	public Cafe findById(Long cafeId) {
