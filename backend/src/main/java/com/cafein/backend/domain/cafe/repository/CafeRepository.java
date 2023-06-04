@@ -38,6 +38,7 @@ public interface CafeRepository extends JpaRepository<Cafe, Long> {
 	Collection<HomeResponseDTO> getCustomData(@Param("localName") String localName);
 
 	Optional<Cafe> findByName(String name);
+
 	List<Cafe> findAllByLocal(Local local);
 
 	int countByLocal(Local local);
