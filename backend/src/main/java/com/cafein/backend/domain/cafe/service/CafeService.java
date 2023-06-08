@@ -39,6 +39,7 @@ public class CafeService {
 
 	@Transactional(readOnly = true)
 	public Integer countByLocal(Local local) {
-		return cafeRepository.countByLocal(local);
+		// return cafeRepository.countByLocal(local);
+		return 0;
 	}
 }

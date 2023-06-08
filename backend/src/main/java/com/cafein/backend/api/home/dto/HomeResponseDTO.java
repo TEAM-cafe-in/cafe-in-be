@@ -1,12 +1,16 @@
-
 package com.cafein.backend.api.home.dto;
 
-public interface HomeResponseDTO {
+import java.util.List;
 
-	String getName();
-	String getPhoneNumber();
-	String getAddress();
-	String getCommentReviewCount();
-	String getStatus();
-	String getAverageCongestion();
+import lombok.Builder;
+import lombok.Getter;
+
+@Getter @Builder
+public class HomeResponseDTO {
+
+	private Integer cafeCount;
+
+	private String hasNext;
+
+	private List<CafeProjection> cafes;
 }

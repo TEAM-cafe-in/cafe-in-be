@@ -1,7 +1,5 @@
 package com.cafein.backend.api.home.controller;
 
-import java.util.List;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
@@ -28,7 +26,7 @@ public class HomeController {
 	private final CafeService cafeService;
 
 	@GetMapping("/home")
-	public ResponseEntity<List<HomeResponseDTO>> home(final @Valid @RequestBody HomeRequestDTO homeRequestDTO,
+	public ResponseEntity<HomeResponseDTO> home(final @Valid @RequestBody HomeRequestDTO homeRequestDTO,
 												 HttpServletRequest httpServletRequest) {
 		String authorizationHeader = httpServletRequest.getHeader("Authorization");
 		AuthorizationHeaderUtils.validateAuthorization(authorizationHeader);
