@@ -1,6 +1,5 @@
 package com.cafein.backend.domain.cafe.service;
 
-import java.util.Collection;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
@@ -23,8 +22,8 @@ public class CafeService {
 	private final CafeRepository cafeRepository;
 
 	@Transactional(readOnly = true)
-	public Collection<HomeResponseDTO> getHomeDTO(String localName) {
-		return cafeRepository.getCustomData(localName);
+	public List<HomeResponseDTO> getHomeData(String localName) {
+		return cafeRepository.getHomeData(localName);
 	}
 
 	@Transactional(readOnly = true)

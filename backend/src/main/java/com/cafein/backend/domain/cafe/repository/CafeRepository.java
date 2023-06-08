@@ -1,6 +1,5 @@
 package com.cafein.backend.domain.cafe.repository;
 
-import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 
@@ -35,7 +34,7 @@ public interface CafeRepository extends JpaRepository<Cafe, Long> {
 		+ "avg_congestion ON c.cafe_id = avg_congestion.cafe_id WHERE c.local = :localName ORDER BY "
 		+ "(COALESCE(r.review_count, 0) + COALESCE(co.comment_count, 0)) DESC, c.name;",
 		nativeQuery = true)
-	Collection<HomeResponseDTO> getCustomData(@Param("localName") String localName);
+	List<HomeResponseDTO> getHomeData(@Param("localName") String localName);
 
 	Optional<Cafe> findByName(String name);
 
