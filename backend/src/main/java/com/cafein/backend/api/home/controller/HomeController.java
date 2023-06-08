@@ -32,6 +32,7 @@ public class HomeController {
 												 HttpServletRequest httpServletRequest) {
 		String authorizationHeader = httpServletRequest.getHeader("Authorization");
 		AuthorizationHeaderUtils.validateAuthorization(authorizationHeader);
-		return ResponseEntity.ok(List.copyOf(cafeService.getHomeDTO(homeRequestDTO.getLocal())));
+
+		return ResponseEntity.ok(cafeService.getHomeData(homeRequestDTO.getLocal()));
 	}
 }

@@ -1,3 +1,4 @@
+
 package com.cafein.backend.api.home.dto;
 
 public interface HomeResponseDTO {
@@ -5,7 +6,7 @@ public interface HomeResponseDTO {
 	String getName();
 	String getPhoneNumber();
 	String getAddress();
-	Integer getCommentReviewCount();
+	String getCommentReviewCount();
 	String getStatus();
-	Integer getAverageCongestion();
+	String getAverageCongestion();
 }
