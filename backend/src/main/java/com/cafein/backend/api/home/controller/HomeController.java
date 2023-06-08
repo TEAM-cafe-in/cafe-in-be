@@ -25,12 +25,15 @@ public class HomeController {
 
 	private final CafeService cafeService;
 
+	private static final Integer LIMIT = 10;
+
 	@GetMapping("/home")
 	public ResponseEntity<HomeResponseDTO> home(final @Valid @RequestBody HomeRequestDTO homeRequestDTO,
 												 HttpServletRequest httpServletRequest) {
 		String authorizationHeader = httpServletRequest.getHeader("Authorization");
 		AuthorizationHeaderUtils.validateAuthorization(authorizationHeader);
-
-		return ResponseEntity.ok(cafeService.getHomeData(homeRequestDTO.getLocal()));
+		return ResponseEntity.ok(
+			cafeService.getHomeData(homeRequestDTO.getLocal(), LIMIT, Integer.parseInt(homeRequestDTO.getOffset()))
+		);
 	}
 }

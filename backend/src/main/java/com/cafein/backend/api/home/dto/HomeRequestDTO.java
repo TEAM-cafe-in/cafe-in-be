@@ -9,4 +9,7 @@ public class HomeRequestDTO {
 
 	@NotNull
 	private String local;
+
+	@NotNull
+	private String offset;
 }
