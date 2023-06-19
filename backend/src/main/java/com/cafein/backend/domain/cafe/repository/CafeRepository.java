@@ -13,6 +13,7 @@ import com.cafein.backend.domain.cafe.entity.Cafe;
 public interface CafeRepository extends JpaRepository<Cafe, Long> {
 
 	@Query(value = "SELECT "
+		+ "c.cafe_id AS 'cafeId', "
 		+ "c.name AS 'name', "
 		+ "c.local AS 'local', "
 		+ "c.latitude AS 'latitude', "
