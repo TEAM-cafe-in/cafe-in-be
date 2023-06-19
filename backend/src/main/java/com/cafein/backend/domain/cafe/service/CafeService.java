@@ -5,6 +5,8 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.cafein.backend.api.cafe.dto.CafeInfoDTO;
+import com.cafein.backend.api.cafe.dto.CafeInfoProjection;
 import com.cafein.backend.api.home.dto.HomeResponseDTO;
 import com.cafein.backend.domain.cafe.constant.Local;
 import com.cafein.backend.domain.cafe.entity.Cafe;
@@ -22,17 +24,19 @@ public class CafeService {
 	private final CafeRepository cafeRepository;
 
 	@Transactional(readOnly = true)
-	public HomeResponseDTO getHomeData() {
+	public HomeResponseDTO getHomeData(Long memberId) {
 		return HomeResponseDTO.builder()
 			.cafeCount(cafeRepository.count())
-			.cafes(cafeRepository.getHomeData())
+			.cafes(cafeRepository.getHomeData(memberId))
 			.build();
 	}
 
 	@Transactional(readOnly = true)
-	public Cafe findById(Long cafeId) {
-		return cafeRepository.findById(cafeId)
-			.orElseThrow(() -> new EntityNotFoundException(ErrorCode.CAFE_NOT_EXIST));
+	public CafeInfoDTO findCafeInfoById(Long memberId, Long cafeId) {
+		return CafeInfoDTO.builder()
+			.cafeInfoProjection(cafeRepository.findCafeInfoById(memberId, cafeId))
+			.comments(cafeRepository.findCommentsByCafeId(cafeId))
+			.build();
 	}
 
 	@Transactional(readOnly = true)
