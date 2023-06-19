@@ -14,6 +14,9 @@ public interface CafeRepository extends JpaRepository<Cafe, Long> {
 
 	@Query(value = "SELECT "
 		+ "c.name AS 'name', "
+		+ "c.local AS 'local', "
+		+ "c.latitude AS 'latitude', "
+		+ "c.longitude AS 'longitude', "
 		+ "COALESCE(c.phone_number, '등록된 전화번호가 없습니다') AS 'phoneNumber', "
 		+ "CONCAT(c.sigungu, ' ', c.road_name, c.house_number) AS 'address', "
 		+ "(COALESCE(r.review_count, 0) + COALESCE(co.comment_count, 0)) AS 'commentReviewCount', "
