@@ -3,7 +3,7 @@ package com.cafein.backend.api.home.dto;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 
-public interface CafeProjection {
+public interface HomeProjection {
 
 	@Schema(description = "카페 이름", example = "5to7", required = true)
 	String getName();

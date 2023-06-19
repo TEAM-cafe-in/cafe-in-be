@@ -12,5 +12,5 @@ public class HomeResponseDTO {
 	@Schema(description = "총 카페 수", example = "60", required = true)
 	private long cafeCount;
 
-	private List<CafeProjection> cafes;
+	private List<HomeProjection> cafes;
 }

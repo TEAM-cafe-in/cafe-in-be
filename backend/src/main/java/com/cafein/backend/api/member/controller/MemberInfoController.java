@@ -15,6 +15,7 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
+import springfox.documentation.annotations.ApiIgnore;
 
 @Tag(name = "member", description = "회원 API")
 @RestController
@@ -32,7 +33,7 @@ public class MemberInfoController {
 		@ApiResponse(responseCode = "M-003", description = "해당 회원은 존재하지 않습니다.")
 	})
 	@GetMapping("/info")
-	public ResponseEntity<MemberInfoResponseDTO> getMemberInfo(@MemberInfo MemberInfoDTO memberInfoDTO) {
+	public ResponseEntity<MemberInfoResponseDTO> getMemberInfo(@ApiIgnore @MemberInfo MemberInfoDTO memberInfoDTO) {
 		Long memberId = memberInfoDTO.getMemberId();
 		MemberInfoResponseDTO memberInfoResponseDTO = memberInfoService.getMemberInfo(memberId);
 		return ResponseEntity.ok(memberInfoResponseDTO);
