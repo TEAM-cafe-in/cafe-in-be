@@ -11,8 +11,6 @@ import com.cafein.backend.api.home.dto.HomeResponseDTO;
 import com.cafein.backend.domain.cafe.constant.Local;
 import com.cafein.backend.domain.cafe.entity.Cafe;
 import com.cafein.backend.domain.cafe.repository.CafeRepository;
-import com.cafein.backend.global.error.ErrorCode;
-import com.cafein.backend.global.error.exception.EntityNotFoundException;
 
 import lombok.RequiredArgsConstructor;
 

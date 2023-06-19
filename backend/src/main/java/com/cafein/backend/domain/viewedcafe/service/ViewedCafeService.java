@@ -22,4 +22,14 @@ public class ViewedCafeService {
 	public List<Long> findViewedCafes(Long memberId) {
 		return viewedCafeRepository.findViewedCafes(memberId);
 	}
+
+	@Transactional
+	public void addViewedCafe(Member member, Long cafeId) {
+		viewedCafeRepository.save(
+			ViewedCafe.builder()
+				.cafeId(cafeId)
+				.member(member)
+				.build()
+		);
+	}
 }

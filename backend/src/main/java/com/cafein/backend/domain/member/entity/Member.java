@@ -94,4 +94,8 @@ public class Member extends BaseTimeEntity {
 	public void expireRefreshToken(final LocalDateTime now) {
 		this.tokenExpirationTime = now;
 	}
+
+	public void updateCoffeeBean(Integer coffeeBean) {
+		this.coffeeBean = coffeeBean - 2;
+	}
 }
