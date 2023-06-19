@@ -5,7 +5,6 @@ import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.query.Param;
 
 import com.cafein.backend.api.home.dto.CafeProjection;
 import com.cafein.backend.domain.cafe.constant.Local;
@@ -31,22 +30,13 @@ public interface CafeRepository extends JpaRepository<Cafe, Long> {
 		+ "LEFT JOIN "
 		+ "(SELECT cafe_id, AVG( CASE cafe_congestion WHEN 'LOW' THEN 1 WHEN 'MEDIUM' THEN 2 WHEN 'HIGH' THEN 3 END) AS avg_congestion "
 		+ "FROM Review WHERE created_time >= DATE_SUB(NOW(), INTERVAL 1 HOUR) GROUP BY cafe_id) "
-		+ "avg_congestion ON c.cafe_id = avg_congestion.cafe_id WHERE c.local = :localName ORDER BY "
-		+ "(COALESCE(r.review_count, 0) + COALESCE(co.comment_count, 0)) DESC, c.name "
-		+ "LIMIT :limit OFFSET :offset", nativeQuery = true)
-	List<CafeProjection> getHomeData(@Param("localName") String localName,
-	                                  @Param("limit") int limit,
-		                              @Param("offset") int offset);
-
-	@Query(value = "SELECT EXISTS ("
-		+ "SELECT * FROM (SELECT * FROM Cafe c WHERE c.local = :localName LIMIT :limit OFFSET :offset) AS subquery) "
-		+ "AS has_more_data;",
-		nativeQuery = true)
-	String hasNext(@Param("localName") String localName, @Param("limit") int limit, @Param("offset") int nextOffset);
+		+ "avg_congestion ON c.cafe_id = avg_congestion.cafe_id ORDER BY "
+		+ "(COALESCE(r.review_count, 0) + COALESCE(co.comment_count, 0)) DESC, c.name ", nativeQuery = true)
+	List<CafeProjection> getHomeData();
 
 	Optional<Cafe> findByName(String name);
 
 	List<Cafe> findAllByLocal(Local local);
 
-	Integer countByLocal(Local local);
+	long count();
 }

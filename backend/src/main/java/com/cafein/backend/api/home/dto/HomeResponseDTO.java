@@ -8,9 +8,7 @@ import lombok.Getter;
 @Getter @Builder
 public class HomeResponseDTO {
 
-	private Integer cafeCount;
-
-	private String hasNext;
+	private long cafeCount;
 
 	private List<CafeProjection> cafes;
 }

@@ -22,11 +22,10 @@ public class CafeService {
 	private final CafeRepository cafeRepository;
 
 	@Transactional(readOnly = true)
-	public HomeResponseDTO getHomeData(String localName, int limit, int offset) {
+	public HomeResponseDTO getHomeData() {
 		return HomeResponseDTO.builder()
-			.cafeCount(cafeRepository.countByLocal(Local.from(localName)))
-			.hasNext(cafeRepository.hasNext(localName, limit, offset + limit))
-			.cafes(cafeRepository.getHomeData(localName, limit, offset))
+			.cafeCount(cafeRepository.count())
+			.cafes(cafeRepository.getHomeData())
 			.build();
 	}
 
