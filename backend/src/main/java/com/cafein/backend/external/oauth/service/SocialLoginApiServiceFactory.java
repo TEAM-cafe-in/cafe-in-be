@@ -5,6 +5,7 @@ import java.util.Map;
 import org.springframework.stereotype.Service;
 
 import com.cafein.backend.domain.member.constant.MemberType;
+import com.cafein.backend.domain.member.constant.Role;
 
 @Service
 public class SocialLoginApiServiceFactory {
@@ -18,9 +19,9 @@ public class SocialLoginApiServiceFactory {
 	public static SocialLoginApiService getSocialLoginApiService(MemberType memberType) {
 		String socialLoginApiServiceBeanName = "";
 
-		if (MemberType.KAKAO.equals(memberType)) {
+		if (MemberType.KAKAO == memberType) {
 			socialLoginApiServiceBeanName = "kakaoLoginApiServiceImpl";
-		} else if (MemberType.GOOGLE.equals(memberType)) {
+		} else if (MemberType.GOOGLE == memberType) {
 			socialLoginApiServiceBeanName = "googleLoginApiServiceImpl";
 		}
 		return socialLoginApiServices.get(socialLoginApiServiceBeanName);

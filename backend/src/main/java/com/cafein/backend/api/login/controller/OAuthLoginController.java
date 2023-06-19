@@ -29,7 +29,6 @@ import lombok.RequiredArgsConstructor;
 @RequestMapping("/api/oauth")
 public class OAuthLoginController {
 
-	private final OAuthValidator oAuthValidator;
 	private final OAuthLoginService oAuthLoginService;
 
 	@Tag(name = "authentication")
@@ -46,7 +45,7 @@ public class OAuthLoginController {
 
 		String authorizationHeader = httpServletRequest.getHeader("Authorization");
 		AuthorizationHeaderUtils.validateAuthorization(authorizationHeader);
-		oAuthValidator.validateMemberType(oauthLoginRequestDTO.getMemberType());
+		OAuthValidator.validateMemberType(oauthLoginRequestDTO.getMemberType());
 
 		String accessToken = authorizationHeader.split(" ")[1];
 		OAuthLoginDTO.Response jwtTokenResponseDTO = oAuthLoginService

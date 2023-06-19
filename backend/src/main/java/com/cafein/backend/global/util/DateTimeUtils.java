@@ -6,7 +6,7 @@ import java.util.Date;
 
 public class DateTimeUtils {
 
-	public static LocalDateTime convertToLoalDateTime(Date date) {
+	public static LocalDateTime convertDateToLocalDateTime(Date date) {
 		return date.toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime();
 	}
 }

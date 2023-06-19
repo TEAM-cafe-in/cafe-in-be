@@ -15,7 +15,7 @@ class MemberInfoControllerTest extends ControllerTestSupporter {
 	@Test
 	void 회원_정보를_가져온다() throws Exception {
 		given(memberInfoService.getMemberInfo(any()))
-			.willReturn(memberInfoResponseDTO());
+			.willReturn(MEMBER_INFO_RESPONSE_DTO);
 
 		mockMvc.perform(get("/api/member/info")
 				.contentType(MediaType.APPLICATION_JSON_VALUE)
