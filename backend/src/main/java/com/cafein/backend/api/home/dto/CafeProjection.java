@@ -8,6 +8,9 @@ public interface CafeProjection {
 	@Schema(description = "카페 이름", example = "5to7", required = true)
 	String getName();
 
+	@Schema(description = "카페 Id", example = "1", required = true)
+	String getCafeId();
+
 	@Schema(description = "카페 번호", example = "050713337616", required = true)
 	String getPhoneNumber();
 
