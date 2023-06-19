@@ -1,5 +1,7 @@
 package com.cafein.backend.api.member.dto;
 
+import java.util.List;
+
 import com.cafein.backend.domain.member.constant.Role;
 import com.cafein.backend.domain.member.entity.Member;
 

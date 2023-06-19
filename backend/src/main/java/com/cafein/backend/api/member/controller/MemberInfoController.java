@@ -35,7 +35,6 @@ public class MemberInfoController {
 	public ResponseEntity<MemberInfoResponseDTO> getMemberInfo(@MemberInfo MemberInfoDTO memberInfoDTO) {
 		Long memberId = memberInfoDTO.getMemberId();
 		MemberInfoResponseDTO memberInfoResponseDTO = memberInfoService.getMemberInfo(memberId);
-
 		return ResponseEntity.ok(memberInfoResponseDTO);
 	}
 }

@@ -18,7 +18,7 @@ public class ViewedCafeService {
 	private final ViewedCafeRepository viewedCafeRepository;
 
 	@Transactional(readOnly = true)
-	public List<ViewedCafe> findAllByMemberId(Long memberId) {
-		return viewedCafeRepository.findAllByMemberId(memberId);
+	public List<Long> findViewedCafes(Long memberId) {
+		return viewedCafeRepository.findViewedCafes(memberId);
 	}
 }
