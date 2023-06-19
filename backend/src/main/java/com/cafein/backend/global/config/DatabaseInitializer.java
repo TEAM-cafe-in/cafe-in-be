@@ -71,7 +71,7 @@ public class DatabaseInitializer {
 			);
 
 			final JwtTokenDTO jwtTokenDto = tokenManager.createJwtTokenDto(member1.getMemberId(), member1.getRole());
-			System.out.println(jwtTokenDto.getAccessToken() + " member1 jwtTokenDto");
+			System.out.println(jwtTokenDto.getAccessToken() + " member1 jwtTokenDto access_token");
 			member1.updateRefreshToken(jwtTokenDto);
 
 			Member member2 = memberRepository.save(

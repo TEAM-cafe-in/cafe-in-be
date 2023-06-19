@@ -27,13 +27,17 @@ public class MemberInfoResponseDTO {
 	@Schema(description = "회원의 역할", example = "USER", required = true)
 	private Role role;
 
-	public static MemberInfoResponseDTO of(final Member member) {
+	@Schema(description = "회원이 조회한 카페 Id", example = "[1, 2, 3]", required = true)
+	private List<Long> viewedCafeIds;
+
+	public static MemberInfoResponseDTO of(final Member member, final List<Long> viewedCafeIds) {
 		return MemberInfoResponseDTO.builder()
 			.memberId(member.getMemberId())
 			.memberName(member.getName())
 			.email(member.getEmail())
 			.profile(member.getProfile())
 			.role(member.getRole())
+			.viewedCafeIds(viewedCafeIds)
 			.build();
 	}
 }
