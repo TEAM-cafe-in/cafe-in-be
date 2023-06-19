@@ -49,8 +49,14 @@ public class Cafe extends BaseTimeEntity{
 	@Embedded
 	private Address address;
 
-	// @Column(nullable = false)
+	@Column(length = 20)
 	private String phoneNumber;
+
+	@Column(length = 20)
+	private String latitude;
+
+	@Column(length = 20)
+	private String longitude;
 
 	@OneToMany(mappedBy = "cafe", cascade = ALL)
 	private List<OpeningHour> openingHours = new ArrayList<>();
