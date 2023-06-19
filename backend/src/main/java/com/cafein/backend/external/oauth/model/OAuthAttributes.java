@@ -12,6 +12,8 @@ import lombok.ToString;
 @Getter @Builder
 public class OAuthAttributes {
 
+	private static final int COFFEE_BEAN = 100;
+
 	private String name;
 	private String email;
 	private String profile;
@@ -24,6 +26,7 @@ public class OAuthAttributes {
 			.memberType(memberType)
 			.profile(profile)
 			.role(role)
+			.coffeeBean(COFFEE_BEAN)
 			.build();
 	}
 }

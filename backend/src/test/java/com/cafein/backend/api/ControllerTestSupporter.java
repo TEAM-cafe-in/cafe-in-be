@@ -14,7 +14,6 @@ import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
-import com.cafein.backend.api.home.service.HomeService;
 import com.cafein.backend.api.login.service.OAuthLoginService;
 import com.cafein.backend.api.logout.service.LogoutService;
 import com.cafein.backend.api.member.service.MemberInfoService;
@@ -74,9 +73,6 @@ public class ControllerTestSupporter {
 
 	@MockBean
 	protected CafeService cafeService;
-
-	@MockBean
-	protected HomeService homeService;
 
 	@MockBean
 	protected GoogleLoginApiServiceImpl googleLoginApiServiceImpl;

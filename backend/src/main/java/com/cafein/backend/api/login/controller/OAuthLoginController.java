@@ -33,9 +33,7 @@ public class OAuthLoginController {
 
 	@Tag(name = "authentication")
 	@Operation(summary = "소셜 로그인 API",
-		description = "refresh token 예시 쿠키 값입니다." +
-			"Set-Cookie: refresh_token= eyJ0eXBlIjoiSldUIiwiYWxnIjoiSFM1MTIifQ.eyJzdWIiOiJSRUZSRVNIIiwiaWF0IjoxNjg0NDc3NDkyLCJleHAiOjE2ODU2ODcwOTIsIm1lbWJlcklkIjoxfQ.VoaLQEd4QkQ5Q7pzrkQbfRVdYcX2flmdP4fELrn5J2_4T0lfuhcrB1r5Ma5F7YyqKzyMGR-Ol30wMS_VDsf0mg " +
-			"HttpOnly; SameSite=Strict; Max-Age=60 * 60 * 24 * 14; Expires=Thu, 31 Mar 2023 14:24:52 GMT;")
+		description = "추후 서비스 배포 시 Refresh Token을 쿠키로 반환하도록 변경할 예정입니다.")
 	@ApiResponses({
 		@ApiResponse(responseCode = "M-001", description = "잘못된 회원 타입 입니다. (memberType : Kakao"),
 		@ApiResponse(responseCode = "A-003", description = "Authorization Header가 빈값입니다."),

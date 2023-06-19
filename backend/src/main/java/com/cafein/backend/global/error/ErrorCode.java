@@ -21,7 +21,13 @@ public enum ErrorCode {
 	//회원
 	INVALID_MEMBER_TYPE(HttpStatus.BAD_REQUEST, "M-001", "잘못된 회원 타입 입니다."),
 	ALREADY_REGISTERED_MEMBER(HttpStatus.BAD_REQUEST, "M-002", "이미 가입된 회원입니다."),
-	MEMBER_NOT_EXIST(HttpStatus.BAD_REQUEST, "M-003", "해당 회원은 존재하지 않습니다.")
+	MEMBER_NOT_EXIST(HttpStatus.BAD_REQUEST, "M-003", "해당 회원은 존재하지 않습니다."),
+
+	//카페
+	CAFE_NOT_EXIST(HttpStatus.BAD_REQUEST, "C-001", "해당 카페는 존재하지 않습니다."),
+
+	//지역
+	LOCAL_NOT_EXIST(HttpStatus.BAD_REQUEST, "L-001", "해당 지역은 존재하지 않습니다."),
 	;
 
 	private HttpStatus httpStatus;

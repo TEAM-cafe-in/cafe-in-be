@@ -13,7 +13,6 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 
 import com.cafein.backend.domain.Review.entity.Review;
@@ -49,6 +48,15 @@ public class Cafe extends BaseTimeEntity{
 
 	@Embedded
 	private Address address;
+
+	@Column(length = 20)
+	private String phoneNumber;
+
+	@Column(length = 20)
+	private String latitude;
+
+	@Column(length = 20)
+	private String longitude;
 
 	@OneToMany(mappedBy = "cafe", cascade = ALL)
 	private List<OpeningHour> openingHours = new ArrayList<>();

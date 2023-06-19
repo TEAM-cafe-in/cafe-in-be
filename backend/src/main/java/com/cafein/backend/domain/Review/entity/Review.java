@@ -14,6 +14,8 @@ import javax.persistence.ManyToOne;
 
 import com.cafein.backend.domain.Review.constant.CafeCongestion;
 import com.cafein.backend.domain.cafe.entity.Cafe;
+import com.cafein.backend.domain.common.BaseTimeEntity;
+import com.cafein.backend.domain.member.entity.Member;
 
 import lombok.AccessLevel;
 import lombok.Builder;
@@ -23,7 +25,7 @@ import lombok.NoArgsConstructor;
 @Entity
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class Review {
+public class Review extends BaseTimeEntity {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -43,11 +45,18 @@ public class Review {
 	@JoinColumn(name = "cafe_id")
 	private Cafe cafe;
 
+	@ManyToOne(fetch = LAZY)
+	@JoinColumn(name = "member_id")
+	private Member member;
+
 	@Builder
-	public Review(final CafeCongestion cafeCongestion, final boolean isClean, final boolean hasPlug) {
+	public Review(final CafeCongestion cafeCongestion, final boolean isClean, final boolean hasPlug,
+		Cafe cafe, Member member) {
 		this.cafeCongestion = cafeCongestion;
 		this.isClean = isClean;
 		this.hasPlug = hasPlug;
+		this.cafe = cafe;
+		this.member = member;
 	}
 	//TODO 리뷰 등록 시 커피콩 더해주는 로직 구현
 }

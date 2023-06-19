@@ -46,9 +46,11 @@ public class OpeningHour {
 	private Cafe cafe;
 
 	@Builder
-	public OpeningHour(final DayOfWeek dayOfWeek, final LocalTime openTime, final LocalTime closeTime) {
+	public OpeningHour(final DayOfWeek dayOfWeek, final LocalTime openTime, final LocalTime closeTime,
+		Cafe cafe) {
 		this.dayOfWeek = dayOfWeek;
 		this.openTime = openTime;
 		this.closeTime = closeTime;
+		this.cafe = cafe;
 	}
 }
