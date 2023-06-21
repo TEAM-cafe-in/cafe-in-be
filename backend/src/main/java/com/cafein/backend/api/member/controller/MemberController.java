@@ -6,7 +6,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.cafein.backend.api.member.dto.MemberInfoResponseDTO;
+import com.cafein.backend.api.member.dto.MyPageDTO;
 import com.cafein.backend.api.member.service.MemberInfoService;
+import com.cafein.backend.api.member.service.MyPageService;
+import com.cafein.backend.domain.cafe.entity.Cafe;
+import com.cafein.backend.domain.cafe.service.CafeService;
+import com.cafein.backend.domain.viewedcafe.service.ViewedCafeService;
 import com.cafein.backend.global.resolver.MemberInfo;
 import com.cafein.backend.global.resolver.MemberInfoDTO;
 
@@ -24,6 +29,7 @@ import springfox.documentation.annotations.ApiIgnore;
 public class MemberInfoController {
 
 	private final MemberInfoService memberInfoService;
+	private final MyPageService myPageService;
 
 	@Tag(name = "member")
 	@Operation(summary = "회원 정보 조회 API", description = "회원 정보 조회 API")
@@ -37,5 +43,10 @@ public class MemberInfoController {
 		Long memberId = memberInfoDTO.getMemberId();
 		MemberInfoResponseDTO memberInfoResponseDTO = memberInfoService.getMemberInfo(memberId);
 		return ResponseEntity.ok(memberInfoResponseDTO);
+	}
+
+	@GetMapping("/mypage")
+	public ResponseEntity<MyPageDTO> getMyPage(@ApiIgnore @MemberInfo MemberInfoDTO memberInfoDTO) {
+		return ResponseEntity.ok(myPageService.getMyPageDTO(memberInfoDTO.getMemberId()));
 	}
 }

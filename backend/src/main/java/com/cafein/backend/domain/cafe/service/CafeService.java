@@ -38,13 +38,9 @@ public class CafeService {
 	}
 
 	@Transactional(readOnly = true)
-	public List<Cafe> findAllByLocal(Local local) {
-		return cafeRepository.findAllByLocal(local);
-	}
-
-	@Transactional(readOnly = true)
-	public Integer countByLocal(Local local) {
-		// return cafeRepository.countByLocal(local);
-		return 0;
+	public List<CafeInfoViewedByMemberProjection> findCafeInfoViewedByMember(final List<Long> viewedCafeIds) {
+		return viewedCafeIds.stream()
+			.map(cafeRepository::findCafeInfoViewedByMember)
+			.collect(Collectors.toList());
 	}
 }
