@@ -1,10 +1,13 @@
 package com.cafein.backend.api.member.controller;
 
+import java.util.List;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.cafein.backend.api.member.dto.CafeInfoViewedByMemberProjection;
 import com.cafein.backend.api.member.dto.MemberInfoResponseDTO;
 import com.cafein.backend.api.member.dto.MyPageDTO;
 import com.cafein.backend.api.member.service.MemberInfoService;
@@ -20,13 +23,15 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import springfox.documentation.annotations.ApiIgnore;
 
 @Tag(name = "member", description = "회원 API")
+@Slf4j
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/member")
-public class MemberInfoController {
+public class MemberController {
 
 	private final MemberInfoService memberInfoService;
 	private final MyPageService myPageService;

@@ -1,6 +1,8 @@
 package com.cafein.backend.domain.cafe.service;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -8,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.cafein.backend.api.cafe.dto.CafeInfoDTO;
 import com.cafein.backend.api.cafe.dto.CafeInfoProjection;
 import com.cafein.backend.api.home.dto.HomeResponseDTO;
+import com.cafein.backend.api.member.dto.CafeInfoViewedByMemberProjection;
 import com.cafein.backend.domain.cafe.constant.Local;
 import com.cafein.backend.domain.cafe.entity.Cafe;
 import com.cafein.backend.domain.cafe.repository.CafeRepository;
