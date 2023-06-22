@@ -1,16 +1,19 @@
 package com.cafein.backend.domain.cafe.service;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.cafein.backend.api.cafe.dto.CafeInfoDTO;
+import com.cafein.backend.api.cafe.dto.CafeInfoProjection;
 import com.cafein.backend.api.home.dto.HomeResponseDTO;
+import com.cafein.backend.api.member.dto.CafeInfoViewedByMemberProjection;
 import com.cafein.backend.domain.cafe.constant.Local;
 import com.cafein.backend.domain.cafe.entity.Cafe;
 import com.cafein.backend.domain.cafe.repository.CafeRepository;
-import com.cafein.backend.global.error.ErrorCode;
-import com.cafein.backend.global.error.exception.EntityNotFoundException;
 
 import lombok.RequiredArgsConstructor;
 
@@ -22,27 +25,25 @@ public class CafeService {
 	private final CafeRepository cafeRepository;
 
 	@Transactional(readOnly = true)
-	public HomeResponseDTO getHomeData() {
+	public HomeResponseDTO getHomeData(Long memberId) {
 		return HomeResponseDTO.builder()
 			.cafeCount(cafeRepository.count())
-			.cafes(cafeRepository.getHomeData())
+			.cafes(cafeRepository.getHomeData(memberId))
 			.build();
 	}
 
 	@Transactional(readOnly = true)
-	public Cafe findById(Long cafeId) {
-		return cafeRepository.findById(cafeId)
-			.orElseThrow(() -> new EntityNotFoundException(ErrorCode.CAFE_NOT_EXIST));
+	public CafeInfoDTO findCafeInfoById(Long memberId, Long cafeId) {
+		return CafeInfoDTO.builder()
+			.cafeInfoProjection(cafeRepository.findCafeInfoById(memberId, cafeId))
+			.comments(cafeRepository.findCommentsByCafeId(cafeId))
+			.build();
 	}
 
 	@Transactional(readOnly = true)
-	public List<Cafe> findAllByLocal(Local local) {
-		return cafeRepository.findAllByLocal(local);
-	}
-
-	@Transactional(readOnly = true)
-	public Integer countByLocal(Local local) {
-		// return cafeRepository.countByLocal(local);
-		return 0;
+	public List<CafeInfoViewedByMemberProjection> findCafeInfoViewedByMember(final List<Long> viewedCafeIds) {
+		return viewedCafeIds.stream()
+			.map(cafeRepository::findCafeInfoViewedByMember)
+			.collect(Collectors.toList());
 	}
 }

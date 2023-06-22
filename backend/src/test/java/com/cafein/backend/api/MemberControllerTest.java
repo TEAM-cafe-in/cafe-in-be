@@ -10,7 +10,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 
-class MemberInfoControllerTest extends ControllerTestSupporter {
+class MemberControllerTest extends ControllerTestSupporter {
 
 	@Test
 	void 회원_정보를_가져온다() throws Exception {

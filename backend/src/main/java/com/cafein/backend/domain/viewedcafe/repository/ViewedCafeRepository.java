@@ -9,6 +9,6 @@ import com.cafein.backend.domain.viewedcafe.entity.ViewedCafe;
 
 public interface ViewedCafeRepository extends JpaRepository<ViewedCafe, Long> {
 
-	@Query("SELECT v FROM ViewedCafe v WHERE v.member.memberId = :memberId")
-	List<ViewedCafe> findAllByMemberId(Long memberId);
+	@Query(value = "SELECT v.cafeId FROM ViewedCafe v WHERE v.member.memberId = :memberId")
+	List<Long> findViewedCafes(Long memberId);
 }

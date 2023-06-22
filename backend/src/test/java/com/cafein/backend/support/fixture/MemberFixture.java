@@ -18,7 +18,7 @@ public class MemberFixture {
 	public static final MemberInfoResponseDTO MEMBER_INFO_RESPONSE_DTO = memberInfoResponseDTO();
 
 	private static Member createMember() {
-		return Member.builder()
+		return Member.testBuilder()
 			.memberId(1L)
 			.memberType(MemberType.KAKAO)
 			.name("황의찬")
@@ -30,7 +30,7 @@ public class MemberFixture {
 	}
 
 	private static Member createMemberWithExpiredRefreshToken() {
-		return Member.builder()
+		return Member.testBuilder()
 			.memberId(1L)
 			.memberType(MemberType.KAKAO)
 			.name("황의찬")

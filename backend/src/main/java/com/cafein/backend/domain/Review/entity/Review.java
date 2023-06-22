@@ -58,5 +58,4 @@ public class Review extends BaseTimeEntity {
 		this.cafe = cafe;
 		this.member = member;
 	}
-	//TODO 리뷰 등록 시 커피콩 더해주는 로직 구현
 }

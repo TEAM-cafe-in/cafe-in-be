@@ -1,10 +1,11 @@
-package com.cafein.backend.domain.viewedcafe;
+package com.cafein.backend.domain.viewedcafe.service;
 
 import java.util.List;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.cafein.backend.domain.member.entity.Member;
 import com.cafein.backend.domain.viewedcafe.entity.ViewedCafe;
 import com.cafein.backend.domain.viewedcafe.repository.ViewedCafeRepository;
 
@@ -18,7 +19,17 @@ public class ViewedCafeService {
 	private final ViewedCafeRepository viewedCafeRepository;
 
 	@Transactional(readOnly = true)
-	public List<ViewedCafe> findAllByMemberId(Long memberId) {
-		return viewedCafeRepository.findAllByMemberId(memberId);
+	public List<Long> findViewedCafes(Long memberId) {
+		return viewedCafeRepository.findViewedCafes(memberId);
+	}
+
+	@Transactional
+	public void addViewedCafe(Member member, Long cafeId) {
+		viewedCafeRepository.save(
+			ViewedCafe.builder()
+				.cafeId(cafeId)
+				.member(member)
+				.build()
+		);
 	}
 }

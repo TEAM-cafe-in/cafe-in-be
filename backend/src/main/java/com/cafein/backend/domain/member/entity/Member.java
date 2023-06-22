@@ -86,6 +86,18 @@ public class Member extends BaseTimeEntity {
 		this.coffeeBean = coffeeBean;
 	}
 
+	@Builder(builderMethodName = "testBuilder")
+	public Member(final Long memberId, final MemberType memberType, final String email,
+		final String name, final String profile, final String refreshToken, final LocalDateTime tokenExpirationTime) {
+		this.memberId = memberId;
+		this.memberType = memberType;
+		this.email = email;
+		this.name = name;
+		this.profile = profile;
+		this.refreshToken = refreshToken;
+		this.tokenExpirationTime = tokenExpirationTime;
+	}
+
 	public void updateRefreshToken(final JwtTokenDTO jwtTokenDto) {
 		this.refreshToken = jwtTokenDto.getRefreshToken();
 		this.tokenExpirationTime = DateTimeUtils.convertDateToLocalDateTime(jwtTokenDto.getRefreshTokenExpireTime());
@@ -93,5 +105,9 @@ public class Member extends BaseTimeEntity {
 
 	public void expireRefreshToken(final LocalDateTime now) {
 		this.tokenExpirationTime = now;
+	}
+
+	public void updateCoffeeBean(Integer coffeeBean) {
+		this.coffeeBean = coffeeBean - 2;
 	}
 }
