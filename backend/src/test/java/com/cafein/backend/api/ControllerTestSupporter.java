@@ -17,9 +17,11 @@ import org.springframework.web.context.WebApplicationContext;
 import com.cafein.backend.api.login.service.OAuthLoginService;
 import com.cafein.backend.api.logout.service.LogoutService;
 import com.cafein.backend.api.member.service.MemberInfoService;
+import com.cafein.backend.api.member.service.MyPageService;
 import com.cafein.backend.api.token.service.TokenService;
 import com.cafein.backend.domain.cafe.service.CafeService;
 import com.cafein.backend.domain.member.service.MemberService;
+import com.cafein.backend.domain.viewedcafe.service.ViewedCafeService;
 import com.cafein.backend.external.oauth.google.service.GoogleLoginApiServiceImpl;
 import com.cafein.backend.external.oauth.kakao.service.KakaoLoginApiServiceImpl;
 import com.cafein.backend.external.oauth.service.SocialLoginApiServiceFactory;
@@ -73,6 +75,12 @@ public class ControllerTestSupporter {
 
 	@MockBean
 	protected CafeService cafeService;
+
+	@MockBean
+	protected ViewedCafeService viewedCafeService;
+
+	@MockBean
+	protected MyPageService myPageService;
 
 	@MockBean
 	protected GoogleLoginApiServiceImpl googleLoginApiServiceImpl;
