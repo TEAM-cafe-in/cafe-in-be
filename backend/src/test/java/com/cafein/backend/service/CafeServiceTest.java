@@ -27,10 +27,8 @@ public class CafeServiceTest {
 
 	@Test
 	void 카페_정보를_반환하다() {
-		given(cafeRepository.findCafeInfoById(anyLong(), anyLong()))
-			.willReturn(BDDMockito.mock(CafeInfoProjection.class));
-		given(cafeRepository.findCommentsByCafeId(anyLong()))
-			.willReturn(new ArrayList<>(List.of("comment1", "comment2")));
+		given(cafeRepository.findCafeInfoById(anyLong(), anyLong())).willReturn(CAFE_INFO_PROJECTION);
+		given(cafeRepository.findCommentsByCafeId(anyLong())).willReturn(CAFE_COMMENTS);
 
 		cafeService.findCafeInfoById(1L, 1L);
 
@@ -40,8 +38,7 @@ public class CafeServiceTest {
 
 	@Test
 	void 회원이_조회한_카페들의_정보를_반환한다() {
-		given(cafeRepository.findCafeInfoViewedByMember(anyLong()))
-			.willReturn(CAFE_INFO_VIEWED_BY_MEMBER);
+		given(cafeRepository.findCafeInfoViewedByMember(anyLong())).willReturn(CAFE_INFO_VIEWED_BY_MEMBER);
 
 		cafeService.findCafeInfoViewedByMember(VIEWED_CAFE_IDS);
 
