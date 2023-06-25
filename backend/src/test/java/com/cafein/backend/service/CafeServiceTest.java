@@ -12,7 +12,7 @@ import com.cafein.backend.domain.cafe.service.CafeService;
 import com.cafein.backend.support.utils.ServiceTest;
 
 @ServiceTest
-public class CafeServiceTest {
+class CafeServiceTest {
 
 	@Autowired
 	private CafeService cafeService;
