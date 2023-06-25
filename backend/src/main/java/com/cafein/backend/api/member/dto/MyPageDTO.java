@@ -23,4 +23,13 @@ public class MyPageDTO {
 			.reviewCount(reviewCount)
 			.build();
 	}
+
+	@Override
+	public String toString() {
+		return "MyPageDTO{" +
+			"cafeInfoViewedByMemberDTOS=" + cafeInfoViewedByMemberDTOS +
+			", reviewDTOS=" + reviewDTOS +
+			", reviewCount=" + reviewCount +
+			'}';
+	}
 }
