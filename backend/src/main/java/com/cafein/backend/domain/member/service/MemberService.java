@@ -63,6 +63,6 @@ public class MemberService {
 		if (member.getCoffeeBean() < 2) {
 			throw new BusinessException(ErrorCode.NOT_ENOUGH_COFFEE_BEAN);
 		}
-		member.updateCoffeeBean(member.getCoffeeBean());
+		member.subtractCoffeeBean(member.getCoffeeBean());
 	}
 }

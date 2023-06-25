@@ -100,7 +100,7 @@ public class Member extends BaseTimeEntity {
 		this.tokenExpirationTime = now;
 	}
 
-	public void updateCoffeeBean(Integer coffeeBean) {
+	public void subtractCoffeeBean(Integer coffeeBean) {
 		this.coffeeBean = coffeeBean - 2;
 	}
 }

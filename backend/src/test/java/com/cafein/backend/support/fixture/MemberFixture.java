@@ -24,6 +24,7 @@ public class MemberFixture {
 			.name("황의찬")
 			.email("chan@test.com")
 			.profile("http://k.kakaocdn.net/img_110x110.jpg")
+			.coffeeBean(100)
 			.refreshToken(REFRESH_TOKEN)
 			.tokenExpirationTime(LocalDateTime.now().plusDays(14))
 			.build();
@@ -36,6 +37,7 @@ public class MemberFixture {
 			.name("황의찬")
 			.email("chan@test.com")
 			.profile("http://k.kakaocdn.net/img_110x110.jpg")
+			.coffeeBean(100)
 			.refreshToken(REFRESH_TOKEN)
 			.tokenExpirationTime(LocalDateTime.now().minusDays(1))
 			.build();
