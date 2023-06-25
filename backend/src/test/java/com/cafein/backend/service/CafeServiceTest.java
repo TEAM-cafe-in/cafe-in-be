@@ -3,15 +3,10 @@ package com.cafein.backend.service;
 import static com.cafein.backend.support.fixture.CafeFixture.*;
 import static org.mockito.BDDMockito.*;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.junit.jupiter.api.Test;
-import org.mockito.BDDMockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.mock.mockito.MockBean;
 
-import com.cafein.backend.api.cafe.dto.CafeInfoProjection;
 import com.cafein.backend.domain.cafe.repository.CafeRepository;
 import com.cafein.backend.domain.cafe.service.CafeService;
 import com.cafein.backend.support.utils.ServiceTest;
