@@ -18,24 +18,26 @@ public class MemberFixture {
 	public static final MemberInfoResponseDTO MEMBER_INFO_RESPONSE_DTO = memberInfoResponseDTO();
 
 	private static Member createMember() {
-		return Member.testBuilder()
+		return Member.builder()
 			.memberId(1L)
 			.memberType(MemberType.KAKAO)
 			.name("황의찬")
 			.email("chan@test.com")
 			.profile("http://k.kakaocdn.net/img_110x110.jpg")
+			.coffeeBean(100)
 			.refreshToken(REFRESH_TOKEN)
 			.tokenExpirationTime(LocalDateTime.now().plusDays(14))
 			.build();
 	}
 
 	private static Member createMemberWithExpiredRefreshToken() {
-		return Member.testBuilder()
+		return Member.builder()
 			.memberId(1L)
 			.memberType(MemberType.KAKAO)
 			.name("황의찬")
 			.email("chan@test.com")
 			.profile("http://k.kakaocdn.net/img_110x110.jpg")
+			.coffeeBean(100)
 			.refreshToken(REFRESH_TOKEN)
 			.tokenExpirationTime(LocalDateTime.now().minusDays(1))
 			.build();

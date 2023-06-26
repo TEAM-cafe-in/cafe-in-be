@@ -76,24 +76,17 @@ public class Member extends BaseTimeEntity {
 	private List<Comment> comments = new ArrayList<>();
 
 	@Builder
-	public Member(MemberType memberType, String email, String password, String name, String profile, Role role, Integer coffeeBean) {
+	public Member(final Long memberId, final MemberType memberType, final String email,
+		final String password, final String name, final String profile, final Integer coffeeBean,
+		final Role role, final String refreshToken, final LocalDateTime tokenExpirationTime) {
+		this.memberId = memberId;
 		this.memberType = memberType;
 		this.email = email;
 		this.password = password;
 		this.name = name;
 		this.profile = profile;
-		this.role = role;
 		this.coffeeBean = coffeeBean;
-	}
-
-	@Builder(builderMethodName = "testBuilder")
-	public Member(final Long memberId, final MemberType memberType, final String email,
-		final String name, final String profile, final String refreshToken, final LocalDateTime tokenExpirationTime) {
-		this.memberId = memberId;
-		this.memberType = memberType;
-		this.email = email;
-		this.name = name;
-		this.profile = profile;
+		this.role = role;
 		this.refreshToken = refreshToken;
 		this.tokenExpirationTime = tokenExpirationTime;
 	}
@@ -107,7 +100,7 @@ public class Member extends BaseTimeEntity {
 		this.tokenExpirationTime = now;
 	}
 
-	public void updateCoffeeBean(Integer coffeeBean) {
+	public void subtractCoffeeBean(Integer coffeeBean) {
 		this.coffeeBean = coffeeBean - 2;
 	}
 }

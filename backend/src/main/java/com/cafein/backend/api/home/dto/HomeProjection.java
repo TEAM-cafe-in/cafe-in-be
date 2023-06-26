@@ -17,7 +17,7 @@ public interface HomeProjection {
 	@Schema(description = "카페 주소", example = "서울시 성동구 서울숲2길44-13 1층", required = true)
 	String getAddress();
 
-	@Schema(description = "카페 리뷰 갯수", example = "10", required = true)
+	@Schema(description = "카페 리뷰 개수", example = "10", required = true)
 	String getCommentReviewCount();
 
 	@Schema(description = "영업 상태", example = "영업중", required = true)
@@ -34,4 +34,6 @@ public interface HomeProjection {
 
 	@Schema(description = "경도", example = "127.043297", required = true)
 	String getLongitude();
+
+	void setName(String name);
 }

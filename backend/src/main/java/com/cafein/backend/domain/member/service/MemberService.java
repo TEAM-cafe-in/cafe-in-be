@@ -57,12 +57,12 @@ public class MemberService {
 	}
 
 	@Transactional
-	public void updateCoffeeBean(final Long memberId) {
+	public void subtractCoffeeBean(final Long memberId) {
 		Member member = memberRepository.findById(memberId)
 			.orElseThrow(() -> new EntityNotFoundException(ErrorCode.MEMBER_NOT_EXIST));
 		if (member.getCoffeeBean() < 2) {
 			throw new BusinessException(ErrorCode.NOT_ENOUGH_COFFEE_BEAN);
 		}
-		member.updateCoffeeBean(member.getCoffeeBean());
+		member.subtractCoffeeBean(member.getCoffeeBean());
 	}
 }

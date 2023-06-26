@@ -8,6 +8,7 @@ import java.time.LocalDateTime;
 
 import org.junit.jupiter.api.Test;
 
+import com.cafein.backend.domain.member.entity.Member;
 import com.cafein.backend.global.util.DateTimeUtils;
 
 class MemberTest {
@@ -26,5 +27,12 @@ class MemberTest {
 		MEMBER.expireRefreshToken(LocalDateTime.now());
 
 		assertThat(MEMBER.getTokenExpirationTime()).isBefore(LocalDateTime.now());
+	}
+
+	@Test
+	void 카페를_조회하면_커피콩을_차감한다() {
+		MEMBER.subtractCoffeeBean(MEMBER.getCoffeeBean());
+
+		assertThat(MEMBER.getCoffeeBean()).isEqualTo(98);
 	}
 }
