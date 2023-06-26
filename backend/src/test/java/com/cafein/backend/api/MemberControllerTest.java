@@ -19,6 +19,7 @@ import com.cafein.backend.api.member.dto.MemberInfoResponseDTO;
 import com.cafein.backend.api.member.dto.MyPageDTO;
 import com.cafein.backend.api.member.service.MemberInfoService;
 import com.cafein.backend.api.member.service.MyPageService;
+import com.cafein.backend.support.fixture.CafeFixture;
 
 class MemberControllerTest extends ControllerTestSupporter {
 
