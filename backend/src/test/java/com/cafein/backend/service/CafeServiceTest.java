@@ -45,8 +45,9 @@ class CafeServiceTest {
 		cafeService.findCafeInfoViewedByMember(VIEWED_CAFE_IDS);
 
 		then(cafeRepository).should(times(3)).findCafeInfoViewedByMember(anyLong());
+	}
 
-  @Test
+  	@Test
 	void 홈_화면의_전체_카페_정보를_반환한다() {
 		given(cafeRepository.count()).willReturn(5L);
 		given(cafeRepository.getHomeData(1L)).willReturn(Collections.emptyList());

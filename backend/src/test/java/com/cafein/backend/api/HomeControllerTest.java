@@ -14,8 +14,7 @@ import com.cafein.backend.api.home.controller.HomeController;
 import com.cafein.backend.api.home.dto.HomeResponseDTO;
 import com.cafein.backend.domain.cafe.service.CafeService;
 
-@ExtendWith(MockitoExtension.class)
-class HomeControllerTest extends ControllerTestSupporterV1 {
+class HomeControllerTest extends ControllerTestSupporter {
 
 	@Mock
 	private CafeService cafeService;

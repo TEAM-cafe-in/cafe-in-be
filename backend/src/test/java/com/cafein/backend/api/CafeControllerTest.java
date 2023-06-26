@@ -17,7 +17,9 @@ class CafeControllerTest extends ControllerTestSupporter {
 		given(cafeService.findCafeInfoById(anyLong(), anyLong()))
 			.willReturn(CAFE_INFO_DTO);
 
-		mockMvc.perform(get("/api/cafe/1")
+		mockMvc(new CafeController(memberService, cafeService, viewedCafeService))
+			.perform(
+				get("/api/cafe/1")
 				.contentType(MediaType.APPLICATION_JSON_VALUE)
 				.header(HttpHeaders.AUTHORIZATION, AUTHORIZATION_HEADER_ACCESS)
 			)
