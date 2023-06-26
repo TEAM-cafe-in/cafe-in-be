@@ -45,7 +45,7 @@ public class CafeController {
 	public ResponseEntity<CafeInfoDTO> cafeCongestionCheck(@PathVariable Long cafeId,
 								           		           @ApiIgnore @MemberInfo MemberInfoDTO memberInfoDTO) {
 		log.debug("memberId = {}", memberInfoDTO.getMemberId());
-		memberService.updateCoffeeBean(memberInfoDTO.getMemberId());
+		memberService.subtractCoffeeBean(memberInfoDTO.getMemberId());
 		viewedCafeService.addViewedCafe(memberService.findMemberByMemberId(memberInfoDTO.getMemberId()), cafeId);
 		return ResponseEntity.ok(cafeService.findCafeInfoById(memberInfoDTO.getMemberId(), cafeId));
 	}
