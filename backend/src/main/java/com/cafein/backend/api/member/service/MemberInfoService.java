@@ -23,7 +23,7 @@ public class MemberInfoService {
 	@Transactional(readOnly = true)
 	public MemberInfoResponseDTO getMemberInfo(final Long memberId) {
 		Member member = memberService.findMemberByMemberId(memberId);
-		List<Long> viewdCafeIds = viewedCafeService.findViewedCafes(memberId);
-		return MemberInfoResponseDTO.of(member, viewdCafeIds);
+		List<Long> viewedCafeIds = viewedCafeService.findViewedCafes(memberId);
+		return MemberInfoResponseDTO.of(member, viewedCafeIds);
 	}
 }

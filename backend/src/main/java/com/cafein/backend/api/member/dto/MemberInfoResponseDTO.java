@@ -40,4 +40,16 @@ public class MemberInfoResponseDTO {
 			.viewedCafeIds(viewedCafeIds)
 			.build();
 	}
+
+	@Override
+	public String toString() {
+		return "MemberInfoResponseDTO{" +
+			"memberId=" + memberId +
+			", email='" + email + '\'' +
+			", memberName='" + memberName + '\'' +
+			", profile='" + profile + '\'' +
+			", role=" + role +
+			", viewedCafeIds=" + viewedCafeIds +
+			'}';
+	}
 }

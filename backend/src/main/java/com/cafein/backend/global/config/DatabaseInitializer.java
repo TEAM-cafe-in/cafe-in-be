@@ -6,6 +6,7 @@ import java.util.ArrayList;
 
 import javax.annotation.PostConstruct;
 
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
@@ -35,6 +36,7 @@ import lombok.RequiredArgsConstructor;
 @Profile({"dev"})
 @Component
 @RequiredArgsConstructor
+@ConditionalOnProperty(name = "spring.jpa.hibernate.ddl-auto", havingValue = "create")
 public class DatabaseInitializer {
 
 	private final InitService initService;

@@ -1,20 +1,14 @@
 package com.cafein.backend.api.member.controller;
 
-import java.util.List;
-
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.cafein.backend.api.member.dto.CafeInfoViewedByMemberProjection;
 import com.cafein.backend.api.member.dto.MemberInfoResponseDTO;
 import com.cafein.backend.api.member.dto.MyPageDTO;
 import com.cafein.backend.api.member.service.MemberInfoService;
 import com.cafein.backend.api.member.service.MyPageService;
-import com.cafein.backend.domain.cafe.entity.Cafe;
-import com.cafein.backend.domain.cafe.service.CafeService;
-import com.cafein.backend.domain.viewedcafe.service.ViewedCafeService;
 import com.cafein.backend.global.resolver.MemberInfo;
 import com.cafein.backend.global.resolver.MemberInfoDTO;
 
@@ -50,6 +44,13 @@ public class MemberController {
 		return ResponseEntity.ok(memberInfoResponseDTO);
 	}
 
+	@Tag(name = "member")
+	@Operation(summary = "마이페이지 조회 API", description = "마이페이지 조회 API")
+	@ApiResponses({
+		@ApiResponse(responseCode = "A-001", description = "토큰이 만료되었습니다."),
+		@ApiResponse(responseCode = "A-002", description = "해당 토큰은 유효한 토큰이 아닙니다."),
+		@ApiResponse(responseCode = "M-003", description = "해당 회원은 존재하지 않습니다.")
+	})
 	@GetMapping("/mypage")
 	public ResponseEntity<MyPageDTO> getMyPage(@ApiIgnore @MemberInfo MemberInfoDTO memberInfoDTO) {
 		return ResponseEntity.ok(myPageService.getMyPageDTO(memberInfoDTO.getMemberId()));
