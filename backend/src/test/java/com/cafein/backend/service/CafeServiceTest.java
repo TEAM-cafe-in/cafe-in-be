@@ -1,12 +1,14 @@
 package com.cafein.backend.service;
 
 import static com.cafein.backend.support.fixture.CafeFixture.*;
+import static org.assertj.core.api.Assertions.*;
 import static org.mockito.BDDMockito.*;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.mock.mockito.MockBean;
 
+import com.cafein.backend.api.cafe.dto.CafeInfoDTO;
 import com.cafein.backend.domain.cafe.repository.CafeRepository;
 import com.cafein.backend.domain.cafe.service.CafeService;
 import com.cafein.backend.support.utils.ServiceTest;
@@ -25,10 +27,12 @@ class CafeServiceTest {
 		given(cafeRepository.findCafeInfoById(anyLong(), anyLong())).willReturn(CAFE_INFO_PROJECTION);
 		given(cafeRepository.findCommentsByCafeId(anyLong())).willReturn(CAFE_COMMENTS);
 
-		cafeService.findCafeInfoById(1L, 1L);
+		CafeInfoDTO cafeInfoDTO = cafeService.findCafeInfoById(1L, 1L);
 
 		then(cafeRepository).should(times(1)).findCafeInfoById(anyLong(), anyLong());
 		then(cafeRepository).should(times(1)).findCommentsByCafeId(anyLong());
+		assertThat(cafeInfoDTO.getCafeInfoProjection().getName()).isEqualTo("5to7");
+		assertThat(cafeInfoDTO.getComments().size()).isEqualTo(5);
 	}
 
 	@Test
