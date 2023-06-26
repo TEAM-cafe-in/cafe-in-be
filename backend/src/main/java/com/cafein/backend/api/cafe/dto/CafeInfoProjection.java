@@ -36,4 +36,16 @@ public interface CafeInfoProjection {
 
 	@Schema(description = "청결도 리뷰 개수", example = "0", required = true)
 	String getIsCleanCount();
+
+	void setName(String name);
+	void setCafeId(String cafeId);
+	void setPhoneNumber(String phoneNumber);
+	void setAddress(String address);
+	void setStatus(String status);
+	void setAverageCongestion(String averageCongestion);
+	void setLocal(String local);
+	void setLatitude(String latitude);
+	void setLongitude(String longitude);
+	void setHasPlugCount(String hasPlugCount);
+	void setIsCleanCount(String isCleanCount);
 }

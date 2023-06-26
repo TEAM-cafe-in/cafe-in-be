@@ -12,4 +12,8 @@ public interface CafeInfoViewedByMemberProjection {
 
 	@Schema(description = "카페 리뷰 개수", example = "10", required = true)
 	String getCommentReviewCount();
+
+	void setCafeName(String cafeName);
+	void setAddress(String address);
+	void setCommentReviewCount(String commentReviewCount);
 }
