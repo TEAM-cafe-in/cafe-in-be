@@ -1,43 +1,39 @@
 package com.cafein.backend.api;
 
-import static com.cafein.backend.support.fixture.MemberFixture.*;
-import static org.assertj.core.api.Assertions.*;
+import static com.cafein.backend.support.fixture.HomeFixture.*;
 import static org.mockito.BDDMockito.*;
-
-import java.util.Collections;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
 import com.cafein.backend.api.home.controller.HomeController;
 import com.cafein.backend.api.home.dto.HomeResponseDTO;
 import com.cafein.backend.domain.cafe.service.CafeService;
 
 @ExtendWith(MockitoExtension.class)
-class HomeControllerTest {
+class HomeControllerTest extends ControllerTestSupporterV1 {
 
 	@Mock
 	private CafeService cafeService;
 
-	@InjectMocks
-	private HomeController homeController;
-
 	@Test
-	void 홈_화면에_필요한_카페_정보를_반환한다() {
+	void 홈_화면에_필요한_카페_정보를_반환한다() throws Exception {
 		HomeResponseDTO response = HomeResponseDTO.builder()
 			.cafeCount(5L)
-			.cafes(Collections.emptyList())
+			.cafes(HOME_PROJECTION)
 			.build();
-		given(cafeService.getHomeData(anyLong())).willReturn(response);
 
-		final ResponseEntity<HomeResponseDTO> result = homeController.home(MEMBER_INFO_DTO);
+		given(cafeService.getHomeData(any())).willReturn(response);
 
-		then(cafeService).should(times(1)).getHomeData(anyLong());
-		assertThat(result.getStatusCode()).isEqualTo(HttpStatus.OK);
+		mockMvc(new HomeController(cafeService))
+			.perform(MockMvcRequestBuilders
+				.get("/api/home"))
+			.andExpect(status().isOk())
+			.andExpect(jsonPath("$.cafeCount").value(5L))
+			.andExpect(jsonPath("$.cafes[0].name").value("5to7"));
 	}
 }

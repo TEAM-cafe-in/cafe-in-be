@@ -34,4 +34,6 @@ public interface HomeProjection {
 
 	@Schema(description = "경도", example = "127.043297", required = true)
 	String getLongitude();
+
+	void setName(String name);
 }
