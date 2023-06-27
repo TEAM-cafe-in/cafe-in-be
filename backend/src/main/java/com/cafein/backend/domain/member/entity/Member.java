@@ -103,4 +103,8 @@ public class Member extends BaseTimeEntity {
 	public void subtractCoffeeBean(Integer coffeeBean) {
 		this.coffeeBean = coffeeBean - 2;
 	}
+
+	public void addCoffeeBean(Integer coffeeBean) {
+		this.coffeeBean = coffeeBean + 2;
+	}
 }
