@@ -15,6 +15,8 @@ import com.cafein.backend.global.resolver.MemberInfo;
 import com.cafein.backend.global.resolver.MemberInfoDTO;
 
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -33,6 +35,9 @@ public class CafeController {
 
 	@Tag(name = "cafe")
 	@Operation(summary = "카페 상세보기 API", description = "카페 정보를 조회하는 API")
+	@ApiResponses({
+		@ApiResponse(responseCode = "C-001", description = "해당 카페는 존재하지 않습니다.")
+	})
 	@GetMapping("/cafe/{cafeId}")
 	public ResponseEntity<CafeInfoDTO> cafeInfo(@PathVariable Long cafeId,
 											    @ApiIgnore @MemberInfo MemberInfoDTO memberInfoDTO) {
@@ -41,6 +46,10 @@ public class CafeController {
 
 	@Tag(name = "cafe")
 	@Operation(summary = "카페 상세보기 API", description = "커피콩을 사용해서 카페 정보 열람 권한을 얻을때 사용하는 API")
+	@ApiResponses({
+		@ApiResponse(responseCode = "M-004", description = "커피 콩이 부족합니다"),
+		@ApiResponse(responseCode = "C-001", description = "해당 카페는 존재하지 않습니다.")
+	})
 	@PostMapping("/cafe/{cafeId}")
 	public ResponseEntity<CafeInfoDTO> cafeCongestionCheck(@PathVariable Long cafeId,
 								           		           @ApiIgnore @MemberInfo MemberInfoDTO memberInfoDTO) {
