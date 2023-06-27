@@ -1,4 +1,4 @@
-package com.cafein.backend.domain.Review.respository;
+package com.cafein.backend.domain.review.respository;
 
 import java.util.List;
 
@@ -7,7 +7,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 import com.cafein.backend.api.member.dto.MemberReviewProjection;
-import com.cafein.backend.domain.Review.entity.Review;
+import com.cafein.backend.domain.review.entity.Review;
 
 public interface ReviewRepository extends JpaRepository<Review, Long> {
 
