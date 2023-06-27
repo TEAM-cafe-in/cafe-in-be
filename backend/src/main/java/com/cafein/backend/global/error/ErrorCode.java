@@ -26,6 +26,7 @@ public enum ErrorCode {
 
 	//카페
 	CAFE_NOT_EXIST(HttpStatus.BAD_REQUEST, "C-001", "해당 카페는 존재하지 않습니다."),
+	CAFE_ALREADY_VIEWED(HttpStatus.BAD_REQUEST, "C-002", "이미 조회한 카페입니다."),
 
 	//지역
 	LOCAL_NOT_EXIST(HttpStatus.BAD_REQUEST, "L-001", "해당 지역은 존재하지 않습니다.");

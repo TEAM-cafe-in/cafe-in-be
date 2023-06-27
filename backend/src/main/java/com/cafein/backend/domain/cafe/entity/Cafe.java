@@ -15,12 +15,12 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
-import com.cafein.backend.domain.Review.entity.Review;
 import com.cafein.backend.domain.cafe.constant.Local;
 import com.cafein.backend.domain.comment.entity.Comment;
 import com.cafein.backend.domain.common.Address;
 import com.cafein.backend.domain.common.BaseTimeEntity;
 import com.cafein.backend.domain.openinghours.entity.OpeningHour;
+import com.cafein.backend.domain.review.entity.Review;
 
 import lombok.AccessLevel;
 import lombok.Builder;

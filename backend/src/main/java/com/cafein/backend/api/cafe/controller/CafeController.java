@@ -20,7 +20,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import springfox.documentation.annotations.ApiIgnore;
 
-@Tag(name = "cafe", description = "카페 상세보기 API")
+@Tag(name = "cafe", description = "카페 관련 API")
 @Slf4j
 @RestController
 @RequiredArgsConstructor
