@@ -1,4 +1,4 @@
-package com.cafein.backend.domain.Review.entity;
+package com.cafein.backend.domain.review.entity;
 
 import static javax.persistence.FetchType.*;
 
@@ -12,10 +12,10 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
-import com.cafein.backend.domain.Review.constant.CafeCongestion;
 import com.cafein.backend.domain.cafe.entity.Cafe;
 import com.cafein.backend.domain.common.BaseTimeEntity;
 import com.cafein.backend.domain.member.entity.Member;
+import com.cafein.backend.domain.review.constant.CafeCongestion;
 
 import lombok.AccessLevel;
 import lombok.Builder;
