@@ -1,14 +1,13 @@
 package com.cafein.backend.api.member.service;
 
-import java.util.Collections;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.cafein.backend.api.member.dto.MyPageDTO;
-import com.cafein.backend.domain.Review.respository.ReviewRepository;
 import com.cafein.backend.domain.cafe.service.CafeService;
+import com.cafein.backend.domain.review.respository.ReviewRepository;
 import com.cafein.backend.domain.viewedcafe.service.ViewedCafeService;
 
 import lombok.RequiredArgsConstructor;

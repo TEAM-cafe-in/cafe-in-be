@@ -1,4 +1,4 @@
-package com.cafein.backend.domain.Review.constant;
+package com.cafein.backend.domain.review.constant;
 
 public enum CafeCongestion {
 

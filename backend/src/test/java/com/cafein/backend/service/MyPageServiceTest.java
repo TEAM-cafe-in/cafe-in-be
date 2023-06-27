@@ -11,8 +11,8 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 
 import com.cafein.backend.api.member.dto.MyPageDTO;
 import com.cafein.backend.api.member.service.MyPageService;
-import com.cafein.backend.domain.Review.respository.ReviewRepository;
 import com.cafein.backend.domain.cafe.service.CafeService;
+import com.cafein.backend.domain.review.respository.ReviewRepository;
 import com.cafein.backend.support.utils.ServiceTest;
 
 @ServiceTest

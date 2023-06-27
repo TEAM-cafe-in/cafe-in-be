@@ -18,11 +18,11 @@ import javax.persistence.OneToMany;
 import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.DynamicInsert;
 
-import com.cafein.backend.domain.Review.entity.Review;
 import com.cafein.backend.domain.comment.entity.Comment;
 import com.cafein.backend.domain.common.BaseTimeEntity;
 import com.cafein.backend.domain.member.constant.MemberType;
 import com.cafein.backend.domain.member.constant.Role;
+import com.cafein.backend.domain.review.entity.Review;
 import com.cafein.backend.global.jwt.dto.JwtTokenDTO;
 import com.cafein.backend.global.util.DateTimeUtils;
 
@@ -102,5 +102,9 @@ public class Member extends BaseTimeEntity {
 
 	public void subtractCoffeeBean(Integer coffeeBean) {
 		this.coffeeBean = coffeeBean - 2;
+	}
+
+	public void addCoffeeBean(Integer coffeeBean) {
+		this.coffeeBean = coffeeBean + 2;
 	}
 }
