@@ -86,6 +86,9 @@ public interface CafeRepository extends JpaRepository<Cafe, Long> {
 		"WHERE c.cafe_id = :cafeId", nativeQuery = true)
 	CafeInfoViewedByMemberProjection findCafeInfoViewedByMember(@Param("cafeId") Long cafeId);
 
+	@Query("SELECT co FROM Comment co WHERE co.cafe.cafeId = :cafeId")
+	List<Comment> findAllCommentByCafeId(@Param("cafeId") Long cafeId);
+
 	Optional<Cafe> findByName(String name);
 
 	long count();
