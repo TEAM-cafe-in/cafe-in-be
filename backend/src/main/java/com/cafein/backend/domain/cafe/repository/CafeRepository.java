@@ -1,7 +1,6 @@
 package com.cafein.backend.domain.cafe.repository;
 
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -11,8 +10,8 @@ import org.springframework.data.repository.query.Param;
 import com.cafein.backend.api.cafe.dto.CafeInfoProjection;
 import com.cafein.backend.api.home.dto.HomeProjection;
 import com.cafein.backend.api.member.dto.CafeInfoViewedByMemberProjection;
-import com.cafein.backend.domain.cafe.constant.Local;
 import com.cafein.backend.domain.cafe.entity.Cafe;
+import com.cafein.backend.domain.comment.entity.Comment;
 
 public interface CafeRepository extends JpaRepository<Cafe, Long> {
 

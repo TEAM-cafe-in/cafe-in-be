@@ -9,7 +9,11 @@ import org.springframework.transaction.annotation.Transactional;
 import com.cafein.backend.api.cafe.dto.CafeInfoDTO;
 import com.cafein.backend.api.home.dto.HomeResponseDTO;
 import com.cafein.backend.api.member.dto.CafeInfoViewedByMemberProjection;
+import com.cafein.backend.domain.cafe.entity.Cafe;
 import com.cafein.backend.domain.cafe.repository.CafeRepository;
+import com.cafein.backend.domain.comment.entity.Comment;
+import com.cafein.backend.global.error.ErrorCode;
+import com.cafein.backend.global.error.exception.EntityNotFoundException;
 
 import lombok.RequiredArgsConstructor;
 
@@ -32,7 +36,7 @@ public class CafeService {
 	public CafeInfoDTO findCafeInfoById(Long memberId, Long cafeId) {
 		return CafeInfoDTO.builder()
 			.cafeInfoProjection(cafeRepository.findCafeInfoById(memberId, cafeId))
-			.comments(cafeRepository.findCommentsByCafeId(cafeId))
+			.comments(getComments(cafeId))
 			.build();
 	}
 
@@ -41,5 +45,11 @@ public class CafeService {
 		return viewedCafeIds.stream()
 			.map(cafeRepository::findCafeInfoViewedByMember)
 			.collect(Collectors.toList());
+	}
+
+	@Transactional(readOnly = true)
+	public Cafe findCafeByCafeId(final Long cafeId) {
+		return cafeRepository.findById(cafeId)
+			.orElseThrow(() -> new EntityNotFoundException(ErrorCode.CAFE_NOT_EXIST));
 	}
 }
