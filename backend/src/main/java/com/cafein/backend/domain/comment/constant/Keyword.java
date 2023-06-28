@@ -1,5 +1,10 @@
 package com.cafein.backend.domain.comment.constant;
 
+import java.util.Arrays;
+
+import com.cafein.backend.global.error.ErrorCode;
+import com.cafein.backend.global.error.exception.BusinessException;
+
 import lombok.Getter;
 
 @Getter
@@ -16,5 +21,12 @@ public enum Keyword {
 
 	Keyword(final String keyWord) {
 		this.keyWord = keyWord;
+	}
+
+	public static Keyword from(String keyword) {
+		return Arrays.stream(Keyword.values())
+			.filter(value -> value.getKeyWord().equals(keyword))
+			.findFirst()
+			.orElseThrow(() -> new BusinessException(ErrorCode.KEYWORD_NOT_EXIST));
 	}
 }
