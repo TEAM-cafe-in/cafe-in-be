@@ -1,4 +1,4 @@
-package com.cafein.backend.domain.comment.entity;
+package com.cafein.backend.domain.commentkeyword.entity;
 
 import static javax.persistence.FetchType.*;
 
@@ -12,8 +12,10 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 import com.cafein.backend.domain.comment.constant.Keyword;
+import com.cafein.backend.domain.comment.entity.Comment;
 
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -32,4 +34,10 @@ public class CommentKeyword {
 	@ManyToOne(fetch = LAZY)
 	@JoinColumn(name = "comment_id")
 	private Comment comment;
+
+	@Builder
+	public CommentKeyword(final Keyword keyword, final Comment comment) {
+		this.keyword = keyword;
+		this.comment = comment;
+	}
 }

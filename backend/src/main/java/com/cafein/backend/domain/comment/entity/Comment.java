@@ -2,6 +2,9 @@ package com.cafein.backend.domain.comment.entity;
 
 import static javax.persistence.FetchType.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -10,8 +13,10 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 import com.cafein.backend.domain.cafe.entity.Cafe;
+import com.cafein.backend.domain.commentkeyword.entity.CommentKeyword;
 import com.cafein.backend.domain.common.BaseTimeEntity;
 import com.cafein.backend.domain.member.entity.Member;
 
@@ -33,6 +38,9 @@ public class Comment extends BaseTimeEntity {
 	@Lob
 	private String content;
 
+	@OneToMany(mappedBy = "comment")
+	List<CommentKeyword> keywords = new ArrayList<>();
+
 	@ManyToOne(fetch = LAZY)
 	@JoinColumn(name = "cafe_id")
 	private Cafe cafe;
@@ -46,5 +54,16 @@ public class Comment extends BaseTimeEntity {
 		this.content = content;
 		this.cafe = cafe;
 		this.member = member;
+	}
+
+	@Override
+	public String toString() {
+		return "Comment{" +
+			"commentId=" + commentId +
+			", content='" + content + '\'' +
+			", keywords=" + keywords +
+			", cafe=" + cafe +
+			", member=" + member +
+			'}';
 	}
 }
