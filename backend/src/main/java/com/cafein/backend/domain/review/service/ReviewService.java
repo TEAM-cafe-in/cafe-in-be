@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.cafein.backend.api.review.dto.ReviewDTO;
-import com.cafein.backend.domain.cafe.repository.CafeRepository;
+import com.cafein.backend.domain.cafe.service.CafeService;
 import com.cafein.backend.domain.member.entity.Member;
 import com.cafein.backend.domain.member.service.MemberService;
 import com.cafein.backend.domain.review.constant.CafeCongestion;
@@ -26,7 +26,7 @@ public class ReviewService {
 
 	private final MemberService memberService;
 	private final ReviewRepository reviewRepository;
-	private final CafeRepository cafeRepository;
+	private final CafeService cafeService;
 
 	public ReviewDTO.Response createReview(final ReviewDTO.Request requestDTO, final Long cafeId, final Long memberId) {
 		Member member = memberService.findMemberByMemberId(memberId);
@@ -39,7 +39,7 @@ public class ReviewService {
 
 	private Review createReview(final ReviewDTO.Request requestDTO, final Long cafeId, final Member member) {
 		return Review.builder()
-			.cafe(cafeRepository.findById(cafeId).orElseThrow(() -> new BusinessException(ErrorCode.CAFE_NOT_EXIST)))
+			.cafe(cafeService.findCafeByCafeId(cafeId))
 			.cafeCongestion(CafeCongestion.valueOf(requestDTO.getCafeCongestion()))
 			.isClean(Boolean.parseBoolean(requestDTO.getIsClean()))
 			.hasPlug(Boolean.parseBoolean(requestDTO.getHasPlug()))

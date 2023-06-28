@@ -7,9 +7,7 @@ import lombok.Getter;
 @Getter
 public enum ErrorCode {
 
-	TEST(HttpStatus.INTERNAL_SERVER_ERROR, "001", "business exception test"),
-
-	//인증
+	// 인증
 	TOKEN_EXPIRED(HttpStatus.UNAUTHORIZED, "A-001", "토큰이 만료되었습니다."),
 	NOT_VALID_TOKEN(HttpStatus.UNAUTHORIZED, "A-002", "해당 토큰은 유효한 토큰이 아닙니다."),
 	NOT_EXISTS_AUTHORIZATION(HttpStatus.UNAUTHORIZED, "A-003", "Authorization Header가 빈값입니다."),
@@ -18,21 +16,24 @@ public enum ErrorCode {
 	REFRESH_TOKEN_EXPIRED(HttpStatus.UNAUTHORIZED, "A-006", "해당 Refresh Token은 만료 되었습니다."),
 	NOT_ACCESS_TOKEN_TYPE(HttpStatus.UNAUTHORIZED, "A-007", "해당 토큰은 Access Token이 아닙니다."),
 
-	//회원
+	// 회원
 	INVALID_MEMBER_TYPE(HttpStatus.BAD_REQUEST, "M-001", "잘못된 회원 타입 입니다."),
 	ALREADY_REGISTERED_MEMBER(HttpStatus.BAD_REQUEST, "M-002", "이미 가입된 회원입니다."),
 	MEMBER_NOT_EXIST(HttpStatus.BAD_REQUEST, "M-003", "해당 회원은 존재하지 않습니다."),
 	NOT_ENOUGH_COFFEE_BEAN(HttpStatus.BAD_REQUEST, "M-004", "커피 콩이 부족합니다."),
 
-	//카페
+	// 카페
 	CAFE_NOT_EXIST(HttpStatus.BAD_REQUEST, "C-001", "해당 카페는 존재하지 않습니다."),
 	CAFE_ALREADY_VIEWED(HttpStatus.BAD_REQUEST, "C-002", "이미 조회한 카페입니다."),
 
-	//지역
+	// 지역
 	LOCAL_NOT_EXIST(HttpStatus.BAD_REQUEST, "L-001", "해당 지역은 존재하지 않습니다."),
 
-	//리뷰
-	REVIEWED_CAFE_WITHIN_A_DAY(HttpStatus.BAD_REQUEST, "R-001", "해당 카페에 대해 하루에 한번만 리뷰를 작성할 수 있습니다.");
+	// 리뷰
+	REVIEWED_CAFE_WITHIN_A_DAY(HttpStatus.BAD_REQUEST, "R-001", "해당 카페에 대해 하루에 한번만 리뷰를 작성할 수 있습니다."),
+
+	// 댓글
+	KEYWORD_NOT_EXIST(HttpStatus.BAD_REQUEST,"CO-001","해당 키워드는 존재하지 않습니다.");
 
 	private HttpStatus httpStatus;
 	private String errorCode;
