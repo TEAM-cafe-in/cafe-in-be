@@ -29,7 +29,7 @@ class MemberServiceTest {
 	@Test
 	void 회원_등록을_한다() {
 		given(memberRepository.save(any())).willReturn(MEMBER);
-		given(memberRepository.findByEmail(any())).willReturn(Optional.empty());
+		given(memberRepository.findByEmailAndMemberType(any(), any())).willReturn(Optional.empty());
 
 		memberService.registerMember(MEMBER);
 
@@ -38,7 +38,7 @@ class MemberServiceTest {
 
 	@Test
 	void 회원_등록시_이미_가입된_회원이면_예외를_던진다() {
-		given(memberRepository.findByEmail(any())).willReturn(Optional.of(MEMBER));
+		given(memberRepository.findByEmailAndMemberType(any(), any())).willReturn(Optional.of(MEMBER));
 
 		assertThatThrownBy(() -> memberService.registerMember(MEMBER))
 			.isInstanceOf(BusinessException.class)
@@ -52,6 +52,15 @@ class MemberServiceTest {
 		memberService.findMemberByEmail(MEMBER.getEmail());
 
 		then(memberRepository).should(times(1)).findByEmail(anyString());
+	}
+
+	@Test
+	void 이메일과_멤버타입으로_회원을_조회한다() {
+		given(memberRepository.findByEmailAndMemberType(any(), any())).willReturn(Optional.of(MEMBER));
+
+		memberService.findMemberByEmailAndMemberType(MEMBER.getEmail(), MEMBER.getMemberType());
+
+		then(memberRepository).should(times(1)).findByEmailAndMemberType(any(), any());
 	}
 
 	@Test
