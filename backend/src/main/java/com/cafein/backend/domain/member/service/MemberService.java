@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.cafein.backend.domain.member.constant.MemberType;
 import com.cafein.backend.domain.member.entity.Member;
 import com.cafein.backend.domain.member.repository.MemberRepository;
 import com.cafein.backend.global.error.ErrorCode;
@@ -56,7 +57,6 @@ public class MemberService {
 			.orElseThrow(() -> new EntityNotFoundException(ErrorCode.MEMBER_NOT_EXIST));
 	}
 
-	@Transactional
 	public void subtractCoffeeBean(final Long memberId) {
 		Member member = memberRepository.findById(memberId)
 			.orElseThrow(() -> new EntityNotFoundException(ErrorCode.MEMBER_NOT_EXIST));
@@ -64,5 +64,10 @@ public class MemberService {
 			throw new BusinessException(ErrorCode.NOT_ENOUGH_COFFEE_BEAN);
 		}
 		member.subtractCoffeeBean(member.getCoffeeBean());
+	}
+
+	@Transactional(readOnly = true)
+	public Optional<Member> findMemberByEmailAndMemberType(String email, MemberType memberType) {
+		return memberRepository.findByEmailAndMemberType(email, memberType);
 	}
 }
