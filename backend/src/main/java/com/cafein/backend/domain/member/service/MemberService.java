@@ -36,6 +36,11 @@ public class MemberService {
 	}
 
 	@Transactional(readOnly = true)
+	public Optional<Member> findMemberByEmailAndMemberType(String email, MemberType memberType) {
+		return memberRepository.findByEmailAndMemberType(email, memberType);
+	}
+
+	@Transactional(readOnly = true)
 	public Optional<Member> findMemberByEmail(String email) {
 		return memberRepository.findByEmail(email);
 	}
@@ -66,8 +71,10 @@ public class MemberService {
 		member.subtractCoffeeBean(member.getCoffeeBean());
 	}
 
-	@Transactional(readOnly = true)
-	public Optional<Member> findMemberByEmailAndMemberType(String email, MemberType memberType) {
-		return memberRepository.findByEmailAndMemberType(email, memberType);
+	@Transactional
+	public void updateMemberName(Long memberId, String name) {
+		Member member = memberRepository.findById(memberId)
+			.orElseThrow(() -> new EntityNotFoundException(ErrorCode.MEMBER_NOT_EXIST));
+		member.updateName(name);
 	}
 }
