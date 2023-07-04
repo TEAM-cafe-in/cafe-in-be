@@ -8,7 +8,6 @@ import java.time.LocalDateTime;
 
 import org.junit.jupiter.api.Test;
 
-import com.cafein.backend.domain.member.entity.Member;
 import com.cafein.backend.global.util.DateTimeUtils;
 
 class MemberTest {
@@ -34,5 +33,11 @@ class MemberTest {
 		MEMBER.subtractCoffeeBean(MEMBER.getCoffeeBean());
 
 		assertThat(MEMBER.getCoffeeBean()).isEqualTo(98);
+	}
+
+	@Test
+	void 회원의_닉네임을_수정한다() {
+		MEMBER.updateName(MEMBER.getName());
+		assertThat(MEMBER.getName()).isEqualTo("황의찬");
 	}
 }
