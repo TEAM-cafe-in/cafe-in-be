@@ -45,7 +45,7 @@ public class Member extends BaseTimeEntity {
 	@Column(nullable = false, length = 10)
 	private MemberType memberType;
 
-	@Column(unique = true, length = 50, nullable = false)
+	@Column(length = 50, nullable = false)
 	private String email;
 
 	@Column(length = 200)
