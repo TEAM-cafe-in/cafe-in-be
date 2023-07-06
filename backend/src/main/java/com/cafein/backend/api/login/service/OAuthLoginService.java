@@ -34,7 +34,7 @@ public class OAuthLoginService {
 		log.info("userInfo : {}", userInfo);
 
 		JwtTokenDTO jwtTokenDTO;
-		Optional<Member> optionalMember = memberService.findMemberByEmail(userInfo.getEmail());
+		Optional<Member> optionalMember = memberService.findMemberByEmailAndMemberType(userInfo.getEmail(), userInfo.getMemberType());
 		if (optionalMember.isEmpty()) {		//신규 회원가입
 			Member oauthMember = userInfo.toMemberEntity(memberType, Role.USER);
 			oauthMember = memberService.registerMember(oauthMember);

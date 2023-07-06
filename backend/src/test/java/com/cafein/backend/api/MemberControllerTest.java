@@ -1,27 +1,28 @@
 package com.cafein.backend.api;
 
 import static com.cafein.backend.support.fixture.MemberFixture.*;
-import static org.assertj.core.api.Assertions.*;
 import static org.mockito.BDDMockito.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
+import org.apache.http.HttpHeaders;
+import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+import org.springframework.http.MediaType;
+import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
 import com.cafein.backend.api.member.controller.MemberController;
-import com.cafein.backend.api.member.dto.MemberInfoResponseDTO;
 import com.cafein.backend.api.member.dto.MyPageDTO;
 import com.cafein.backend.api.member.service.MemberInfoService;
 import com.cafein.backend.api.member.service.MyPageService;
-import com.cafein.backend.support.fixture.CafeFixture;
+import com.cafein.backend.domain.member.service.MemberService;
+import com.cafein.backend.support.fixture.LoginFixture;
 
 class MemberControllerTest extends ControllerTestSupporter {
+
+	@Mock
+	private MemberService memberService;
 
 	@Mock
 	private MemberInfoService memberInfoService;
@@ -34,7 +35,7 @@ class MemberControllerTest extends ControllerTestSupporter {
 		given(memberInfoService.getMemberInfo(any()))
 			.willReturn(MEMBER_INFO_RESPONSE_DTO);
 
-		mockMvc(new MemberController(memberInfoService, myPageService))
+		mockMvc(new MemberController(memberService, memberInfoService, myPageService))
 			.perform(MockMvcRequestBuilders
 				.get("/api/member/info"))
 			.andExpect(status().isOk())
@@ -50,10 +51,25 @@ class MemberControllerTest extends ControllerTestSupporter {
 
 		given(myPageService.getMyPageDTO(any())).willReturn(response);
 
-		mockMvc(new MemberController(memberInfoService, myPageService))
+		mockMvc(new MemberController(memberService, memberInfoService, myPageService))
 			.perform(MockMvcRequestBuilders
 				.get("/api/member/mypage"))
 			.andExpect(status().isOk())
 			.andExpect(jsonPath("$.reviewCount").value(5L));
+	}
+
+	@Test
+	void 회원_이름을_수정한다() throws Exception {
+		MvcResult result = mockMvc(new MemberController(memberService, memberInfoService, myPageService))
+			.perform(MockMvcRequestBuilders
+				.patch("/api/member/name")
+				.content("{\"name\": \"김길동\"}")
+				.contentType(MediaType.APPLICATION_JSON_VALUE)
+				.header(HttpHeaders.AUTHORIZATION, LoginFixture.AUTHORIZATION_HEADER_ACCESS)
+			)
+			.andExpect(status().isOk())
+			.andReturn();
+
+		Assertions.assertThat(result.getResponse().getContentAsString()).isEqualTo("Name change successful!");
 	}
 }
