@@ -46,19 +46,29 @@ public class CommentController {
 		return ResponseEntity.ok("comment added");
 	}
 
+	@Tag(name = "cafe")
+	@Operation(summary = "카페 댓글 수정 API", description = "카페의 댓글을 수정하는 API 입니다. 키워드는 중복 선택이 가능합니다.")
+	@ApiResponses({
+		@ApiResponse(responseCode = "CO-002", description = "카페에 해당하는 댓글이 존재하지 않습니다.")
+	})
+	@PatchMapping("/cafe/{cafeId}/comment/{commentId}")
+	public ResponseEntity<String> updateComment(@Valid @RequestBody CommentDTO.Request requestDTO,
+		@PathVariable Long cafeId,
+		@PathVariable Long commentId) {
+		commentService.updateComment(requestDTO, cafeId, commentId);
+		return ResponseEntity.ok("comment updated");
+	}
+
+	@Tag(name = "cafe")
+	@Operation(summary = "카페 댓글 삭제 API", description = "카페의 댓글을 삭제하는 API 입니다.")
+	@ApiResponses({
+		@ApiResponse(responseCode = "CO-002", description = "카페에 해당하는 댓글이 존재하지 않습니다.")
+	})
 	@DeleteMapping("/cafe/{cafeId}/comment/{commentId}")
 	public ResponseEntity<String> deleteComment(@PathVariable Long cafeId,
 												@PathVariable Long commentId) {
 
 		commentService.deleteComment(cafeId, commentId);
 		return ResponseEntity.ok("comment deleted");
-	}
-
-	@PatchMapping("/cafe/{cafeId}/comment/{commentId}")
-	public ResponseEntity<String> updateComment(@Valid @RequestBody CommentDTO.Request requestDTO,
-												@PathVariable Long cafeId,
-												@PathVariable Long commentId) {
-		commentService.updateComment(requestDTO, cafeId, commentId);
-		return ResponseEntity.ok("comment updated");
 	}
 }
