@@ -12,6 +12,9 @@ import lombok.Getter;
 @Getter @Builder
 public class CommentInfoDTO {
 
+	@Schema(name = "commentId", description = "댓글 아이디", example = "1", required = true)
+	private Long commentId;
+
 	@Schema(name = "memberName", description = "회원 이름", example = "황의찬", required = true)
 	private String memberName;
 

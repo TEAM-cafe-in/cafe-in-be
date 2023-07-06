@@ -22,7 +22,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import springfox.documentation.annotations.ApiIgnore;
 
-@Tag(name = "cafe", description = "카페 관련 API")
+@Tag(name = "cafe", description = "카페 API")
 @Slf4j
 @RestController
 @RequiredArgsConstructor
@@ -34,7 +34,7 @@ public class CafeController {
 	private final ViewedCafeService viewedCafeService;
 
 	@Tag(name = "cafe")
-	@Operation(summary = "카페 상세보기 API", description = "카페 정보를 조회하는 API")
+	@Operation(summary = "카페 상세보기 API(커피콩을 사용해서 이미 조회한 카페)", description = "카페 정보를 조회하는 API")
 	@ApiResponses({
 		@ApiResponse(responseCode = "C-001", description = "해당 카페는 존재하지 않습니다.")
 	})
@@ -45,7 +45,7 @@ public class CafeController {
 	}
 
 	@Tag(name = "cafe")
-	@Operation(summary = "카페 상세보기 API", description = "커피콩을 사용해서 카페 정보 열람 권한을 얻을때 사용하는 API")
+	@Operation(summary = "카페 상세보기 API(커피콩을 사용한 혼잡도 조회)", description = "커피콩을 사용해서 카페 정보 열람 권한을 얻을때 사용하는 API")
 	@ApiResponses({
 		@ApiResponse(responseCode = "M-004", description = "커피 콩이 부족합니다"),
 		@ApiResponse(responseCode = "C-001", description = "해당 카페는 존재하지 않습니다.")

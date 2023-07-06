@@ -45,8 +45,10 @@ public class CafeService {
 
 	private List<CommentInfoDTO> getComments(final Long cafeId) {
 		final List<Comment> comments = cafeRepository.findAllCommentByCafeId(cafeId);
+		log.debug("comments: {}", comments);
 		return comments.stream()
 			.map(comment -> CommentInfoDTO.builder()
+				.commentId(comment.getCommentId())
 				.memberName(comment.getMember().getName())
 				.createdTime(comment.getCreatedTime())
 				.content(comment.getContent())

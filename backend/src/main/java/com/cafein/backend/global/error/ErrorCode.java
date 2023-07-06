@@ -33,7 +33,8 @@ public enum ErrorCode {
 	REVIEWED_CAFE_WITHIN_A_DAY(HttpStatus.BAD_REQUEST, "R-001", "해당 카페에 대해 하루에 한번만 리뷰를 작성할 수 있습니다."),
 
 	// 댓글
-	KEYWORD_NOT_EXIST(HttpStatus.BAD_REQUEST,"CO-001","해당 키워드는 존재하지 않습니다.");
+	KEYWORD_NOT_EXIST(HttpStatus.BAD_REQUEST,"CO-001","해당 키워드는 존재하지 않습니다."),
+	COMMENT_NOT_FOUND(HttpStatus.BAD_REQUEST, "CO-002", "카페에 해당하는 댓글이 존재하지 않습니다.");
 
 	private HttpStatus httpStatus;
 	private String errorCode;
