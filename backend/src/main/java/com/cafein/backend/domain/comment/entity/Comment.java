@@ -38,7 +38,7 @@ public class Comment extends BaseTimeEntity {
 	@Lob
 	private String content;
 
-	@OneToMany(mappedBy = "comment")
+	@OneToMany(mappedBy = "comment", orphanRemoval = true)
 	List<CommentKeyword> keywords = new ArrayList<>();
 
 	@ManyToOne(fetch = LAZY)
@@ -54,6 +54,10 @@ public class Comment extends BaseTimeEntity {
 		this.content = content;
 		this.cafe = cafe;
 		this.member = member;
+	}
+
+	public void updateContent(final String content) {
+		this.content = content;
 	}
 
 	@Override
