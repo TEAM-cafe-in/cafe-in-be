@@ -3,6 +3,8 @@ package com.cafein.backend.api.comment.controller;
 import javax.validation.Valid;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -42,5 +44,21 @@ public class CommentController {
 										     @PathVariable Long cafeId) {
 		commentService.addComment(requestDTO, cafeId, memberInfoDTO.getMemberId());
 		return ResponseEntity.ok("comment added");
+	}
+
+	@DeleteMapping("/cafe/{cafeId}/comment/{commentId}")
+	public ResponseEntity<String> deleteComment(@PathVariable Long cafeId,
+												@PathVariable Long commentId) {
+
+		commentService.deleteComment(cafeId, commentId);
+		return ResponseEntity.ok("comment deleted");
+	}
+
+	@PatchMapping("/cafe/{cafeId}/comment/{commentId}")
+	public ResponseEntity<String> updateComment(@Valid @RequestBody CommentDTO.Request requestDTO,
+												@PathVariable Long cafeId,
+												@PathVariable Long commentId) {
+		commentService.updateComment(requestDTO, cafeId, commentId);
+		return ResponseEntity.ok("comment updated");
 	}
 }
