@@ -5,12 +5,15 @@ import java.util.List;
 import javax.validation.constraints.NotNull;
 
 import io.swagger.v3.oas.annotations.media.Schema;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 
 public class CommentDTO {
 
 	@Getter @Builder
+	@NoArgsConstructor
+	@AllArgsConstructor
 	public static class Request {
 
 		@Schema(name = "content", description = "댓글 내용", example = "여기 카페 너무 트렌디해요!", required = true)
