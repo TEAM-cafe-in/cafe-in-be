@@ -3,6 +3,7 @@ package com.cafein.backend.support.fixture;
 import static org.mockito.BDDMockito.*;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import org.springframework.data.projection.ProjectionFactory;
@@ -41,7 +42,7 @@ public class CafeFixture {
 	private static CafeInfoDTO createCafeInfoDTO() {
 		return CafeInfoDTO.builder()
 			.cafeInfoProjection(CAFE_INFO_PROJECTION)
-			.comments(CAFE_COMMENTS)
+			.comments(Collections.emptyList()) // TODO 카페 정보 추가 필요
 			.build();
 	}
 }
