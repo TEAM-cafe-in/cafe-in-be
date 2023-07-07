@@ -26,17 +26,17 @@ public interface CafeRepository extends JpaRepository<Cafe, Long> {
 		+ "(COALESCE(r.review_count, 0) + COALESCE(co.comment_count, 0)) AS 'commentReviewCount', "
 		+ "CASE WHEN CURRENT_TIME() BETWEEN oh.open_time AND oh.close_time THEN '영업중' ELSE '영업종료' END AS 'status', "
 		+ "CASE WHEN vc.cafe_id IS NOT NULL THEN CAST(COALESCE(avg_congestion.avg_congestion, 0) AS UNSIGNED) ELSE '실시간 혼잡도 알아보기' END AS 'averageCongestion'"
-		+ "FROM Cafe c "
+		+ "FROM cafe c "
 		+ "LEFT JOIN "
-		+ "(SELECT cafe_id, COUNT(*) AS review_count FROM Review GROUP BY cafe_id) r "
+		+ "(SELECT cafe_id, COUNT(*) AS review_count FROM review GROUP BY cafe_id) r "
 		+ "ON c.cafe_id = r.cafe_id "
-		+ "LEFT JOIN (SELECT cafe_id, COUNT(*) AS comment_count FROM Comment GROUP BY cafe_id) co "
+		+ "LEFT JOIN (SELECT cafe_id, COUNT(*) AS comment_count FROM comment GROUP BY cafe_id) co "
 		+ "ON c.cafe_id = co.cafe_id "
 		+ "LEFT JOIN opening_hour oh "
 		+ "ON c.cafe_id = oh.cafe_id AND DATE_FORMAT(CURRENT_DATE(), '%W') = oh.day_of_week "
 		+ "LEFT JOIN "
 		+ "(SELECT cafe_id, AVG(CASE cafe_congestion WHEN 'LOW' THEN 1 WHEN 'MEDIUM' THEN 2 WHEN 'HIGH' THEN 3 END) AS avg_congestion "
-		+ "FROM Review WHERE created_time >= DATE_SUB(NOW(), INTERVAL 1 HOUR) GROUP BY cafe_id) "
+		+ "FROM review WHERE created_time >= DATE_SUB(NOW(), INTERVAL 1 HOUR) GROUP BY cafe_id) "
 		+ "avg_congestion ON c.cafe_id = avg_congestion.cafe_id "
 		+ "LEFT JOIN "
 		+ "viewed_cafe vc ON c.cafe_id = vc.cafe_id AND vc.member_id = :memberId "
@@ -56,17 +56,17 @@ public interface CafeRepository extends JpaRepository<Cafe, Long> {
 		+ "CONCAT(c.sigungu, ' ', c.road_name, c.house_number) AS 'address', "
 		+ "CASE WHEN CURRENT_TIME() BETWEEN oh.open_time AND oh.close_time THEN '영업중' ELSE '영업종료' END AS 'status', "
 		+ "CASE WHEN vc.cafe_id IS NOT NULL THEN CAST(COALESCE(avg_congestion.avg_congestion, 0) AS UNSIGNED) ELSE '실시간 혼잡도 알아보기' END AS 'averageCongestion'"
-		+ "FROM Cafe c "
+		+ "FROM cafe c "
 		+ "LEFT JOIN "
-		+ "(SELECT cafe_id, COUNT(*) AS review_count FROM Review GROUP BY cafe_id) r "
+		+ "(SELECT cafe_id, COUNT(*) AS review_count FROM review GROUP BY cafe_id) r "
 		+ "ON c.cafe_id = r.cafe_id "
-		+ "LEFT JOIN (SELECT cafe_id, COUNT(*) AS comment_count FROM Comment GROUP BY cafe_id) co "
+		+ "LEFT JOIN (SELECT cafe_id, COUNT(*) AS comment_count FROM comment GROUP BY cafe_id) co "
 		+ "ON c.cafe_id = co.cafe_id "
 		+ "LEFT JOIN opening_hour oh "
 		+ "ON c.cafe_id = oh.cafe_id AND DATE_FORMAT(CURRENT_DATE(), '%W') = oh.day_of_week "
 		+ "LEFT JOIN "
 		+ "(SELECT cafe_id, AVG(CASE cafe_congestion WHEN 'LOW' THEN 1 WHEN 'MEDIUM' THEN 2 WHEN 'HIGH' THEN 3 END) AS avg_congestion "
-		+ "FROM Review WHERE created_time >= DATE_SUB(NOW(), INTERVAL 1 HOUR) GROUP BY cafe_id) "
+		+ "FROM review WHERE created_time >= DATE_SUB(NOW(), INTERVAL 1 HOUR) GROUP BY cafe_id) "
 		+ "avg_congestion ON c.cafe_id = avg_congestion.cafe_id "
 		+ "LEFT JOIN "
 		+ "viewed_cafe vc ON c.cafe_id = vc.cafe_id AND vc.member_id = :memberId "
@@ -82,7 +82,7 @@ public interface CafeRepository extends JpaRepository<Cafe, Long> {
 		"CONCAT(c.sigungu, ' ', c.road_name, c.house_number) AS 'address', " +
 		"((SELECT COUNT(*) FROM review r WHERE r.cafe_id = c.cafe_id) + " +
 		"(SELECT COUNT(*) FROM comment co WHERE co.cafe_id = c.cafe_id)) as 'commentReviewCount' " +
-		"FROM Cafe c " +
+		"FROM cafe c " +
 		"WHERE c.cafe_id = :cafeId", nativeQuery = true)
 	CafeInfoViewedByMemberProjection findCafeInfoViewedByMember(@Param("cafeId") Long cafeId);
 
