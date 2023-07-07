@@ -5,6 +5,7 @@ import static com.cafein.backend.support.fixture.MemberFixture.*;
 import static org.assertj.core.api.Assertions.*;
 import static org.mockito.BDDMockito.*;
 
+import java.util.Date;
 import java.util.Optional;
 
 import org.junit.jupiter.api.Test;
@@ -17,7 +18,6 @@ import com.cafein.backend.domain.member.constant.MemberType;
 import com.cafein.backend.domain.member.service.MemberService;
 import com.cafein.backend.external.oauth.google.service.GoogleLoginApiServiceImpl;
 import com.cafein.backend.external.oauth.kakao.service.KakaoLoginApiServiceImpl;
-import com.cafein.backend.support.utils.DataBaseSupporter;
 import com.cafein.backend.support.utils.ServiceTest;
 
 @ServiceTest
@@ -55,11 +55,11 @@ class OAuthLoginServiceTest {
 		given(memberService.findMemberByEmail(anyString())).willReturn(Optional.empty());
 		given(memberService.registerMember(any())).willReturn(MEMBER);
 
-		final OAuthLoginDTO.Response response = oAuthLoginService.oauthLogin(ACCESS_TOKEN, MemberType.KAKAO);
+		final OAuthLoginDTO.OAuthLoginResponse OAuthLoginResponse = oAuthLoginService.oauthLogin(ACCESS_TOKEN, MemberType.KAKAO);
 
 		then(memberService).should(times(1)).registerMember(any());
-		assertThat(response.getAccessToken()).isNotNull();
-		assertThat(response.getRefreshToken()).isNotNull();
+		assertThat(OAuthLoginResponse.getAccessToken()).isNotNull();
+		assertThat(OAuthLoginResponse.getRefreshToken()).isNotNull();
 	}
 
 	@Test
@@ -68,10 +68,12 @@ class OAuthLoginServiceTest {
 		given(memberService.findMemberByEmail(anyString())).willReturn(Optional.of(MEMBER));
 		given(memberService.registerMember(any())).willReturn(MEMBER);
 
-		final OAuthLoginDTO.Response response = oAuthLoginService.oauthLogin(ACCESS_TOKEN, MemberType.KAKAO);
+		final OAuthLoginDTO.OAuthLoginResponse OAuthLoginResponse = oAuthLoginService.oauthLogin(ACCESS_TOKEN, MemberType.KAKAO);
 
-		then(memberService).should(never()).registerMember(any());
-		assertThat(response.getAccessToken()).isNotNull();
-		assertThat(response.getRefreshToken()).isNotNull();
+		then(memberService).should().registerMember(any());
+		assertThat(OAuthLoginResponse.getAccessToken()).isNotNull();
+		assertThat(OAuthLoginResponse.getRefreshToken()).isNotNull();
+		assertThat(OAuthLoginResponse.getRefreshTokenExpireTime()).isAfter(new Date());
 	}
+	//TODO 회원 종류에 따른 테스트 코드 추가
 }

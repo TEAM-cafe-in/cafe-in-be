@@ -35,26 +35,26 @@ public class CommentService {
 	private final MemberService memberService;
 	private final CafeService cafeService;
 
-	public void addComment(final CommentDTO.Request requestDTO, final Long cafeId, final Long memberId) {
-		Comment comment = createCafeComment(requestDTO, cafeId, memberId);
+	public void addComment(final CommentDTO.CommentRequest commentRequestDTO, final Long cafeId, final Long memberId) {
+		Comment comment = createCafeComment(commentRequestDTO, cafeId, memberId);
 		commentRepository.save(comment);
 	}
 
-	private Comment createCafeComment(final CommentDTO.Request requestDTO, final Long cafeId, final Long memberId) {
-		log.debug("requestDTO.getKeywords(): {}", requestDTO.getKeywords());
+	private Comment createCafeComment(final CommentDTO.CommentRequest commentRequestDTO, final Long cafeId, final Long memberId) {
+		log.debug("requestDTO.getKeywords(): {}", commentRequestDTO.getKeywords());
 		final Member member = memberService.findMemberByMemberId(memberId);
 		final Cafe cafe = cafeService.findCafeByCafeId(cafeId);
 		Comment comment = Comment.builder()
-			.content(requestDTO.getContent())
+			.content(commentRequestDTO.getContent())
 			.cafe(cafe)
 			.member(member)
 			.build();
-		addCommentKeyword(requestDTO, comment);
+		addCommentKeyword(commentRequestDTO, comment);
 		return comment;
 	}
 
-	private void addCommentKeyword(final CommentDTO.Request requestDTO, final Comment comment) {
-		for (String key : requestDTO.getKeywords()) {
+	private void addCommentKeyword(final CommentDTO.CommentRequest commentRequestDTO, final Comment comment) {
+		for (String key : commentRequestDTO.getKeywords()) {
 			commentKeywordRepository.save(createCommentKeyword(comment, key));
 		}
 	}
@@ -76,7 +76,7 @@ public class CommentService {
 			.orElseThrow(() -> new EntityNotFoundException(ErrorCode.COMMENT_NOT_FOUND));
 	}
 
-	public void updateComment(final CommentDTO.Request requestDTO, final Long cafeId, final Long commentId) {
+	public void updateComment(final CommentDTO.CommentRequest commentRequestDTO, final Long cafeId, final Long commentId) {
 		final List<CommentKeyword> oldKeywords = commentKeywordRepository.findAllByCommentId(commentId);
 
 		final Set<String> oldCommentKeywords = oldKeywords.stream()
@@ -87,16 +87,16 @@ public class CommentService {
 			.orElseThrow(() -> new EntityNotFoundException(ErrorCode.COMMENT_NOT_FOUND));
 
 		log.debug("oldCommentKeywords: {}", oldCommentKeywords);
-		log.debug("newCommentKeywords(): {}", requestDTO.getKeywords());
+		log.debug("newCommentKeywords(): {}", commentRequestDTO.getKeywords());
 
-		if(!new HashSet<>(requestDTO.getKeywords()).equals(oldCommentKeywords)) {
-			updateCommentKeyword(requestDTO, comment);
+		if(!new HashSet<>(commentRequestDTO.getKeywords()).equals(oldCommentKeywords)) {
+			updateCommentKeyword(commentRequestDTO, comment);
 		}
-		comment.updateContent(requestDTO.getContent());
+		comment.updateContent(commentRequestDTO.getContent());
 	}
 
-	private void updateCommentKeyword(final CommentDTO.Request requestDTO, final Comment comment) {
+	private void updateCommentKeyword(final CommentDTO.CommentRequest commentRequestDTO, final Comment comment) {
 		commentKeywordRepository.deleteAllByCommentId(comment.getCommentId());
-		addCommentKeyword(requestDTO, comment);
+		addCommentKeyword(commentRequestDTO, comment);
 	}
 }

@@ -17,9 +17,9 @@ public interface ReviewRepository extends JpaRepository<Review, Long> {
 		+ "r.cafe_congestion AS 'cafeCongestion', "
 		+ "r.is_clean AS 'isClean', "
 		+ "r.has_plug AS 'hasPlug' "
-		+ "FROM Review r "
+		+ "FROM review r "
 		+ "LEFT JOIN "
-		+ "Cafe c ON c.cafe_id = r.cafe_id "
+		+ "cafe c ON c.cafe_id = r.cafe_id "
 		+ "WHERE r.member_id = :memberId ", nativeQuery = true)
 	List<MemberReviewProjection> findReviewsByMemberId(@Param("memberId") Long memberId);
 
@@ -28,7 +28,7 @@ public interface ReviewRepository extends JpaRepository<Review, Long> {
 
 	@Query(value = "SELECT "
 		+ "r.cafe_id "
-		+ "FROM Review r "
+		+ "FROM review r "
 		+ "WHERE r.member_id = :memberId "
 		+ "AND r.created_time > DATE_SUB(NOW(), INTERVAL 1 DAY) ", nativeQuery = true)
 	List<Long> findCafeIdsOfRecentReviews(@Param("memberId") Long memberId);

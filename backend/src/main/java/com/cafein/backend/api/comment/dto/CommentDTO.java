@@ -16,7 +16,7 @@ public class CommentDTO {
 	@Getter @Builder
 	@NoArgsConstructor
 	@AllArgsConstructor
-	public static class Request {
+	public static class CommentRequest {
 
 		@Schema(name = "content", description = "댓글 내용", example = "여기 카페 너무 트렌디해요!", required = true)
 		@NotNull

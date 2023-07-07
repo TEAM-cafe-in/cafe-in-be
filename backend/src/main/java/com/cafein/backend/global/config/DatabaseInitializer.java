@@ -33,7 +33,7 @@ import com.cafein.backend.global.jwt.service.TokenManager;
 
 import lombok.RequiredArgsConstructor;
 
-@Profile({"dev"})
+@Profile({"dev", "prod"})
 @Component
 @RequiredArgsConstructor
 @ConditionalOnProperty(name = "spring.jpa.hibernate.ddl-auto", havingValue = "create")

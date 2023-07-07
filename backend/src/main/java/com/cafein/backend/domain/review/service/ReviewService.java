@@ -1,11 +1,12 @@
 package com.cafein.backend.domain.review.service;
 
+import static com.cafein.backend.api.review.dto.ReviewDTO.*;
+
 import java.util.List;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.cafein.backend.api.review.dto.ReviewDTO;
 import com.cafein.backend.domain.cafe.service.CafeService;
 import com.cafein.backend.domain.member.entity.Member;
 import com.cafein.backend.domain.member.service.MemberService;
@@ -28,21 +29,21 @@ public class ReviewService {
 	private final ReviewRepository reviewRepository;
 	private final CafeService cafeService;
 
-	public ReviewDTO.Response createReview(final ReviewDTO.Request requestDTO, final Long cafeId, final Long memberId) {
+	public ReviewResponse createReview(final ReviewRequest reviewRequestDTO, final Long cafeId, final Long memberId) {
 		Member member = memberService.findMemberByMemberId(memberId);
-		reviewRepository.save(createReview(requestDTO, cafeId, member));
+		reviewRepository.save(createReview(reviewRequestDTO, cafeId, member));
 		member.addCoffeeBean(member.getCoffeeBean());
-		return ReviewDTO.Response.builder()
+		return ReviewResponse.builder()
 				.coffeeBean(member.getCoffeeBean())
 				.build();
 	}
 
-	private Review createReview(final ReviewDTO.Request requestDTO, final Long cafeId, final Member member) {
+	private Review createReview(final ReviewRequest reviewRequestDTO, final Long cafeId, final Member member) {
 		return Review.builder()
 			.cafe(cafeService.findCafeByCafeId(cafeId))
-			.cafeCongestion(CafeCongestion.valueOf(requestDTO.getCafeCongestion()))
-			.isClean(Boolean.parseBoolean(requestDTO.getIsClean()))
-			.hasPlug(Boolean.parseBoolean(requestDTO.getHasPlug()))
+			.cafeCongestion(CafeCongestion.from(reviewRequestDTO.getCafeCongestion()))
+			.isClean(Boolean.parseBoolean(reviewRequestDTO.getIsClean()))
+			.hasPlug(Boolean.parseBoolean(reviewRequestDTO.getHasPlug()))
 			.member(member)
 			.build();
 	}

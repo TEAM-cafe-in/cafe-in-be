@@ -2,6 +2,7 @@ package com.cafein.backend.api.token.controller;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -41,6 +42,6 @@ public class TokenController {
 
 		String refreshToken = authorizationHeader.split(" ")[1];
 		AccessTokenResponseDTO accessTokenResponseDTO = tokenService.createAccessTokenByRefreshToken(refreshToken);
-		return ResponseEntity.ok(accessTokenResponseDTO);
+		return ResponseEntity.status(HttpStatus.CREATED).body(accessTokenResponseDTO);
 	}
 }

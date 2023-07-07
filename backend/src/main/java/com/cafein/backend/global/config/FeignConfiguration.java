@@ -29,6 +29,6 @@ public class FeignConfiguration {
 
 	@Bean
 	public Retryer retryer() {
-		return new Retryer.Default(1000, 2000, 3);		//실행 주기, 최대 주기, 최대 재시도 횟수
+		return new Retryer.Default(1000, 2000, 3);
 	}
 }

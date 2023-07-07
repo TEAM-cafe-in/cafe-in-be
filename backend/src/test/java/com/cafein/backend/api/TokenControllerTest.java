@@ -28,7 +28,7 @@ class TokenControllerTest extends ControllerTestSupporter {
 				.contentType(MediaType.APPLICATION_JSON_VALUE)
 				.header(HttpHeaders.AUTHORIZATION, AUTHORIZATION_HEADER_REFRESH)
 			)
-			.andExpect(status().isOk())
+			.andExpect(status().isCreated())
 			.andExpect(jsonPath("$.grantType").value("Bearer"))
 			.andExpect(jsonPath("$.accessToken").value("access_token"));
 	}

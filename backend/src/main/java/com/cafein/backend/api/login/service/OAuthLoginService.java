@@ -28,7 +28,7 @@ public class OAuthLoginService {
 	private final MemberService memberService;
 	private final TokenManager tokenManager;
 
-	public OAuthLoginDTO.Response oauthLogin(String accessToken, MemberType memberType) {
+	public OAuthLoginDTO.OAuthLoginResponse oauthLogin(String accessToken, MemberType memberType) {
 		SocialLoginApiService socialLoginApiService = SocialLoginApiServiceFactory.getSocialLoginApiService(memberType);
 		OAuthAttributes userInfo = socialLoginApiService.getUserInfo(accessToken);
 		log.info("userInfo : {}", userInfo);
@@ -50,6 +50,6 @@ public class OAuthLoginService {
 			oauthMember.updateRefreshToken(jwtTokenDTO);
 		}
 
-		return OAuthLoginDTO.Response.of(jwtTokenDTO);
+		return OAuthLoginDTO.OAuthLoginResponse.of(jwtTokenDTO);
 	}
 }

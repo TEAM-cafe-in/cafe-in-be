@@ -34,7 +34,10 @@ public enum ErrorCode {
 
 	// 댓글
 	KEYWORD_NOT_EXIST(HttpStatus.BAD_REQUEST,"CO-001","해당 키워드는 존재하지 않습니다."),
-	COMMENT_NOT_FOUND(HttpStatus.BAD_REQUEST, "CO-002", "카페에 해당하는 댓글이 존재하지 않습니다.");
+	COMMENT_NOT_FOUND(HttpStatus.BAD_REQUEST, "CO-002", "카페에 해당하는 댓글이 존재하지 않습니다."),
+
+	// 혼잡도
+	INVALID_CAFE_CONGESTION_VALUE(HttpStatus.BAD_REQUEST, "CR-001" , "카페의 혼잡도는 1[LOW], 2[MEDIUM], 3[HIGH] 중 하나입니다.");
 
 	private HttpStatus httpStatus;
 	private String errorCode;
