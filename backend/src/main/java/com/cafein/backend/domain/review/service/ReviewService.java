@@ -1,5 +1,7 @@
 package com.cafein.backend.domain.review.service;
 
+import static com.cafein.backend.api.review.dto.ReviewDTO.*;
+
 import java.util.List;
 
 import org.springframework.stereotype.Service;
@@ -27,19 +29,19 @@ public class ReviewService {
 	private final ReviewRepository reviewRepository;
 	private final CafeService cafeService;
 
-	public ReviewDTO.ReviewResponse createReview(final ReviewDTO.ReviewRequest reviewRequestDTO, final Long cafeId, final Long memberId) {
+	public ReviewResponse createReview(final ReviewRequest reviewRequestDTO, final Long cafeId, final Long memberId) {
 		Member member = memberService.findMemberByMemberId(memberId);
 		reviewRepository.save(createReview(reviewRequestDTO, cafeId, member));
 		member.addCoffeeBean(member.getCoffeeBean());
-		return ReviewDTO.ReviewResponse.builder()
+		return ReviewResponse.builder()
 				.coffeeBean(member.getCoffeeBean())
 				.build();
 	}
 
-	private Review createReview(final ReviewDTO.ReviewRequest reviewRequestDTO, final Long cafeId, final Member member) {
+	private Review createReview(final ReviewRequest reviewRequestDTO, final Long cafeId, final Member member) {
 		return Review.builder()
 			.cafe(cafeService.findCafeByCafeId(cafeId))
-			.cafeCongestion(CafeCongestion.valueOf(reviewRequestDTO.getCafeCongestion()))
+			.cafeCongestion(CafeCongestion.from(reviewRequestDTO.getCafeCongestion()))
 			.isClean(Boolean.parseBoolean(reviewRequestDTO.getIsClean()))
 			.hasPlug(Boolean.parseBoolean(reviewRequestDTO.getHasPlug()))
 			.member(member)

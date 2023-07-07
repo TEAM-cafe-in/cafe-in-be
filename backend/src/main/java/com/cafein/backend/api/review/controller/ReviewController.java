@@ -37,7 +37,8 @@ public class ReviewController {
 	@Tag(name = "cafe")
 	@Operation(summary = "카페 리뷰 등록 API", description = "카페에 리뷰를 등록하면 커피빈을 지급하고 업데이트된 커피빈 개수를 반환하는 API 입니다.")
 	@ApiResponses({
-		@ApiResponse(responseCode = "R-001", description = "해당 카페에 대해 하루에 한번만 리뷰를 작성할 수 있습니다.")
+		@ApiResponse(responseCode = "R-001", description = "해당 카페에 대해 하루에 한번만 리뷰를 작성할 수 있습니다."),
+		@ApiResponse(responseCode = "CR-001", description = "카페의 혼잡도는 1[LOW], 2[MEDIUM], 3[HIGH] 중 하나입니다.")
 	})
 	@PostMapping("/cafe/{cafeId}/review")
 	public ResponseEntity<ReviewResponse> createCafeReview(@Valid @RequestBody ReviewRequest reviewRequestDTO,

@@ -1,5 +1,13 @@
 package com.cafein.backend.domain.review.constant;
 
+import java.util.Arrays;
+
+import com.cafein.backend.global.error.ErrorCode;
+import com.cafein.backend.global.error.exception.BusinessException;
+
+import lombok.Getter;
+
+@Getter
 public enum CafeCongestion {
 
 	LOW("1"),

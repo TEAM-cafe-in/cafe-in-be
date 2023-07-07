@@ -25,7 +25,7 @@ public interface CafeRepository extends JpaRepository<Cafe, Long> {
 		+ "CONCAT(c.sigungu, ' ', c.road_name, c.house_number) AS 'address', "
 		+ "(COALESCE(r.review_count, 0) + COALESCE(co.comment_count, 0)) AS 'commentReviewCount', "
 		+ "CASE WHEN CURRENT_TIME() BETWEEN oh.open_time AND oh.close_time THEN '영업중' ELSE '영업종료' END AS 'status', "
-		+ "CASE WHEN vc.cafe_id IS NOT NULL THEN CAST(COALESCE(avg_congestion.avg_congestion, 0) AS UNSIGNED) ELSE '실시간 혼잡도 알아보기' END AS 'averageCongestion'"
+		+ "CASE WHEN vc.cafe_id IS NOT NULL THEN CAST(COALESCE(avg_congestion.avg_congestion, 0) AS UNSIGNED) ELSE '0' END AS 'averageCongestion'"
 		+ "FROM cafe c "
 		+ "LEFT JOIN "
 		+ "(SELECT cafe_id, COUNT(*) AS review_count FROM review GROUP BY cafe_id) r "
