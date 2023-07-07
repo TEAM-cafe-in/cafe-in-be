@@ -5,6 +5,7 @@ import static com.cafein.backend.support.fixture.MemberFixture.*;
 import static org.assertj.core.api.Assertions.*;
 import static org.mockito.BDDMockito.*;
 
+import java.util.Date;
 import java.util.Optional;
 
 import org.junit.jupiter.api.Test;
@@ -69,8 +70,10 @@ class OAuthLoginServiceTest {
 
 		final OAuthLoginDTO.OAuthLoginResponse OAuthLoginResponse = oAuthLoginService.oauthLogin(ACCESS_TOKEN, MemberType.KAKAO);
 
-		then(memberService).should(never()).registerMember(any());
+		then(memberService).should().registerMember(any());
 		assertThat(OAuthLoginResponse.getAccessToken()).isNotNull();
 		assertThat(OAuthLoginResponse.getRefreshToken()).isNotNull();
+		assertThat(OAuthLoginResponse.getRefreshTokenExpireTime()).isAfter(new Date());
 	}
+	//TODO 회원 종류에 따른 테스트 코드 추가
 }
