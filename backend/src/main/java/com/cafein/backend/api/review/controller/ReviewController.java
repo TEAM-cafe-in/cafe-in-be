@@ -2,6 +2,7 @@ package com.cafein.backend.api.review.controller;
 
 import javax.validation.Valid;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -45,6 +46,6 @@ public class ReviewController {
 		log.debug("memberId = {}", memberInfoDTO.getMemberId());
 		reviewService.validateReview(memberInfoDTO.getMemberId(), cafeId);
 		ReviewDTO.Response response = reviewService.createReview(requestDTO, cafeId, memberInfoDTO.getMemberId());
-		return ResponseEntity.ok(response);
+		return ResponseEntity.status(HttpStatus.CREATED).body(response);
 	}
 }
