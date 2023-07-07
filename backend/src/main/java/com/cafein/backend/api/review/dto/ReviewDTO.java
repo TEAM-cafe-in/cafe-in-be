@@ -12,7 +12,7 @@ public class ReviewDTO {
 	public static class ReviewRequest {
 
 		@NotNull
-		@Schema(description = "카페 혼잡도. HIGH, MEDIUM, LOW 중 하나입니다.", example = "HIGH", required = true)
+		@Schema(description = "카페 혼잡도. 1(LOW), 2(MEDIUM), 3(HIGH) 중 하나입니다.", example = "1", required = true)
 		private String cafeCongestion;
 
 		@NotNull

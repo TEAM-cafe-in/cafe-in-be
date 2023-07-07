@@ -5,7 +5,6 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.cafein.backend.api.review.dto.ReviewDTO;
 import com.cafein.backend.domain.cafe.service.CafeService;
 import com.cafein.backend.domain.member.entity.Member;
 import com.cafein.backend.domain.member.service.MemberService;
