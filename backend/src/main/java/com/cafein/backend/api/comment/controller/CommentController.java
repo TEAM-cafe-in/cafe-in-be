@@ -44,7 +44,7 @@ public class CommentController {
 										     @ApiIgnore @MemberInfo MemberInfoDTO memberInfoDTO,
 										     @PathVariable Long cafeId) {
 		commentService.addComment(requestDTO, cafeId, memberInfoDTO.getMemberId());
-		return ResponseEntity.ok("comment added");
+		return ResponseEntity.status(HttpStatus.CREATED).body("comment added");
 	}
 
 	@Tag(name = "cafe")
