@@ -12,14 +12,14 @@ import lombok.Getter;
 public class OAuthLoginDTO {
 
 	@Getter
-	public static class Request {
+	public static class OAuthLoginRequest {
 
 		@Schema(description = "소셜 로그인 회원 타입", example = "KAKAO", required = true)
 		private String memberType;
 	}
 
 	@Getter @Builder
-	public static class Response {
+	public static class OAuthLoginResponse {
 
 		@Schema(description = "Grant Type", example = "Bearer", required = true)
 		private String grantType;
@@ -38,8 +38,8 @@ public class OAuthLoginDTO {
 		@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss", timezone = "Asia/Seoul")
 		private Date refreshTokenExpireTime;
 
-		public static Response of(JwtTokenDTO jwtTokenDTO) {
-			return Response.builder()
+		public static OAuthLoginResponse of(JwtTokenDTO jwtTokenDTO) {
+			return OAuthLoginResponse.builder()
 				.grantType(jwtTokenDTO.getGrantType())
 				.accessToken(jwtTokenDTO.getAccessToken())
 				.accessTokenExpireTime(jwtTokenDTO.getAccessTokenExpireTime())

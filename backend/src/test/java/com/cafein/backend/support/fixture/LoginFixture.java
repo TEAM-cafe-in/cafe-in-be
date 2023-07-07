@@ -18,7 +18,7 @@ public class LoginFixture {
 	public static final String KAKAO_MEMBER_TYPE = "{\"memberType\":\"KAKAO\"}";
 	public static final String GOOGLE_MEMBER_TYPE = "{\"memberType\":\"GOOGLE\"}";
 
-	public static final OAuthLoginDTO.Response KAKAO_LOGIN_RESPONSE = kakaoLoginResponse();
+	public static final OAuthLoginDTO.OAuthLoginResponse KAKAO_LOGIN_O_AUTH_LOGIN_RESPONSE = kakaoLoginResponse();
 	public static final AccessTokenResponseDTO ACCESS_TOKEN_RESPONSE = accessTokenResponse();
 	public static final OAuthAttributes KAKAO_OAUTH_ATTRIBUTES = createKakaoOauthAttributes();
 	public static final OAuthAttributes GOOGLE_OAUTH_ATTRIBUTES = createGoogleOauthAttributes();
@@ -42,8 +42,8 @@ public class LoginFixture {
 			.build();
 	}
 
-	private static OAuthLoginDTO.Response kakaoLoginResponse() {
-		return OAuthLoginDTO.Response.builder()
+	private static OAuthLoginDTO.OAuthLoginResponse kakaoLoginResponse() {
+		return OAuthLoginDTO.OAuthLoginResponse.builder()
 			.grantType("Bearer")
 			.accessToken("access_token")
 			.accessTokenExpireTime(new Date(System.currentTimeMillis()))

@@ -22,7 +22,7 @@ class OAuthLoginControllerTest extends ControllerTestSupporter {
 	@Test
 	void 구글_토큰으로_로그인을_진행한다() throws Exception {
 		given(oAuthLoginService.oauthLogin(eq(ACCESS_TOKEN), eq(MemberType.GOOGLE)))
-			.willReturn(KAKAO_LOGIN_RESPONSE);
+			.willReturn(KAKAO_LOGIN_O_AUTH_LOGIN_RESPONSE);
 
 		mockMvc(new OAuthLoginController(oAuthLoginService))
 			.perform(post("/api/oauth/login")
@@ -38,7 +38,7 @@ class OAuthLoginControllerTest extends ControllerTestSupporter {
 	@Test
 	void 카카오_토큰으로_로그인을_진행한다() throws Exception {
 		given(oAuthLoginService.oauthLogin(eq(ACCESS_TOKEN), eq(MemberType.KAKAO)))
-			.willReturn(KAKAO_LOGIN_RESPONSE);
+			.willReturn(KAKAO_LOGIN_O_AUTH_LOGIN_RESPONSE);
 
 		mockMvc(new OAuthLoginController(oAuthLoginService))
 			.perform(post("/api/oauth/login")
