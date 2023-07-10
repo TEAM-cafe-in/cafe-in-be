@@ -16,11 +16,16 @@ import com.cafein.backend.api.member.dto.CafeInfoViewedByMemberProjection;
 public class CafeFixture {
 
 	public static final CafeInfoProjection CAFE_INFO_PROJECTION = createCafeInfoProjection();
-	public static final List<String> CAFE_COMMENTS = new ArrayList<>(List.of("comment1", "comment2", "comment3", "comment4", "comment5"));
 	public static final CafeInfoDTO CAFE_INFO_DTO = createCafeInfoDTO();
-
 	public static final CafeInfoViewedByMemberProjection CAFE_INFO_VIEWED_BY_MEMBER = mock(CafeInfoViewedByMemberProjection.class);
 	public static final List<Long> VIEWED_CAFE_IDS = new ArrayList<>(List.of(1L, 2L, 3L));
+
+	private static CafeInfoDTO createCafeInfoDTO() {
+		return CafeInfoDTO.builder()
+			.cafeInfoProjection(CAFE_INFO_PROJECTION)
+			.comments(Collections.emptyList())
+			.build();
+	}
 
 	private static CafeInfoProjection createCafeInfoProjection() {
 		ProjectionFactory factory = new SpelAwareProxyProjectionFactory();
@@ -37,12 +42,5 @@ public class CafeFixture {
 		projection.setHasPlugCount("5");
 		projection.setIsCleanCount("5");
 		return projection;
-	}
-
-	private static CafeInfoDTO createCafeInfoDTO() {
-		return CafeInfoDTO.builder()
-			.cafeInfoProjection(CAFE_INFO_PROJECTION)
-			.comments(Collections.emptyList()) // TODO 카페 정보 추가 필요
-			.build();
 	}
 }
