@@ -29,7 +29,7 @@ class CafeControllerTest extends ControllerTestSupporter {
 
 	@Test
 	void 카페_정보를_조회한다() throws Exception {
-		given(cafeService.findCafeInfoById(any(), any())).willReturn(CAFE_INFO_DTO);
+		given(cafeService.findCafeInfoById(anyLong(), eq(1L))).willReturn(CAFE_INFO_DTO);
 
 		mockMvc(new CafeController(memberService, cafeService, viewedCafeService))
 			.perform(
@@ -43,7 +43,7 @@ class CafeControllerTest extends ControllerTestSupporter {
 
 	@Test
 	void 커피콩을_사용해서_카페_정보를_열람한다() throws Exception {
-		given(cafeService.findCafeInfoById(any(), any())).willReturn(CAFE_INFO_DTO);
+		given(cafeService.findCafeInfoById(anyLong(), eq(1L))).willReturn(CAFE_INFO_DTO);
 
 		mockMvc(new CafeController(memberService, cafeService, viewedCafeService))
 			.perform(

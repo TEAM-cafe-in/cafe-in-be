@@ -2,11 +2,11 @@ package com.cafein.backend.api;
 
 import static com.cafein.backend.support.fixture.HomeFixture.*;
 import static org.mockito.BDDMockito.*;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
-import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
 import com.cafein.backend.api.home.controller.HomeController;
 import com.cafein.backend.api.home.dto.HomeResponseDTO;
@@ -24,13 +24,13 @@ class HomeControllerTest extends ControllerTestSupporter {
 			.cafes(HOME_PROJECTION)
 			.build();
 
-		given(cafeService.getHomeData(any())).willReturn(response);
+		given(cafeService.getHomeData(anyLong())).willReturn(response);
 
 		mockMvc(new HomeController(cafeService))
-			.perform(MockMvcRequestBuilders
-				.get("/api/home"))
+			.perform(get("/api/home"))
 			.andExpect(status().isOk())
 			.andExpect(jsonPath("$.cafeCount").value(5L))
-			.andExpect(jsonPath("$.cafes[0].name").value("5to7"));
+			.andExpect(jsonPath("$.cafes[0].name").value("5to7"))
+			.andExpect(jsonPath("$.cafes[0].phoneNumber").value("05012341234"));
 	}
 }
