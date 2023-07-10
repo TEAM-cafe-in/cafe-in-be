@@ -2,15 +2,13 @@ package com.cafein.backend.api;
 
 import static com.cafein.backend.support.fixture.MemberFixture.*;
 import static org.mockito.BDDMockito.*;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
-import org.apache.http.HttpHeaders;
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
-import org.springframework.test.web.servlet.MvcResult;
-import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
 import com.cafein.backend.api.member.controller.MemberController;
 import com.cafein.backend.api.member.dto.MyPageDTO;
@@ -36,8 +34,7 @@ class MemberControllerTest extends ControllerTestSupporter {
 			.willReturn(MEMBER_INFO_RESPONSE_DTO);
 
 		mockMvc(new MemberController(memberService, memberInfoService, myPageService))
-			.perform(MockMvcRequestBuilders
-				.get("/api/member/info"))
+			.perform(get("/api/member/info"))
 			.andExpect(status().isOk())
 			.andExpect(jsonPath("$.memberName").value("홍길동"))
 			.andExpect(jsonPath("$.email").value("test@test.com"));
@@ -52,24 +49,22 @@ class MemberControllerTest extends ControllerTestSupporter {
 		given(myPageService.getMyPageDTO(any())).willReturn(response);
 
 		mockMvc(new MemberController(memberService, memberInfoService, myPageService))
-			.perform(MockMvcRequestBuilders
-				.get("/api/member/mypage"))
+			.perform(get("/api/member/mypage"))
 			.andExpect(status().isOk())
 			.andExpect(jsonPath("$.reviewCount").value(5L));
 	}
 
 	@Test
 	void 회원_이름을_수정한다() throws Exception {
-		MvcResult result = mockMvc(new MemberController(memberService, memberInfoService, myPageService))
-			.perform(MockMvcRequestBuilders
-				.patch("/api/member/name")
-				.content("{\"name\": \"김길동\"}")
+		mockMvc(new MemberController(memberService, memberInfoService, myPageService))
+			.perform(patch("/api/member/name")
+				.content("{\"name\": \"손흥민\"}")
 				.contentType(MediaType.APPLICATION_JSON_VALUE)
 				.header(HttpHeaders.AUTHORIZATION, LoginFixture.AUTHORIZATION_HEADER_ACCESS)
 			)
 			.andExpect(status().isOk())
-			.andReturn();
+			.andExpect(jsonPath("$").value("Name change successful!"));
 
-		Assertions.assertThat(result.getResponse().getContentAsString()).isEqualTo("Name change successful!");
+		then(memberService).should(times(1)).updateMemberName(anyLong(), eq("손흥민"));
 	}
 }
