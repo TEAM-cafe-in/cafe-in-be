@@ -37,7 +37,8 @@ class MemberTest {
 
 	@Test
 	void 회원의_닉네임을_수정한다() {
-		MEMBER.updateName(MEMBER.getName());
-		assertThat(MEMBER.getName()).isEqualTo("황의찬");
+		MEMBER.updateName("손흥민");
+
+		assertThat(MEMBER.getName()).isEqualTo("손흥민");
 	}
 }
