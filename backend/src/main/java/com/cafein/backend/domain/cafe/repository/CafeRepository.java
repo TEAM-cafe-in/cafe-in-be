@@ -75,9 +75,6 @@ public interface CafeRepository extends JpaRepository<Cafe, Long> {
 		+ "(COALESCE(r.review_count, 0) + COALESCE(co.comment_count, 0)) DESC, c.name ", nativeQuery = true)
 	CafeInfoProjection findCafeInfoById(@Param("memberId") Long memberId, @Param("cafeId") Long cafeId);
 
-	@Query("SELECT co.content FROM Comment co WHERE co.cafe.cafeId = :cafeId")
-	List<String> findCommentsByCafeId(@Param("cafeId") Long cafeId);
-
 	@Query(value = "SELECT c.name AS 'cafeName', " +
 		"CONCAT(c.sigungu, ' ', c.road_name, c.house_number) AS 'address', " +
 		"((SELECT COUNT(*) FROM review r WHERE r.cafe_id = c.cafe_id) + " +
