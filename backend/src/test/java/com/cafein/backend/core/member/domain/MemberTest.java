@@ -30,7 +30,7 @@ class MemberTest {
 
 	@Test
 	void 카페를_조회하면_커피콩을_차감한다() {
-		MEMBER.subtractCoffeeBean(MEMBER.getCoffeeBean());
+		MEMBER.subtractCoffeeBean(100);
 
 		assertThat(MEMBER.getCoffeeBean()).isEqualTo(98);
 	}
