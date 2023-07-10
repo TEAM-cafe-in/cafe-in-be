@@ -78,18 +78,4 @@ public class Cafe extends BaseTimeEntity{
 		this.reviews = reviews;
 		this.comments = comments;
 	}
-
-	@Builder(builderMethodName = "testBuilder")
-	public Cafe(Long cafeId, String name, String info, Local local, Address address, String phoneNumber,
-		String latitude,
-		String longitude) {
-		this.cafeId = cafeId;
-		this.name = name;
-		this.info = info;
-		this.local = local;
-		this.address = address;
-		this.phoneNumber = phoneNumber;
-		this.latitude = latitude;
-		this.longitude = longitude;
-	}
 }
