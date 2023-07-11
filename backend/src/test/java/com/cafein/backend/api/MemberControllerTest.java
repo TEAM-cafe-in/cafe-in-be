@@ -30,7 +30,7 @@ class MemberControllerTest extends ControllerTestSupporter {
 
 	@Test
 	void 회원_정보를_가져온다() throws Exception {
-		given(memberInfoService.getMemberInfo(any()))
+		given(memberInfoService.getMemberInfo(anyLong()))
 			.willReturn(MEMBER_INFO_RESPONSE_DTO);
 
 		mockMvc(new MemberController(memberService, memberInfoService, myPageService))
@@ -46,7 +46,7 @@ class MemberControllerTest extends ControllerTestSupporter {
 			.reviewCount(5L)
 			.build();
 
-		given(myPageService.getMyPageDTO(any())).willReturn(response);
+		given(myPageService.getMyPageDTO(anyLong())).willReturn(response);
 
 		mockMvc(new MemberController(memberService, memberInfoService, myPageService))
 			.perform(get("/api/member/mypage"))
