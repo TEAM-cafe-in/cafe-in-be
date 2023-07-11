@@ -9,19 +9,19 @@ import java.util.List;
 import org.springframework.data.projection.ProjectionFactory;
 import org.springframework.data.projection.SpelAwareProxyProjectionFactory;
 
-import com.cafein.backend.api.cafe.dto.CafeInfoDTO;
+import com.cafein.backend.api.cafe.dto.CafeDTO;
 import com.cafein.backend.api.cafe.dto.CafeInfoProjection;
 import com.cafein.backend.api.member.dto.CafeInfoViewedByMemberProjection;
 
 public class CafeFixture {
 
 	public static final CafeInfoProjection CAFE_INFO_PROJECTION = createCafeInfoProjection();
-	public static final CafeInfoDTO CAFE_INFO_DTO = createCafeInfoDTO();
+	public static final CafeDTO CAFE_INFO_DTO = createCafeInfoDTO();
 	public static final CafeInfoViewedByMemberProjection CAFE_INFO_VIEWED_BY_MEMBER = mock(CafeInfoViewedByMemberProjection.class);
 	public static final List<Long> VIEWED_CAFE_IDS = new ArrayList<>(List.of(1L, 2L, 3L));
 
-	private static CafeInfoDTO createCafeInfoDTO() {
-		return CafeInfoDTO.builder()
+	private static CafeDTO createCafeInfoDTO() {
+		return CafeDTO.builder()
 			.cafeInfoProjection(CAFE_INFO_PROJECTION)
 			.comments(Collections.emptyList())
 			.build();
