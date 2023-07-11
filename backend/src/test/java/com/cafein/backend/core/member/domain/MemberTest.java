@@ -30,14 +30,22 @@ class MemberTest {
 
 	@Test
 	void 카페를_조회하면_커피콩을_차감한다() {
-		MEMBER.subtractCoffeeBean(MEMBER.getCoffeeBean());
+		MEMBER.subtractCoffeeBean(100);
 
 		assertThat(MEMBER.getCoffeeBean()).isEqualTo(98);
 	}
 
 	@Test
+	void 리뷰를_등록하면_커피콩을_추가한다() {
+		MEMBER.addCoffeeBean(100);
+
+		assertThat(MEMBER.getCoffeeBean()).isEqualTo(102);
+	}
+
+	@Test
 	void 회원의_닉네임을_수정한다() {
-		MEMBER.updateName(MEMBER.getName());
-		assertThat(MEMBER.getName()).isEqualTo("황의찬");
+		MEMBER.updateName("손흥민");
+
+		assertThat(MEMBER.getName()).isEqualTo("손흥민");
 	}
 }

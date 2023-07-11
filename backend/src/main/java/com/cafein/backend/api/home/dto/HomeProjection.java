@@ -36,4 +36,13 @@ public interface HomeProjection {
 	String getLongitude();
 
 	void setName(String name);
+	void setCafeId(String cafeId);
+	void setPhoneNumber(String phoneNumber);
+	void setAddress(String address);
+	void setCommentReviewCount(String commentReviewCount);
+	void setStatus(String status);
+	void setAverageCongestion(String averageCongestion);
+	void setLocal(String local);
+	void setLatitude(String latitude);
+	void setLongitude(String longitude);
 }

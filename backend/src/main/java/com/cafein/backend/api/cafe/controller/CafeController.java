@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.cafein.backend.api.cafe.dto.CafeInfoDTO;
+import com.cafein.backend.api.cafe.dto.CafeDTO;
 import com.cafein.backend.domain.cafe.service.CafeService;
 import com.cafein.backend.domain.member.service.MemberService;
 import com.cafein.backend.domain.viewedcafe.service.ViewedCafeService;
@@ -39,7 +39,7 @@ public class CafeController {
 		@ApiResponse(responseCode = "C-001", description = "해당 카페는 존재하지 않습니다.")
 	})
 	@GetMapping("/cafe/{cafeId}")
-	public ResponseEntity<CafeInfoDTO> cafeInfo(@PathVariable Long cafeId,
+	public ResponseEntity<CafeDTO> cafeInfo(@PathVariable Long cafeId,
 											    @ApiIgnore @MemberInfo MemberInfoDTO memberInfoDTO) {
 		return ResponseEntity.ok(cafeService.findCafeInfoById(memberInfoDTO.getMemberId(), cafeId));
 	}
@@ -51,7 +51,7 @@ public class CafeController {
 		@ApiResponse(responseCode = "C-001", description = "해당 카페는 존재하지 않습니다.")
 	})
 	@PostMapping("/cafe/{cafeId}")
-	public ResponseEntity<CafeInfoDTO> cafeCongestionCheck(@PathVariable Long cafeId,
+	public ResponseEntity<CafeDTO> cafeCongestionCheck(@PathVariable Long cafeId,
 								           		           @ApiIgnore @MemberInfo MemberInfoDTO memberInfoDTO) {
 		log.debug("memberId = {}", memberInfoDTO.getMemberId());
 		memberService.subtractCoffeeBean(memberInfoDTO.getMemberId());

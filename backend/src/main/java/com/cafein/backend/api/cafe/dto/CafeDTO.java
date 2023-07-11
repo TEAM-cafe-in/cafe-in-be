@@ -9,7 +9,7 @@ import lombok.Builder;
 import lombok.Getter;
 
 @Getter @Builder
-public class CafeInfoDTO {
+public class CafeDTO {
 
 	private CafeInfoProjection cafeInfoProjection;
 

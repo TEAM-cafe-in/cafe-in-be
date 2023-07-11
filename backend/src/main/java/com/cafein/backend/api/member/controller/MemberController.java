@@ -67,7 +67,7 @@ public class MemberController {
 	@Operation(summary = "회원 이름(닉네임) 수정 API", description = "회원 이름(닉네임) 수정 API")
 	@PatchMapping("/name")
 	public ResponseEntity<String> updateMemberName(@ApiIgnore @MemberInfo MemberInfoDTO memberInfoDTO,
-												 @Valid @RequestBody NameChangeRequestDTO nameChangeRequestDTO) {
+												   @Valid @RequestBody NameChangeRequestDTO nameChangeRequestDTO) {
 		memberService.updateMemberName(memberInfoDTO.getMemberId(), nameChangeRequestDTO.getName());
 		return ResponseEntity.ok("Name change successful!");
 	}
