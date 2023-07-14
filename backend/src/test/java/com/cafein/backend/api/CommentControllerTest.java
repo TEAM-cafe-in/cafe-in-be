@@ -39,4 +39,17 @@ class CommentControllerTest extends ControllerTestSupporter {
 			.andExpect(status().isCreated())
 			.andExpect(jsonPath("$").value("comment added"));
 	}
+
+	@Test
+	void 댓글을_수정한다() throws Exception {
+		mockMvc(new CommentController(commentService))
+			.perform(
+				patch("/api/cafe/1/comment/1")
+					.contentType(MediaType.APPLICATION_JSON_VALUE)
+					.content("{\"content\":\"여기 카페는 분위기가 좋아요!\","
+						+ "\"keywords\":[\"청결도\",\"콘센트\",\"분위기\"]}")
+			)
+			.andExpect(status().isOk())
+			.andExpect(jsonPath("$").value("comment updated"));
+	}
 }
