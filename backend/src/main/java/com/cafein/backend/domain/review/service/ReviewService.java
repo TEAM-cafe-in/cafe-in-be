@@ -25,8 +25,8 @@ import lombok.extern.slf4j.Slf4j;
 @RequiredArgsConstructor
 public class ReviewService {
 
-	private final MemberService memberService;
 	private final ReviewRepository reviewRepository;
+	private final MemberService memberService;
 	private final CafeService cafeService;
 
 	public ReviewResponse createReview(final ReviewRequest reviewRequestDTO, final Long cafeId, final Long memberId) {
