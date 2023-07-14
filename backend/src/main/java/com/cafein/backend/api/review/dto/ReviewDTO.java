@@ -8,7 +8,7 @@ import lombok.Getter;
 
 public class ReviewDTO {
 
-	@Getter @Builder
+	@Getter
 	public static class ReviewRequest {
 
 		@NotNull
