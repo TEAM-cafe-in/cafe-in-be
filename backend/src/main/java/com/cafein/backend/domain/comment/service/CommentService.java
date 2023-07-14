@@ -35,9 +35,9 @@ public class CommentService {
 	private final MemberService memberService;
 	private final CafeService cafeService;
 
-	public void addComment(final CommentDTO.CommentRequest commentRequestDTO, final Long cafeId, final Long memberId) {
+	public Long addComment(final CommentDTO.CommentRequest commentRequestDTO, final Long cafeId, final Long memberId) {
 		Comment comment = createCafeComment(commentRequestDTO, cafeId, memberId);
-		commentRepository.save(comment);
+		return commentRepository.save(comment).getCommentId();
 	}
 
 	private Comment createCafeComment(final CommentDTO.CommentRequest commentRequestDTO, final Long cafeId, final Long memberId) {
