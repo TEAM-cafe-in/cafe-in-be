@@ -44,6 +44,18 @@ class CommentServiceTest extends DataBaseSupporter {
 	}
 
 	@Test
+	void 존재하지_않는_댓글을_수정하면_예외가_발생한다() {
+		final CommentRequest commentRequest = CommentRequest.builder()
+			.content("테스트 댓글 수정")
+			.keywords(List.of("좌석", "분위기"))
+			.build();
+
+		assertThatThrownBy(() -> commentService.updateComment(commentRequest, 2L, 2L))
+			.isInstanceOf(EntityNotFoundException.class)
+			.hasMessage("카페에 해당하는 댓글이 존재하지 않습니다.");
+	}
+
+	@Test
 	void 댓글을_수정한다() {
 		final CommentRequest commentRequest = CommentRequest.builder()
 			.content("테스트 댓글 수정")
