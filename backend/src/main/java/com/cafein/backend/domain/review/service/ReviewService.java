@@ -31,14 +31,14 @@ public class ReviewService {
 
 	public ReviewResponse createReview(final ReviewRequest reviewRequestDTO, final Long cafeId, final Long memberId) {
 		Member member = memberService.findMemberByMemberId(memberId);
-		reviewRepository.save(createReview(reviewRequestDTO, cafeId, member));
+		reviewRepository.save(createReviewFromDTO(reviewRequestDTO, cafeId, member));
 		member.addCoffeeBean(member.getCoffeeBean());
 		return ReviewResponse.builder()
 				.coffeeBean(member.getCoffeeBean())
 				.build();
 	}
 
-	private Review createReview(final ReviewRequest reviewRequestDTO, final Long cafeId, final Member member) {
+	private Review createReviewFromDTO(final ReviewRequest reviewRequestDTO, final Long cafeId, final Member member) {
 		return Review.builder()
 			.cafe(cafeService.findCafeByCafeId(cafeId))
 			.cafeCongestion(CafeCongestion.from(reviewRequestDTO.getCafeCongestion()))
