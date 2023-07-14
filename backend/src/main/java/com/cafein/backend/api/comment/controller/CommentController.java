@@ -69,7 +69,6 @@ public class CommentController {
 	@DeleteMapping("/cafe/{cafeId}/comment/{commentId}")
 	public ResponseEntity<String> deleteComment(@PathVariable Long cafeId,
 												@PathVariable Long commentId) {
-
 		commentService.deleteComment(cafeId, commentId);
 		return ResponseEntity.ok("comment deleted");
 	}
