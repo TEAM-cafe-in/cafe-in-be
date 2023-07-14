@@ -30,6 +30,20 @@ class CommentControllerTest extends ControllerTestSupporter {
 	}
 
 	@Test
+	void 댓글_등록시_키워드가_없어도_댓글_등록에_성공한다() throws Exception {
+		given(commentService.addComment(any(), eq(1L), anyLong())).willReturn(1L);
+
+		mockMvc(new CommentController(commentService))
+			.perform(
+				post("/api/cafe/1/comment")
+					.contentType(MediaType.APPLICATION_JSON_VALUE)
+					.content("{\"content\":\"여기 카페는 분위기가 좋아요!\"}")
+			)
+			.andExpect(status().isCreated())
+			.andExpect(header().string("Location", "/api/cafe/1/comment/1"));
+	}
+
+	@Test
 	void 댓글을_등록한다() throws Exception {
 		given(commentService.addComment(any(), eq(1L), anyLong())).willReturn(1L);
 
