@@ -1,6 +1,8 @@
 package com.cafein.backend.api;
 
 import static org.hamcrest.Matchers.*;
+import static org.mockito.BDDMockito.any;
+import static org.mockito.BDDMockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
@@ -29,6 +31,8 @@ class CommentControllerTest extends ControllerTestSupporter {
 
 	@Test
 	void 댓글을_등록한다() throws Exception {
+		given(commentService.addComment(any(), eq(1L), anyLong())).willReturn(1L);
+
 		mockMvc(new CommentController(commentService))
 			.perform(
 				post("/api/cafe/1/comment")
@@ -37,7 +41,7 @@ class CommentControllerTest extends ControllerTestSupporter {
 						+ "\"keywords\":[\"청결도\",\"콘센트\",\"분위기\"]}")
 			)
 			.andExpect(status().isCreated())
-			.andExpect(jsonPath("$").value("comment added"));
+			.andExpect(header().string("Location", "/api/cafe/1/comment/1"));
 	}
 
 	@Test
@@ -51,5 +55,15 @@ class CommentControllerTest extends ControllerTestSupporter {
 			)
 			.andExpect(status().isOk())
 			.andExpect(jsonPath("$").value("comment updated"));
+	}
+
+	@Test
+	void 댓글을_삭제한다() throws Exception {
+		mockMvc(new CommentController(commentService))
+			.perform(
+				delete("/api/cafe/1/comment/1")
+			)
+			.andExpect(status().isOk())
+			.andExpect(jsonPath("$").value("comment deleted"));
 	}
 }
