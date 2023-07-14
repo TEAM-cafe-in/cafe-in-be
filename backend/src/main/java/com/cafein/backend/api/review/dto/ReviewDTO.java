@@ -3,12 +3,16 @@ package com.cafein.backend.api.review.dto;
 import javax.validation.constraints.NotNull;
 
 import io.swagger.v3.oas.annotations.media.Schema;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 public class ReviewDTO {
 
-	@Getter
+	@Getter @Builder
+	@NoArgsConstructor
+	@AllArgsConstructor
 	public static class ReviewRequest {
 
 		@NotNull
