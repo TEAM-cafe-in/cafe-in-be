@@ -56,8 +56,8 @@ public class CommentController {
 	})
 	@PatchMapping("/cafe/{cafeId}/comment/{commentId}")
 	public ResponseEntity<String> updateComment(@Valid @RequestBody CommentRequest commentRequestDTO,
-		@PathVariable Long cafeId,
-		@PathVariable Long commentId) {
+												@PathVariable Long cafeId,
+												@PathVariable Long commentId) {
 		commentService.updateComment(commentRequestDTO, cafeId, commentId);
 		return ResponseEntity.ok("comment updated");
 	}
