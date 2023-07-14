@@ -26,4 +26,17 @@ class CommentControllerTest extends ControllerTestSupporter {
 			.andExpect(status().isBadRequest())
 			.andExpect(content().string(containsString("Required request body is missing")));
 	}
+
+	@Test
+	void 댓글을_등록한다() throws Exception {
+		mockMvc(new CommentController(commentService))
+			.perform(
+				post("/api/cafe/1/comment")
+					.contentType(MediaType.APPLICATION_JSON_VALUE)
+					.content("{\"content\":\"여기 카페는 분위기가 좋아요!\","
+						+ "\"keywords\":[\"청결도\",\"콘센트\",\"분위기\"]}")
+			)
+			.andExpect(status().isCreated())
+			.andExpect(jsonPath("$").value("comment added"));
+	}
 }
