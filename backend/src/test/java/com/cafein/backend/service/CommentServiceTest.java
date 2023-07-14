@@ -1,15 +1,21 @@
 package com.cafein.backend.service;
 
+import static com.cafein.backend.api.comment.dto.CommentDTO.*;
 import static org.assertj.core.api.Assertions.*;
 import static org.mockito.BDDMockito.*;
 
+import java.util.List;
+
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.boot.test.mock.mockito.SpyBean;
 import org.springframework.test.context.jdbc.Sql;
 
+import com.cafein.backend.domain.cafe.service.CafeService;
 import com.cafein.backend.domain.comment.repository.CommentRepository;
 import com.cafein.backend.domain.comment.service.CommentService;
+import com.cafein.backend.domain.member.service.MemberService;
 import com.cafein.backend.global.error.exception.EntityNotFoundException;
 import com.cafein.backend.support.utils.DataBaseSupporter;
 import com.cafein.backend.support.utils.ServiceTest;
@@ -23,6 +29,25 @@ class CommentServiceTest extends DataBaseSupporter {
 
 	@SpyBean
 	private CommentRepository commentRepository;
+
+	@MockBean
+	private MemberService memberService;
+
+	@MockBean
+	private CafeService cafeService;
+
+	@Test
+	void 댓글을_등록한다() {
+		final CommentRequest commentRequest = CommentRequest.builder()
+			.content("테스트 댓글")
+			.keywords(List.of("청결도", "분위기"))
+			.build();
+
+		final Long commentId = commentService.addComment(commentRequest, 1L, 1L);
+
+		assertThat(commentId).isEqualTo(2L);
+		then(commentRepository).should(times(1)).save(any());
+	}
 
 	@Test
 	void 존재하지_않는_댓글을_삭제하면_예외가_발생한다() {
