@@ -8,6 +8,7 @@ import com.cafein.backend.domain.member.constant.MemberType;
 import com.cafein.backend.domain.member.entity.Member;
 
 public interface MemberRepository extends JpaRepository<Member, Long> {
+
 	Optional<Member> findByEmail(String email);
 
 	Optional<Member> findByRefreshToken(String refreshToken);

@@ -25,7 +25,7 @@ public class ViewedCafe extends BaseTimeEntity {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
+	private Long viewedCafeId;
 
 	@Column(nullable = false)
 	private Long cafeId;

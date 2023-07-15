@@ -13,7 +13,9 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Index;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.DynamicInsert;
@@ -35,6 +37,10 @@ import lombok.NoArgsConstructor;
 @Getter
 @DynamicInsert
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
+@Table(indexes = {
+		@Index(name = "idx_email_memberType", columnList = "email, memberType", unique = true),
+		@Index(name = "idx_refresh_token", columnList = "refreshToken")
+})
 public class Member extends BaseTimeEntity {
 
 	@Id
