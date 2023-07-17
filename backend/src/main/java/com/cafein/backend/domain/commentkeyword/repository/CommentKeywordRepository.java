@@ -12,7 +12,7 @@ import com.cafein.backend.domain.commentkeyword.entity.CommentKeyword;
 public interface CommentKeywordRepository extends JpaRepository<CommentKeyword, Long> {
 
 	@Query("select ck from CommentKeyword ck where ck.comment.commentId = :commentId")
-	List<CommentKeyword> findAllByCommentId(Long commentId);
+	List<CommentKeyword> findAllByCommentId(@Param("commentId") Long commentId);
 
 	@Modifying
 	@Query("delete from CommentKeyword ck where ck.comment.commentId = :commentId")
