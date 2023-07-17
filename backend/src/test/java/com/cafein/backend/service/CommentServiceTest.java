@@ -2,13 +2,12 @@ package com.cafein.backend.service;
 
 import static com.cafein.backend.api.comment.dto.CommentDTO.*;
 import static org.assertj.core.api.Assertions.*;
-import static org.mockito.BDDMockito.*;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.mock.mockito.SpyBean;
 import org.springframework.test.context.jdbc.Sql;
 
 import com.cafein.backend.domain.comment.entity.Comment;
@@ -25,7 +24,7 @@ class CommentServiceTest extends DataBaseSupporter {
 	@Autowired
 	private CommentService commentService;
 
-	@SpyBean
+	@Autowired
 	private CommentRepository commentRepository;
 
 	@Test
@@ -40,7 +39,6 @@ class CommentServiceTest extends DataBaseSupporter {
 
 		assertThat(commentId).isEqualTo(2L);
 		assertThat(comment.getContent()).isEqualTo("테스트 댓글");
-		then(commentRepository).should(times(1)).save(any());
 	}
 
 	@Test
@@ -79,6 +77,6 @@ class CommentServiceTest extends DataBaseSupporter {
 	void 댓글을_삭제한다() {
 		commentService.deleteComment(1L, 1L);
 
-		then(commentRepository).should(times(1)).deleteById(eq(1L));
+		assertThat(commentRepository.findById(1L)).isEqualTo(Optional.empty());
 	}
 }
