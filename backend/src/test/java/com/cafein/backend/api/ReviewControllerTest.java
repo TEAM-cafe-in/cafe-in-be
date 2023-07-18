@@ -32,6 +32,6 @@ class ReviewControllerTest extends ControllerTestSupporter {
 				.contentType(APPLICATION_JSON_VALUE)
 			)
 			.andExpect(status().isCreated())
-			.andExpect(jsonPath("$.coffeeBean").value(102));
+			.andExpect(header().string("Location", "/api/cafe/1/review/1"));
 	}
 }

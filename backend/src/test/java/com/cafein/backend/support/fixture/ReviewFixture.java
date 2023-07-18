@@ -33,6 +33,7 @@ public class ReviewFixture {
 
 		private static ReviewResponse createReviewResponse() {
 		return ReviewResponse.builder()
+			.reviewId(1L)
 			.coffeeBean(102)
 			.build();
 	}
