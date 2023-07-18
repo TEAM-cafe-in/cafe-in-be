@@ -45,7 +45,7 @@ class ReviewServiceTest {
 	}
 
 	@Test
-	void 리뷰를_검증한다() {
+	void 하루에_두_번_리뷰를_작성하면_예외가_발생한다() {
 		given(reviewRepository.findCafeIdsOfRecentReviews(anyLong()))
 			.willReturn(ReviewFixture.CAFE_IDS_OF_RECENT_REVIEWS);
 
