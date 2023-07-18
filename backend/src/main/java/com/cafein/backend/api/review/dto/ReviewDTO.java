@@ -31,6 +31,9 @@ public class ReviewDTO {
 	@Getter @Builder
 	public static class ReviewResponse {
 
+		@Schema(description = "reviewId", example = "1", required = true)
+		private Long reviewId;
+
 		@Schema(description = "커피빈", example = "100", required = true)
 		private Integer coffeeBean;
 	}

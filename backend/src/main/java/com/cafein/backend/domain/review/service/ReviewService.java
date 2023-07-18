@@ -31,9 +31,10 @@ public class ReviewService {
 
 	public ReviewResponse createReview(final ReviewRequest reviewRequestDTO, final Long cafeId, final Long memberId) {
 		Member member = memberService.findMemberByMemberId(memberId);
-		reviewRepository.save(createReviewFromDTO(reviewRequestDTO, cafeId, member));
+		Review review = reviewRepository.save(createReviewFromDTO(reviewRequestDTO, cafeId, member));
 		member.addCoffeeBean(member.getCoffeeBean());
 		return ReviewResponse.builder()
+				.reviewId(review.getReviewId())
 				.coffeeBean(member.getCoffeeBean())
 				.build();
 	}
