@@ -7,12 +7,12 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.extern.jackson.Jacksonized;
 
 public class ReviewDTO {
 
 	@Getter @Builder
-	@NoArgsConstructor
-	@AllArgsConstructor
+	@Jacksonized
 	public static class ReviewRequest {
 
 		@NotNull
