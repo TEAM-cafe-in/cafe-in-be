@@ -2,6 +2,8 @@ package com.cafein.backend.api.review.controller;
 
 import static com.cafein.backend.api.review.dto.ReviewDTO.*;
 
+import java.net.URI;
+
 import javax.validation.Valid;
 
 import org.springframework.http.HttpStatus;
@@ -48,6 +50,7 @@ public class ReviewController {
 		log.debug("memberId = {}", memberInfoDTO.getMemberId());
 		reviewService.validateReview(memberInfoDTO.getMemberId(), cafeId);
 		ReviewResponse reviewResponse = reviewService.createReview(reviewRequestDTO, cafeId, memberInfoDTO.getMemberId());
-		return ResponseEntity.status(HttpStatus.CREATED).body(reviewResponse);
+		return ResponseEntity.created(URI.create("/api/cafe/" + cafeId + "/review/" + reviewResponse.getReviewId()))
+			.body(reviewResponse);
 	}
 }

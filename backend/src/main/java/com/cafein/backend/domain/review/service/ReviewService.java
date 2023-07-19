@@ -25,20 +25,21 @@ import lombok.extern.slf4j.Slf4j;
 @RequiredArgsConstructor
 public class ReviewService {
 
-	private final MemberService memberService;
 	private final ReviewRepository reviewRepository;
+	private final MemberService memberService;
 	private final CafeService cafeService;
 
 	public ReviewResponse createReview(final ReviewRequest reviewRequestDTO, final Long cafeId, final Long memberId) {
 		Member member = memberService.findMemberByMemberId(memberId);
-		reviewRepository.save(createReview(reviewRequestDTO, cafeId, member));
+		Review review = reviewRepository.save(createReviewFromDTO(reviewRequestDTO, cafeId, member));
 		member.addCoffeeBean(member.getCoffeeBean());
 		return ReviewResponse.builder()
+				.reviewId(review.getReviewId())
 				.coffeeBean(member.getCoffeeBean())
 				.build();
 	}
 
-	private Review createReview(final ReviewRequest reviewRequestDTO, final Long cafeId, final Member member) {
+	private Review createReviewFromDTO(final ReviewRequest reviewRequestDTO, final Long cafeId, final Member member) {
 		return Review.builder()
 			.cafe(cafeService.findCafeByCafeId(cafeId))
 			.cafeCongestion(CafeCongestion.from(reviewRequestDTO.getCafeCongestion()))

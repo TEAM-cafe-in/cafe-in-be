@@ -3,12 +3,16 @@ package com.cafein.backend.api.review.dto;
 import javax.validation.constraints.NotNull;
 
 import io.swagger.v3.oas.annotations.media.Schema;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.extern.jackson.Jacksonized;
 
 public class ReviewDTO {
 
 	@Getter @Builder
+	@Jacksonized
 	public static class ReviewRequest {
 
 		@NotNull
@@ -26,6 +30,9 @@ public class ReviewDTO {
 
 	@Getter @Builder
 	public static class ReviewResponse {
+
+		@Schema(description = "reviewId", example = "1", required = true)
+		private Long reviewId;
 
 		@Schema(description = "커피빈", example = "100", required = true)
 		private Integer coffeeBean;
