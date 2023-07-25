@@ -22,10 +22,7 @@ class ReviewIntegrationTest extends IntegrationSupporter {
 
 	@Test
 	void 카페에_대한_리뷰를_등록한다() {
-
-		final ExtractableResponse<Response> response = post("/api/cafe/1/review", generateAccessHeader(access_token), REVIEW_REQUEST);
-
-		System.out.println(memberService.findMemberByMemberId(1L).getCoffeeBean() + "이후");
+		final ExtractableResponse<Response> response = post("/api/cafe/4/review", generateAccessHeader(access_token), REVIEW_REQUEST);
 
 		Assertions.assertAll(
 			() -> assertThat(response.statusCode()).isEqualTo(HttpStatus.CREATED.value()),
