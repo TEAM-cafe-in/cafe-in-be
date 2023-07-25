@@ -5,11 +5,14 @@ INSERT INTO member VALUES (3, '2023-07-14', '2023-07-14', 100, 'test3@test.com',
 INSERT INTO cafe VALUES (1, '2023-07-14', '2023-07-14', '12-13', '월드컵북로6길', '서울', '서울시 마포구', '연남 노티드입니다.', '100.12345', 'HONGDAE', '35.12312', '연남 노티드', '05012341234');
 INSERT INTO cafe VALUES (2, '2023-07-14', '2023-07-14', '5 1층', '상원1길', '서울', '서울시 성동구', '브래디포스트 성수점 입니다.', '101.12345', 'SEONGSU', '36.12312', '브레디포스트 성수', '05032141234');
 INSERT INTO cafe VALUES (3, '2023-07-14', '2023-07-14', '10-11', '상원2길', '서울', '서울시 성동구', '블루보틀 성수 입니다.', '101.12345', 'SEONGSU', '36.12312', '블루보틀 성수', '05032141234');
+INSERT INTO cafe VALUES (4, '2023-07-14', '2023-07-14', '10-11', '상원2길', '서울', '서울시 성동구', '5to7', '101.24135', 'HONGDAE', '36.12312', '5to7', '05032141234');
 
 INSERT INTO comment VALUES (1, '2023-07-14', '2023-07-14', '테스트 댓글1', 1, 1);
 INSERT INTO comment VALUES (2, '2023-07-14', '2023-07-14', '테스트 댓글2', 1, 1);
 INSERT INTO comment VALUES (3, '2023-07-14', '2023-07-14', '테스트 댓글3', 2, 2);
 
-INSERT INTO review VALUES (1, '2023-07-14', '2023-07-14', 'HIGH', 1, 1, 1, 1);
-INSERT INTO review VALUES (2, '2023-07-14', '2023-07-14', 'MEDIUM', 1, 1, 2, 1);
-INSERT INTO review VALUES (3, '2023-07-14', '2023-07-14', 'HIGH', 1, 1, 3, 1);
+INSERT INTO review VALUES (1, NOW(), NOW(), 'HIGH', 1, 1, 1, 1);
+INSERT INTO review VALUES (2, NOW(), NOW(), 'MEDIUM', 1, 1, 2, 1);
+INSERT INTO review VALUES (3, NOW(), NOW(), 'HIGH', 1, 1, 3, 1);
+
+INSERT INTO viewed_cafe VALUES (1, NOW(), NOW(), 3, 1);

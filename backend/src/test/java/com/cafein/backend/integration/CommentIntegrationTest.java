@@ -88,4 +88,20 @@ class CommentIntegrationTest extends IntegrationSupporter {
 				.isEqualTo("카페에 해당하는 댓글이 존재하지 않습니다.")
 		);
 	}
+
+	@Test
+	void 댓글을_삭제한다() {
+		Long cafeId = 1L;
+		Long commentId = 1L;
+
+		ExtractableResponse<Response> responseExtractableResponse =
+			delete("/api/cafe/" + cafeId + "/comment/" + commentId, generateAccessHeader(access_token));
+
+		assertAll(
+			() -> assertThat(responseExtractableResponse.statusCode()).isEqualTo(HttpStatus.OK.value()),
+			() -> assertThat(responseExtractableResponse.body().asString()).isEqualTo("comment deleted"),
+			() -> assertThat(commentRepository.findById(commentId).isEmpty()).isTrue()
+		);
+	}
 }
+
