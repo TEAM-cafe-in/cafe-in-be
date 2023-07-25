@@ -2,9 +2,10 @@ package com.cafein.backend.api.comment.controller;
 
 import static com.cafein.backend.api.comment.dto.CommentDTO.*;
 
+import java.net.URI;
+
 import javax.validation.Valid;
 
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
@@ -44,8 +45,8 @@ public class CommentController {
 	public ResponseEntity<String> addComment(@Valid @RequestBody CommentRequest commentRequestDTO,
 										     @ApiIgnore @MemberInfo MemberInfoDTO memberInfoDTO,
 										     @PathVariable Long cafeId) {
-		commentService.addComment(commentRequestDTO, cafeId, memberInfoDTO.getMemberId());
-		return ResponseEntity.status(HttpStatus.CREATED).body("comment added");
+		final Long commentId = commentService.addComment(commentRequestDTO, cafeId, memberInfoDTO.getMemberId());
+		return ResponseEntity.created(URI.create("/api/cafe/" + cafeId + "/comment/" + commentId)).build();
 	}
 
 	@Tag(name = "cafe")
@@ -55,8 +56,8 @@ public class CommentController {
 	})
 	@PatchMapping("/cafe/{cafeId}/comment/{commentId}")
 	public ResponseEntity<String> updateComment(@Valid @RequestBody CommentRequest commentRequestDTO,
-		@PathVariable Long cafeId,
-		@PathVariable Long commentId) {
+												@PathVariable Long cafeId,
+												@PathVariable Long commentId) {
 		commentService.updateComment(commentRequestDTO, cafeId, commentId);
 		return ResponseEntity.ok("comment updated");
 	}
@@ -69,7 +70,6 @@ public class CommentController {
 	@DeleteMapping("/cafe/{cafeId}/comment/{commentId}")
 	public ResponseEntity<String> deleteComment(@PathVariable Long cafeId,
 												@PathVariable Long commentId) {
-
 		commentService.deleteComment(cafeId, commentId);
 		return ResponseEntity.ok("comment deleted");
 	}
