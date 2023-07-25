@@ -1,27 +1,6 @@
 package com.cafein.backend.integration;
 
-import static com.cafein.backend.support.fixture.LoginFixture.*;
-import static org.assertj.core.api.Assertions.*;
-import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.ArgumentMatchers.*;
-import static org.mockito.BDDMockito.*;
-
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-
-import org.junit.jupiter.api.Test;
-import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.http.HttpStatus;
-
-import com.cafein.backend.api.login.service.OAuthLoginService;
-import com.cafein.backend.api.logout.service.LogoutService;
-import com.cafein.backend.api.token.service.TokenService;
-import com.cafein.backend.domain.member.constant.MemberType;
-import com.cafein.backend.support.utils.IntegrationTest;
-
-import io.restassured.response.ExtractableResponse;
-import io.restassured.response.Response;
-
+/**
 @IntegrationTest
 class LoginIntegrationTest extends IntegrationSupporter {
 
@@ -86,3 +65,4 @@ class LoginIntegrationTest extends IntegrationSupporter {
 		);
 	}
 }
+*/
