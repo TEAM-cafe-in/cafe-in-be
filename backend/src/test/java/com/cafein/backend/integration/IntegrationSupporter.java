@@ -50,6 +50,15 @@ public class IntegrationSupporter extends DataBaseSupporter {
 			.extract();
 	}
 
+	protected ExtractableResponse<Response> post(final String uri, final Header header) {
+		return RestAssured.given().log().all()
+			.contentType(MediaType.APPLICATION_JSON_VALUE)
+			.header(header)
+			.when().post(uri)
+			.then().log().all()
+			.extract();
+	}
+
 	protected ExtractableResponse<Response> post(final String uri, final Header header, final Object body) {
 		return RestAssured.given().log().all()
 			.contentType(MediaType.APPLICATION_JSON_VALUE)
