@@ -1,7 +1,10 @@
 package com.cafein.backend.integration;
 
+import static com.cafein.backend.support.fixture.LoginFixture.*;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.springframework.boot.test.web.server.LocalServerPort;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 
 import com.cafein.backend.support.utils.DataBaseSupporter;
@@ -95,5 +98,17 @@ public class IntegrationSupporter extends DataBaseSupporter {
 			.when().patch(uri)
 			.then().log().all()
 			.extract();
+	}
+
+	protected Header generateAccessHeader() {
+		return new Header(HttpHeaders.AUTHORIZATION, AUTHORIZATION_HEADER_ACCESS);
+	}
+
+	protected Header generateAccessHeader(String accessToken) {
+		return new Header(HttpHeaders.AUTHORIZATION, "Bearer " + accessToken);
+	}
+
+	protected Header generateRefreshHeader() {
+		return new Header(HttpHeaders.AUTHORIZATION, AUTHORIZATION_HEADER_REFRESH);
 	}
 }
