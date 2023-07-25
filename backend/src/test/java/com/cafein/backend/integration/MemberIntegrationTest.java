@@ -3,12 +3,10 @@ package com.cafein.backend.integration;
 import static org.assertj.core.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.*;
 
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.test.context.jdbc.Sql;
 
 import com.cafein.backend.api.token.service.TokenService;
 import com.cafein.backend.domain.member.entity.Member;
@@ -20,9 +18,7 @@ import io.restassured.response.ExtractableResponse;
 import io.restassured.response.Response;
 
 @IntegrationTest
-@Sql("/sql/integration.sql")
 class MemberIntegrationTest extends IntegrationSupporter {
-
 
 	@Autowired
 	private MemberService memberService;
