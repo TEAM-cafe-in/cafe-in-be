@@ -3,10 +3,14 @@ package com.cafein.backend.integration;
 import static com.cafein.backend.support.fixture.LoginFixture.*;
 
 import org.junit.jupiter.api.BeforeEach;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.web.server.LocalServerPort;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 
+import com.cafein.backend.api.token.service.TokenService;
+import com.cafein.backend.domain.member.entity.Member;
+import com.cafein.backend.domain.member.service.MemberService;
 import com.cafein.backend.support.utils.DataBaseSupporter;
 import com.cafein.backend.support.utils.IntegrationTest;
 
@@ -21,9 +25,20 @@ public class IntegrationSupporter extends DataBaseSupporter {
 	@LocalServerPort
 	private int port;
 
+	@Autowired
+	private TokenService tokenService;
+
+	@Autowired
+	private MemberService memberService;
+
+	protected Member member;
+	protected String access_token;
+
 	@BeforeEach
 	void setUp() {
 		RestAssured.port = port;
+		member = memberService.findMemberByMemberId(1L);
+		access_token = tokenService.createAccessTokenByRefreshToken(member.getRefreshToken()).getAccessToken();
 	}
 
 	protected ExtractableResponse<Response> post(final String uri, final Object body) {
