@@ -115,6 +115,25 @@ public class IntegrationSupporter extends DataBaseSupporter {
 			.extract();
 	}
 
+	protected ExtractableResponse<Response> delete(final String uri, final Header header) {
+		return RestAssured.given().log().all()
+			.contentType(MediaType.APPLICATION_JSON_VALUE)
+			.header(header)
+			.when().delete(uri)
+			.then().log().all()
+			.extract();
+	}
+
+	protected ExtractableResponse<Response> delete(final String uri, final Header header, final Object body) {
+		return RestAssured.given().log().all()
+			.contentType(MediaType.APPLICATION_JSON_VALUE)
+			.header(header)
+			.body(body)
+			.when().delete(uri)
+			.then().log().all()
+			.extract();
+	}
+
 	protected Header generateAccessHeader() {
 		return new Header(HttpHeaders.AUTHORIZATION, AUTHORIZATION_HEADER_ACCESS);
 	}
