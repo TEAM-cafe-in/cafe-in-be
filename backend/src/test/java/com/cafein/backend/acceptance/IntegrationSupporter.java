@@ -4,16 +4,16 @@ import org.junit.jupiter.api.BeforeEach;
 import org.springframework.boot.test.web.server.LocalServerPort;
 import org.springframework.http.MediaType;
 
-import com.cafein.backend.support.utils.AcceptanceTest;
 import com.cafein.backend.support.utils.DataBaseSupporter;
+import com.cafein.backend.support.utils.IntegrationTest;
 
 import io.restassured.RestAssured;
 import io.restassured.http.Header;
 import io.restassured.response.ExtractableResponse;
 import io.restassured.response.Response;
 
-@AcceptanceTest
-public class AcceptanceSupporter extends DataBaseSupporter {
+@IntegrationTest
+public class IntegrationSupporter extends DataBaseSupporter {
 
 	@LocalServerPort
 	private int port;

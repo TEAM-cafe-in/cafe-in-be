@@ -16,5 +16,5 @@ import org.springframework.boot.test.context.SpringBootTest;
 @Retention(RetentionPolicy.RUNTIME)
 @DisplayNameGeneration(ReplaceUnderscores.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-public @interface AcceptanceTest {
+public @interface IntegrationTest {
 }
