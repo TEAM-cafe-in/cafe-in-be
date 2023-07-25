@@ -1,4 +1,4 @@
-package com.cafein.backend.acceptance;
+package com.cafein.backend.integration;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.springframework.boot.test.web.server.LocalServerPort;
