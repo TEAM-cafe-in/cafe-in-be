@@ -7,8 +7,8 @@ import static org.mockito.BDDMockito.*;
 import java.util.Optional;
 
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.mock.mockito.MockBean;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
 
 import com.cafein.backend.domain.member.entity.Member;
 import com.cafein.backend.domain.member.repository.MemberRepository;
@@ -20,10 +20,10 @@ import com.cafein.backend.support.utils.ServiceTest;
 @ServiceTest
 class MemberServiceTest {
 
-	@Autowired
+	@InjectMocks
 	private MemberService memberService;
 
-	@MockBean
+	@Mock
 	private MemberRepository memberRepository;
 
 	@Test
