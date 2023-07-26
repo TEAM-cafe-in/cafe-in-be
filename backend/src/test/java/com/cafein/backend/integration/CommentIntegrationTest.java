@@ -4,10 +4,8 @@ import static org.assertj.core.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 
-import com.cafein.backend.domain.comment.repository.CommentRepository;
 import com.cafein.backend.support.utils.IntegrationTest;
 
 import io.restassured.response.ExtractableResponse;
@@ -15,9 +13,6 @@ import io.restassured.response.Response;
 
 @IntegrationTest
 class CommentIntegrationTest extends IntegrationSupporter {
-
-	@Autowired
-	private CommentRepository commentRepository;
 
 	@Test
 	void 댓글을_등록한다() {

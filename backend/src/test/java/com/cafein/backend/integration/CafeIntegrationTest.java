@@ -4,11 +4,8 @@ import static org.assertj.core.api.Assertions.*;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 
-import com.cafein.backend.domain.cafe.service.CafeService;
-import com.cafein.backend.domain.member.service.MemberService;
 import com.cafein.backend.support.utils.IntegrationTest;
 
 import io.restassured.response.ExtractableResponse;
@@ -16,12 +13,6 @@ import io.restassured.response.Response;
 
 @IntegrationTest
 class CafeIntegrationTest extends IntegrationSupporter {
-
-	@Autowired
-	private CafeService cafeService;
-
-	@Autowired
-	private MemberService memberService;
 
 	@Test
 	void 메인_화면_조회시_혼잡도를_알_수_없는_카페의_목록을_반환한다() {
