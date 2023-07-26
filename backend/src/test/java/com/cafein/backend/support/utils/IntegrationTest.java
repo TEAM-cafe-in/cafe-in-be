@@ -10,11 +10,13 @@ import java.lang.annotation.Target;
 
 import org.junit.jupiter.api.DisplayNameGeneration;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.jdbc.Sql;
 
 @Inherited
+@Sql("/sql/integration.sql")
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
 @DisplayNameGeneration(ReplaceUnderscores.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-public @interface AcceptanceTest {
+public @interface IntegrationTest {
 }
