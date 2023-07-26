@@ -4,13 +4,18 @@ import static com.cafein.backend.support.fixture.LoginFixture.*;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.boot.test.web.server.LocalServerPort;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 
+import com.cafein.backend.api.login.service.OAuthLoginService;
 import com.cafein.backend.api.token.service.TokenService;
+import com.cafein.backend.domain.cafe.service.CafeService;
+import com.cafein.backend.domain.comment.repository.CommentRepository;
 import com.cafein.backend.domain.member.entity.Member;
 import com.cafein.backend.domain.member.service.MemberService;
+import com.cafein.backend.domain.review.respository.ReviewRepository;
 import com.cafein.backend.support.utils.DataBaseSupporter;
 import com.cafein.backend.support.utils.IntegrationTest;
 
@@ -22,16 +27,29 @@ import io.restassured.response.Response;
 @IntegrationTest
 public class IntegrationSupporter extends DataBaseSupporter {
 
+	@Autowired
+	protected TokenService tokenService;
+
+	@Autowired
+	protected MemberService memberService;
+
+	@Autowired
+	protected CafeService cafeService;
+
+	@Autowired
+	protected CommentRepository commentRepository;
+
+	@Autowired
+	protected ReviewRepository reviewRepository;
+
+	@MockBean
+	protected OAuthLoginService oAuthLoginService;
+
 	@LocalServerPort
 	private int port;
 
-	@Autowired
-	private TokenService tokenService;
-
-	@Autowired
-	private MemberService memberService;
-
 	protected Member member;
+
 	protected String access_token;
 
 	@BeforeEach
@@ -151,7 +169,7 @@ public class IntegrationSupporter extends DataBaseSupporter {
 		return new Header(HttpHeaders.AUTHORIZATION, "Bearer " + accessToken);
 	}
 
-	protected Header generateRefreshHeader() {
-		return new Header(HttpHeaders.AUTHORIZATION, AUTHORIZATION_HEADER_REFRESH);
+	protected Header generateRefreshHeader(String refreshToken) {
+		return new Header(HttpHeaders.AUTHORIZATION, "Bearer " + refreshToken);
 	}
 }
