@@ -14,6 +14,7 @@ import com.cafein.backend.api.member.dto.MyPageDTO;
 import com.cafein.backend.api.member.dto.NameChangeRequestDTO;
 import com.cafein.backend.api.member.service.MemberInfoService;
 import com.cafein.backend.api.member.service.MyPageService;
+import com.cafein.backend.domain.member.entity.Member;
 import com.cafein.backend.domain.member.service.MemberService;
 import com.cafein.backend.global.resolver.MemberInfo;
 import com.cafein.backend.global.resolver.MemberInfoDTO;
@@ -65,10 +66,28 @@ public class MemberController {
 
 	@Tag(name = "member")
 	@Operation(summary = "회원 이름(닉네임) 수정 API", description = "회원 이름(닉네임) 수정 API")
+	@ApiResponses({
+		@ApiResponse(responseCode = "A-001", description = "토큰이 만료되었습니다."),
+		@ApiResponse(responseCode = "A-002", description = "해당 토큰은 유효한 토큰이 아닙니다."),
+		@ApiResponse(responseCode = "M-003", description = "해당 회원은 존재하지 않습니다.")
+	})
 	@PatchMapping("/name")
 	public ResponseEntity<String> updateMemberName(@ApiIgnore @MemberInfo MemberInfoDTO memberInfoDTO,
 												   @Valid @RequestBody NameChangeRequestDTO nameChangeRequestDTO) {
 		memberService.updateMemberName(memberInfoDTO.getMemberId(), nameChangeRequestDTO.getName());
 		return ResponseEntity.ok("Name change successful!");
+	}
+
+	@Tag(name = "member")
+	@Operation(summary = "회원 커피콩 조회 API", description = "회원 커피콩 조회 API")
+	@ApiResponses({
+		@ApiResponse(responseCode = "A-001", description = "토큰이 만료되었습니다."),
+		@ApiResponse(responseCode = "A-002", description = "해당 토큰은 유효한 토큰이 아닙니다."),
+		@ApiResponse(responseCode = "M-003", description = "해당 회원은 존재하지 않습니다.")
+	})
+	@GetMapping("/coffeebean")
+	public ResponseEntity<Integer> getMemberCoffeeBean(@ApiIgnore @MemberInfo MemberInfoDTO memberInfoDTO) {
+		final Member member = memberService.findMemberByMemberId(memberInfoDTO.getMemberId());
+		return ResponseEntity.ok(member.getCoffeeBean());
 	}
 }
