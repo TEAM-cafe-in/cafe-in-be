@@ -117,22 +117,4 @@ public class Member extends BaseTimeEntity {
 	public void addCoffeeBean(Integer currentCoffeeBean) {
 		this.coffeeBean = currentCoffeeBean + 2;
 	}
-
-	@Override
-	public String toString() {
-		return "Member{" +
-			"memberId=" + memberId +
-			", memberType=" + memberType +
-			", email='" + email + '\'' +
-			", password='" + password + '\'' +
-			", name='" + name + '\'' +
-			", profile='" + profile + '\'' +
-			", coffeeBean=" + coffeeBean +
-			", role=" + role +
-			", refreshToken='" + refreshToken + '\'' +
-			", tokenExpirationTime=" + tokenExpirationTime +
-			", reviews=" + reviews +
-			", comments=" + comments +
-			'}';
-	}
 }
