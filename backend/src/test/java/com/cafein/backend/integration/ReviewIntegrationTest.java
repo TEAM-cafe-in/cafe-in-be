@@ -9,15 +9,12 @@ import org.springframework.http.HttpStatus;
 
 import com.cafein.backend.support.utils.IntegrationTest;
 
-import io.restassured.response.ExtractableResponse;
-import io.restassured.response.Response;
-
 @IntegrationTest
 class ReviewIntegrationTest extends IntegrationSupporter {
 
 	@Test
 	void 카페에_대한_리뷰를_등록한다() {
-		final ExtractableResponse<Response> response = post("/api/cafe/4/review", generateAccessHeader(access_token), REVIEW_REQUEST);
+		final var response = post("/api/cafe/4/review", generateAccessHeader(access_token), REVIEW_REQUEST);
 
 		Assertions.assertAll(
 			() -> assertThat(response.statusCode()).isEqualTo(HttpStatus.CREATED.value()),
