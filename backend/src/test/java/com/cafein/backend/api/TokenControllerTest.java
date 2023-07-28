@@ -6,17 +6,12 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 import org.junit.jupiter.api.Test;
-import org.mockito.Mock;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 
 import com.cafein.backend.api.token.controller.TokenController;
-import com.cafein.backend.api.token.service.TokenService;
 
 class TokenControllerTest extends ControllerTestSupporter {
-
-	@Mock
-	private TokenService tokenService;
 
 	@Test
 	void refresh_token을_이용해_access_token을_재발급한다() throws Exception {

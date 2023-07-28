@@ -7,25 +7,12 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 import org.junit.jupiter.api.Test;
-import org.mockito.Mock;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 
 import com.cafein.backend.api.cafe.controller.CafeController;
-import com.cafein.backend.domain.cafe.service.CafeService;
-import com.cafein.backend.domain.member.service.MemberService;
-import com.cafein.backend.domain.viewedcafe.service.ViewedCafeService;
 
 class CafeControllerTest extends ControllerTestSupporter {
-
-	@Mock
-	private CafeService cafeService;
-
-	@Mock
-	private ViewedCafeService viewedCafeService;
-
-	@Mock
-	private MemberService memberService;
 
 	@Test
 	void 카페_정보를_조회한다() throws Exception {

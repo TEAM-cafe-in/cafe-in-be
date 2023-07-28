@@ -6,16 +6,11 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 import org.junit.jupiter.api.Test;
-import org.mockito.Mock;
 
 import com.cafein.backend.api.home.controller.HomeController;
 import com.cafein.backend.api.home.dto.HomeResponseDTO;
-import com.cafein.backend.domain.cafe.service.CafeService;
 
 class HomeControllerTest extends ControllerTestSupporter {
-
-	@Mock
-	private CafeService cafeService;
 
 	@Test
 	void 홈_화면에_필요한_카페_정보를_반환한다() throws Exception {
