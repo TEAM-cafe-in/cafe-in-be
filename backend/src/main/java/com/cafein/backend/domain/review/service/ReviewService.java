@@ -50,7 +50,7 @@ public class ReviewService {
 	}
 
 	@Transactional(readOnly = true)
-	public void validateReview(final Long cafeId, final Long memberId) {
+	public void validateReview(final Long memberId, final Long cafeId) {
 		final List<Long> cafeIdsOfRecentReviews = reviewRepository.findCafeIdsOfRecentReviews(memberId);
 		log.info("cafeIdsOfRecentReviews = {}", cafeIdsOfRecentReviews);
 		if (cafeIdsOfRecentReviews.contains(cafeId)) {
