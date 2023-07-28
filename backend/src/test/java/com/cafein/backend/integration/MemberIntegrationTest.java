@@ -60,4 +60,14 @@ class MemberIntegrationTest extends IntegrationSupporter {
 			() ->assertThat(responseExtractableResponse.body().asString()).isEqualTo("Name change successful!")
 		);
 	}
+
+	@Test
+	void 회원의_커피콩을_조회한다() {
+		ExtractableResponse<Response> response = get("/api/member/coffeebean", generateAccessHeader(access_token));
+
+		assertAll(
+			() -> assertThat(response.statusCode()).isEqualTo(HttpStatus.OK.value()),
+			() -> assertThat(response.body().asString()).isEqualTo("100")
+		);
+	}
 }
