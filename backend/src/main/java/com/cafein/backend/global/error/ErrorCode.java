@@ -37,7 +37,8 @@ public enum ErrorCode {
 	COMMENT_NOT_FOUND(HttpStatus.BAD_REQUEST, "CO-002", "카페에 해당하는 댓글이 존재하지 않습니다."),
 
 	// 혼잡도
-	INVALID_CAFE_CONGESTION_VALUE(HttpStatus.BAD_REQUEST, "CR-001" , "카페의 혼잡도는 1[LOW], 2[MEDIUM], 3[HIGH] 중 하나입니다.");
+	INVALID_CAFE_CONGESTION_VALUE(HttpStatus.BAD_REQUEST, "CR-001" , "카페의 혼잡도는 1[LOW], 2[MEDIUM], 3[HIGH] 중 하나입니다."),
+	CONGESTION_ALREADY_REQUESTED(HttpStatus.BAD_REQUEST, "CR-002", "오늘 이미 혼잡도를 요청한 카페입니다.");
 
 	private HttpStatus httpStatus;
 	private String errorCode;
