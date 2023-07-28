@@ -17,6 +17,5 @@ import org.springframework.boot.test.context.SpringBootTest;
 @Retention(RetentionPolicy.RUNTIME)
 @ExtendWith(MockitoExtension.class)
 @DisplayNameGeneration(DisplayNameGenerator.ReplaceUnderscores.class)
-@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 public @interface ServiceTest {
 }

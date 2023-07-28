@@ -7,10 +7,9 @@ import static org.mockito.BDDMockito.*;
 import java.time.LocalDateTime;
 
 import org.junit.jupiter.api.Test;
+import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Spy;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.mock.mockito.MockBean;
 
 import com.cafein.backend.api.logout.service.LogoutService;
 import com.cafein.backend.domain.member.entity.Member;
@@ -23,13 +22,13 @@ import io.jsonwebtoken.Claims;
 @ServiceTest
 class LogoutServiceTest {
 
-	@Autowired
+	@InjectMocks
 	private LogoutService logoutService;
 
-	@MockBean
+	@Mock
 	private MemberService memberService;
 
-	@MockBean
+	@Mock
 	private TokenManager tokenManager;
 
 	@Spy

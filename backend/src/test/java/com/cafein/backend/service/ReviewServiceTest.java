@@ -4,8 +4,8 @@ import static org.assertj.core.api.Assertions.*;
 import static org.mockito.BDDMockito.*;
 
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.mock.mockito.MockBean;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
 
 import com.cafein.backend.domain.cafe.entity.Cafe;
 import com.cafein.backend.domain.cafe.service.CafeService;
@@ -21,16 +21,16 @@ import com.cafein.backend.support.utils.ServiceTest;
 @ServiceTest
 class ReviewServiceTest {
 
-	@Autowired
+	@InjectMocks
 	private ReviewService reviewService;
 
-	@MockBean
+	@Mock
 	private MemberService memberService;
 
-	@MockBean
+	@Mock
 	private CafeService cafeService;
 
-	@MockBean
+	@Mock
 	private ReviewRepository reviewRepository;
 
 	@Test

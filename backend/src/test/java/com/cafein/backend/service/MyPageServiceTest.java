@@ -6,25 +6,30 @@ import static org.mockito.BDDMockito.*;
 import java.util.Collections;
 
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.mock.mockito.MockBean;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
 
 import com.cafein.backend.api.member.dto.MyPageDTO;
 import com.cafein.backend.api.member.service.MyPageService;
 import com.cafein.backend.domain.cafe.service.CafeService;
 import com.cafein.backend.domain.review.respository.ReviewRepository;
+import com.cafein.backend.domain.viewedcafe.service.ViewedCafeService;
+import com.cafein.backend.support.fixture.CafeFixture;
 import com.cafein.backend.support.utils.ServiceTest;
 
 @ServiceTest
 class MyPageServiceTest {
 
-	@Autowired
+	@InjectMocks
 	private MyPageService myPageService;
 
-	@MockBean
+	@Mock
 	private ReviewRepository reviewRepository;
 
-	@MockBean
+	@Mock
+	private ViewedCafeService viewedCafeService;
+
+	@Mock
 	private CafeService cafeService;
 
 	@Test
@@ -32,6 +37,7 @@ class MyPageServiceTest {
 		given(cafeService.findCafeInfoViewedByMember(any())).willReturn(Collections.emptyList());
 		given(reviewRepository.findReviewsByMemberId(anyLong())).willReturn(Collections.emptyList());
 		given(reviewRepository.countReviewByMemberId(anyLong())).willReturn(5L);
+		given(viewedCafeService.findViewedCafes(anyLong())).willReturn(CafeFixture.VIEWED_CAFE_IDS);
 
 		final MyPageDTO myPageDTO = myPageService.getMyPageDTO(1L);
 
