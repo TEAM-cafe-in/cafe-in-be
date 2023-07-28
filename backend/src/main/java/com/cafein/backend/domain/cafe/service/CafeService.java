@@ -12,7 +12,9 @@ import com.cafein.backend.api.home.dto.HomeResponseDTO;
 import com.cafein.backend.api.member.dto.CafeInfoViewedByMemberProjection;
 import com.cafein.backend.domain.cafe.entity.Cafe;
 import com.cafein.backend.domain.cafe.repository.CafeRepository;
+import com.cafein.backend.domain.comment.constant.Keyword;
 import com.cafein.backend.domain.comment.entity.Comment;
+import com.cafein.backend.domain.commentkeyword.entity.CommentKeyword;
 import com.cafein.backend.global.error.ErrorCode;
 import com.cafein.backend.global.error.exception.EntityNotFoundException;
 
@@ -52,8 +54,14 @@ public class CafeService {
 				.memberName(comment.getMember().getName())
 				.createdTime(comment.getCreatedTime())
 				.content(comment.getContent())
-				.keywords(comment.getKeywords())
+				.keywords(getCommentKeywords(comment))
 				.build())
+			.collect(Collectors.toList());
+	}
+
+	private List<Keyword> getCommentKeywords(Comment comment) {
+		return comment.getKeywords().stream()
+			.map(CommentKeyword::getKeyword)
 			.collect(Collectors.toList());
 	}
 

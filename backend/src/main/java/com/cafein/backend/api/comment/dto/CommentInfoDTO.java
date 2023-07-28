@@ -3,7 +3,7 @@ package com.cafein.backend.api.comment.dto;
 import java.time.LocalDateTime;
 import java.util.List;
 
-import com.cafein.backend.domain.commentkeyword.entity.CommentKeyword;
+import com.cafein.backend.domain.comment.constant.Keyword;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Builder;
@@ -25,5 +25,5 @@ public class CommentInfoDTO {
 	private String content;
 
 	@Schema(name = "keywords", description = "댓글 키워드", type = "array", example = "[청결도, 콘센트]", required = true)
-	private List<CommentKeyword> keywords;
+	private List<Keyword> keywords;
 }

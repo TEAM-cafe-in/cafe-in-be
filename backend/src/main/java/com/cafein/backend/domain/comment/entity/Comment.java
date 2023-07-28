@@ -59,15 +59,4 @@ public class Comment extends BaseTimeEntity {
 	public void updateContent(final String content) {
 		this.content = content;
 	}
-
-	@Override
-	public String toString() {
-		return "Comment{" +
-			"commentId=" + commentId +
-			", content='" + content + '\'' +
-			", keywords=" + keywords +
-			", cafe=" + cafe +
-			", member=" + member +
-			'}';
-	}
 }

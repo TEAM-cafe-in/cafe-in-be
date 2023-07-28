@@ -8,6 +8,8 @@ import org.springframework.transaction.annotation.Transactional;
 import com.cafein.backend.domain.member.entity.Member;
 import com.cafein.backend.domain.viewedcafe.entity.ViewedCafe;
 import com.cafein.backend.domain.viewedcafe.repository.ViewedCafeRepository;
+import com.cafein.backend.global.error.ErrorCode;
+import com.cafein.backend.global.error.exception.BusinessException;
 
 import lombok.RequiredArgsConstructor;
 
@@ -31,5 +33,11 @@ public class ViewedCafeService {
 				.member(member)
 				.build()
 		);
+	}
+
+	public void validateCongestionRequest(Long memberId, Long cafeId) {
+		if (viewedCafeRepository.validateCongestionRequest(memberId, cafeId) == 1) {
+			throw new BusinessException(ErrorCode.CONGESTION_ALREADY_REQUESTED);
+		}
 	}
 }
