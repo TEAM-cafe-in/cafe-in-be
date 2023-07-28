@@ -48,4 +48,15 @@ class CafeIntegrationTest extends IntegrationSupporter {
 				.isEqualTo("3")
 		);
 	}
+
+	@Test
+	void 이미_커피콩을_사용해서_조회한_카페에_다시_요청을_보내면_에러를_던진다() {
+		final ExtractableResponse<Response> response = post("/api/cafe/1", generateAccessHeader(access_token));
+		final ExtractableResponse<Response> response2 = post("/api/cafe/1", generateAccessHeader(access_token));
+
+		Assertions.assertAll(
+			() -> assertThat(response.statusCode()).isEqualTo(HttpStatus.OK.value()),
+			() -> assertThat(response2.statusCode()).isEqualTo(HttpStatus.BAD_REQUEST.value())
+		);
+	}
 }
