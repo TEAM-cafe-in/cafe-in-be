@@ -16,8 +16,7 @@ class MemberIntegrationTest extends IntegrationSupporter {
 		final var response = get("/api/member/info", generateAccessHeader(access_token));
 
 		assertThat(response.statusCode()).isEqualTo(HttpStatus.OK.value());
-		assertThat(response.body().jsonPath().getString("memberName"))
-			.isEqualTo(member.getName());
+		assertThat(response.body().jsonPath().getString("memberName")).isEqualTo(member.getName());
 	}
 
 	@Test

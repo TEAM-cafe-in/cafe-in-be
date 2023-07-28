@@ -6,17 +6,12 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 import org.junit.jupiter.api.Test;
-import org.mockito.Mock;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 
 import com.cafein.backend.api.logout.controller.LogoutController;
-import com.cafein.backend.api.logout.service.LogoutService;
 
 public class LogoutControllerTest extends ControllerTestSupporter{
-
-	@Mock
-	private LogoutService logoutService;
 
 	@Test
 	void 로그아웃을_진행한다() throws Exception {

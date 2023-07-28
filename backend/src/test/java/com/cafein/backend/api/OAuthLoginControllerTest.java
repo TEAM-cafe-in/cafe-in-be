@@ -6,18 +6,13 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 import org.junit.jupiter.api.Test;
-import org.mockito.Mock;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 
 import com.cafein.backend.api.login.controller.OAuthLoginController;
-import com.cafein.backend.api.login.service.OAuthLoginService;
 import com.cafein.backend.domain.member.constant.MemberType;
 
 class OAuthLoginControllerTest extends ControllerTestSupporter {
-
-	@Mock
-	private OAuthLoginService oAuthLoginService;
 
 	@Test
 	void 카카오_토큰으로_로그인을_진행한다() throws Exception {

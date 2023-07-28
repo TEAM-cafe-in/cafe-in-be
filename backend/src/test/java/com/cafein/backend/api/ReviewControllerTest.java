@@ -9,16 +9,11 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 import org.apache.http.HttpHeaders;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mock;
 
 import com.cafein.backend.api.review.controller.ReviewController;
-import com.cafein.backend.domain.review.service.ReviewService;
 import com.cafein.backend.support.fixture.LoginFixture;
 
 class ReviewControllerTest extends ControllerTestSupporter {
-
-	@Mock
-	private ReviewService reviewService;
 
 	@Test
 	void 리뷰를_등록한다() throws Exception {

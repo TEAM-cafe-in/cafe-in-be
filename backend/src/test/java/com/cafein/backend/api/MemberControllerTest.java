@@ -7,26 +7,13 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 import org.junit.jupiter.api.Test;
-import org.mockito.Mock;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 
 import com.cafein.backend.api.member.controller.MemberController;
 import com.cafein.backend.api.member.dto.MyPageDTO;
-import com.cafein.backend.api.member.service.MemberInfoService;
-import com.cafein.backend.api.member.service.MyPageService;
-import com.cafein.backend.domain.member.service.MemberService;
 
 class MemberControllerTest extends ControllerTestSupporter {
-
-	@Mock
-	private MemberService memberService;
-
-	@Mock
-	private MemberInfoService memberInfoService;
-
-	@Mock
-	private MyPageService myPageService;
 
 	@Test
 	void 회원_정보를_가져온다() throws Exception {
