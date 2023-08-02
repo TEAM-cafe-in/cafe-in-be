@@ -2,7 +2,7 @@
 <br>
 
 <p align="center">
-   <img src="https://github.com/TEAM-cafe-in/cafe-in-be/blob/docs/readme-%23103/docs/img/cafein_logo.png" width="400" height="200">
+   <img src="https://github.com/TEAM-cafe-in/cafe-in-be/blob/develop/docs/img/cafein_logo.png" width="400" height="200">
 </p>
 
 <br>
@@ -14,12 +14,12 @@
 
 ### 프로젝트 데모
 
-<img src="https://github.com/TEAM-cafe-in/cafe-in-be/blob/docs/readme-%23103/docs/img/cafein.gif" width="700" height="400"/>
+<img src="https://github.com/TEAM-cafe-in/cafe-in-be/blob/develop/docs/img/cafein.gif" width="700" height="400"/>
 
 
 ### 기술 스택
 
-<img src="https://github.com/TEAM-cafe-in/cafe-in-be/blob/docs/readme-%23103/docs/img/project_stack.jpeg" width="700" height="400"/>
+<img src="https://github.com/TEAM-cafe-in/cafe-in-be/blob/develop/docs/img/project_stack.jpeg" width="700" height="400"/>
 
 ### 팀원
    
