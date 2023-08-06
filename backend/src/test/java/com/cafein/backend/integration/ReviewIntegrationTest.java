@@ -22,4 +22,15 @@ class ReviewIntegrationTest extends IntegrationSupporter {
 			() -> assertThat(memberService.findMemberByMemberId(1L).getCoffeeBean()).isEqualTo(102)
 		);
 	}
+
+	@Test
+	void 동일_카페에_대해_하루에_한_번만_리뷰를_등록_가능하다() {
+		final var response = post("/api/cafe/3/review", generateAccessHeader(access_token), REVIEW_REQUEST);
+
+		assertAll(
+			() -> assertThat(response.statusCode()).isEqualTo(HttpStatus.BAD_REQUEST.value()),
+			() -> assertThat(response.body().jsonPath().getString("errorMessage"))
+				.isEqualTo("해당 카페에 대해 하루에 한번만 리뷰를 작성할 수 있습니다.")
+		);
+	}
 }
