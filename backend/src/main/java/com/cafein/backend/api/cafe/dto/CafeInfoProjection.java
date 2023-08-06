@@ -1,7 +1,22 @@
 package com.cafein.backend.api.cafe.dto;
 
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+
 import io.swagger.v3.oas.annotations.media.Schema;
 
+@JsonPropertyOrder({
+	"cafeId",
+	"name",
+	"averageCongestion",
+	"hasPlugCount",
+	"isCleanCount",
+	"phoneNumber",
+	"address",
+	"status",
+	"local",
+	"latitude",
+	"longitude"
+})
 public interface CafeInfoProjection {
 
 	@Schema(description = "카페 이름", example = "5to7", required = true)
