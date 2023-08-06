@@ -40,7 +40,7 @@ public class CafeController {
 	})
 	@GetMapping("/cafe/{cafeId}")
 	public ResponseEntity<CafeDTO> cafeInfo(@PathVariable Long cafeId,
-											    @ApiIgnore @MemberInfo MemberInfoDTO memberInfoDTO) {
+										    @ApiIgnore @MemberInfo MemberInfoDTO memberInfoDTO) {
 		return ResponseEntity.ok(cafeService.findCafeInfoById(memberInfoDTO.getMemberId(), cafeId));
 	}
 
@@ -52,7 +52,7 @@ public class CafeController {
 	})
 	@PostMapping("/cafe/{cafeId}")
 	public ResponseEntity<CafeDTO> cafeCongestionCheck(@PathVariable Long cafeId,
-								           		           @ApiIgnore @MemberInfo MemberInfoDTO memberInfoDTO) {
+		                                               @ApiIgnore @MemberInfo MemberInfoDTO memberInfoDTO) {
 		log.debug("memberId = {}", memberInfoDTO.getMemberId());
 		final Long memberId = memberInfoDTO.getMemberId();
 		viewedCafeService.validateCongestionRequest(memberId, cafeId);

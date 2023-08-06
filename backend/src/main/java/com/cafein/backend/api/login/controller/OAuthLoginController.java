@@ -56,7 +56,7 @@ public class OAuthLoginController {
 			.from("refresh_token", jwtTokenOAuthLoginResponseDTO.getRefreshToken())
 			.httpOnly(true)
 			.sameSite("Strict")
-			.maxAge(60 * 60 * 24 * 14)		//2주
+			.maxAge(60 * 60 * 24 * 14)
 			.build();
 
 		httpServletResponse.setHeader(HttpHeaders.SET_COOKIE, responseCookie.toString());
