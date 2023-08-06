@@ -25,7 +25,7 @@ class CafeControllerTest extends ControllerTestSupporter {
 				.header(HttpHeaders.AUTHORIZATION, AUTHORIZATION_HEADER_ACCESS)
 			)
 			.andExpect(status().isOk())
-			.andExpect(jsonPath("$.cafeInfoProjection.name").value("5to7"));
+			.andExpect(jsonPath("$.cafeInfo.name").value("5to7"));
 	}
 
 	@Test
@@ -39,7 +39,7 @@ class CafeControllerTest extends ControllerTestSupporter {
 				.header(HttpHeaders.AUTHORIZATION, AUTHORIZATION_HEADER_ACCESS)
 			)
 			.andExpect(status().isOk())
-			.andExpect(jsonPath("$.cafeInfoProjection.name").value("5to7"));
+			.andExpect(jsonPath("$.cafeInfo.name").value("5to7"));
 
 		then(memberService).should(times(1)).subtractCoffeeBean(any());
 		then(viewedCafeService).should(times(1)).addViewedCafe(any(), any());

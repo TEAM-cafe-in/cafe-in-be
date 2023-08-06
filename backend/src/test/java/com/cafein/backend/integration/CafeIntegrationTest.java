@@ -23,14 +23,14 @@ class CafeIntegrationTest extends IntegrationSupporter {
 	void 커피콩을_사용하지_않아_혼잡도_조회_권한이_없는_카페_정보를_반환한다() {
 		final var response = get("/api/cafe/2", generateAccessHeader(access_token));
 
-		assertThat(response.jsonPath().getString("cafeInfoProjection.averageCongestion")).isEqualTo("0");
+		assertThat(response.jsonPath().getString("cafeInfo.averageCongestion")).isEqualTo("0");
 	}
 
 	@Test
 	void 커피콩을_사용해_이미_조회한_카페_정보를_반환한다() {
 		final var response = get("/api/cafe/3", generateAccessHeader(access_token));
 
-		assertThat(response.jsonPath().getString("cafeInfoProjection.averageCongestion")).isEqualTo("3");
+		assertThat(response.jsonPath().getString("cafeInfo.averageCongestion")).isEqualTo("3");
 	}
 
 	@Test
