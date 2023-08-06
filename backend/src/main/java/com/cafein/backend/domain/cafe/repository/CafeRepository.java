@@ -40,7 +40,7 @@ public interface CafeRepository extends JpaRepository<Cafe, Long> {
 		+ "avg_congestion ON c.cafe_id = avg_congestion.cafe_id "
 		+ "LEFT JOIN "
 		+ "viewed_cafe vc ON c.cafe_id = vc.cafe_id AND vc.member_id = :memberId "
-		+ "ORDER BY "
+		+ "ORDER BY c.cafe_id, "
 		+ "(COALESCE(r.review_count, 0) + COALESCE(co.comment_count, 0)) DESC, c.name ", nativeQuery = true)
 	List<HomeProjection> getHomeData(@Param("memberId") Long memberId);
 
