@@ -57,4 +57,12 @@ public class ReviewService {
 			throw new BusinessException(ErrorCode.REVIEWED_CAFE_WITHIN_A_DAY);
 		}
 	}
+
+	@Transactional(readOnly = true)
+	public void validateReviewExists(final Long cafeId) {
+		log.info("hasReviewed = {}", reviewRepository.existsReviewByCafeId(cafeId));
+		if (!reviewRepository.existsReviewByCafeId(cafeId)) {
+			throw new BusinessException(ErrorCode.REVIEW_NOT_FOUND);
+		}
+	}
 }

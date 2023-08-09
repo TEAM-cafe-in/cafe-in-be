@@ -31,6 +31,7 @@ public enum ErrorCode {
 
 	// 리뷰
 	REVIEWED_CAFE_WITHIN_A_DAY(HttpStatus.BAD_REQUEST, "R-001", "해당 카페에 대해 하루에 한번만 리뷰를 작성할 수 있습니다."),
+	REVIEW_NOT_FOUND(HttpStatus.BAD_REQUEST, "R-002", "해당 카페에는 리뷰가 존재하지 않아 혼잡도를 확인할 수 없습니다."),
 
 	// 댓글
 	KEYWORD_NOT_EXIST(HttpStatus.BAD_REQUEST,"CO-001","해당 키워드는 존재하지 않습니다."),

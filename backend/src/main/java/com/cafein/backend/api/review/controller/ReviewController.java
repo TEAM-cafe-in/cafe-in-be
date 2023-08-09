@@ -44,10 +44,8 @@ public class ReviewController {
 	})
 	@PostMapping("/cafe/{cafeId}/review")
 	public ResponseEntity<ReviewResponse> createCafeReview(@Valid @RequestBody ReviewRequest reviewRequestDTO,
-		 													   @ApiIgnore @MemberInfo MemberInfoDTO memberInfoDTO,
-							  					 			   @PathVariable Long cafeId) {
-		// TODO 동시성 처리 필요
-		log.debug("memberId = {}", memberInfoDTO.getMemberId());
+		 												   @ApiIgnore @MemberInfo MemberInfoDTO memberInfoDTO,
+									                       @PathVariable Long cafeId) {
 		reviewService.validateReview(memberInfoDTO.getMemberId(), cafeId);
 		ReviewResponse reviewResponse = reviewService.createReview(reviewRequestDTO, cafeId, memberInfoDTO.getMemberId());
 		return ResponseEntity.created(URI.create("/api/cafe/" + cafeId + "/review/" + reviewResponse.getReviewId()))

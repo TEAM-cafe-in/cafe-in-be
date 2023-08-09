@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.cafein.backend.api.cafe.dto.CafeDTO;
 import com.cafein.backend.domain.cafe.service.CafeService;
 import com.cafein.backend.domain.member.service.MemberService;
+import com.cafein.backend.domain.review.service.ReviewService;
 import com.cafein.backend.domain.viewedcafe.service.ViewedCafeService;
 import com.cafein.backend.global.resolver.MemberInfo;
 import com.cafein.backend.global.resolver.MemberInfoDTO;
@@ -31,16 +32,17 @@ public class CafeController {
 
 	private final MemberService	memberService;
 	private final CafeService cafeService;
+	private final ReviewService reviewService;
 	private final ViewedCafeService viewedCafeService;
 
 	@Tag(name = "cafe")
-	@Operation(summary = "카페 상세보기 API(커피콩을 사용해서 이미 조회한 카페)", description = "카페 정보를 조회하는 API")
+	@Operation(summary = "카페 상세보기 API", description = "카페 정보를 조회하는 API")
 	@ApiResponses({
 		@ApiResponse(responseCode = "C-001", description = "해당 카페는 존재하지 않습니다.")
 	})
 	@GetMapping("/cafe/{cafeId}")
 	public ResponseEntity<CafeDTO> cafeInfo(@PathVariable Long cafeId,
-											    @ApiIgnore @MemberInfo MemberInfoDTO memberInfoDTO) {
+										    @ApiIgnore @MemberInfo MemberInfoDTO memberInfoDTO) {
 		return ResponseEntity.ok(cafeService.findCafeInfoById(memberInfoDTO.getMemberId(), cafeId));
 	}
 
@@ -52,9 +54,9 @@ public class CafeController {
 	})
 	@PostMapping("/cafe/{cafeId}")
 	public ResponseEntity<CafeDTO> cafeCongestionCheck(@PathVariable Long cafeId,
-								           		           @ApiIgnore @MemberInfo MemberInfoDTO memberInfoDTO) {
-		log.debug("memberId = {}", memberInfoDTO.getMemberId());
+		                                               @ApiIgnore @MemberInfo MemberInfoDTO memberInfoDTO) {
 		final Long memberId = memberInfoDTO.getMemberId();
+		reviewService.validateReviewExists(cafeId);
 		viewedCafeService.validateCongestionRequest(memberId, cafeId);
 		memberService.subtractCoffeeBean(memberId);
 		viewedCafeService.addViewedCafe(memberService.findMemberByMemberId(memberId), cafeId);
