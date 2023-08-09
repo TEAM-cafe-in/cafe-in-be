@@ -18,7 +18,7 @@ class CafeControllerTest extends ControllerTestSupporter {
 	void 카페_정보를_조회한다() throws Exception {
 		given(cafeService.findCafeInfoById(anyLong(), eq(1L))).willReturn(CAFE_INFO_DTO);
 
-		mockMvc(new CafeController(memberService, cafeService, viewedCafeService))
+		mockMvc(new CafeController(memberService, cafeService, reviewService, viewedCafeService))
 			.perform(
 				get("/api/cafe/1")
 				.contentType(MediaType.APPLICATION_JSON_VALUE)
@@ -32,7 +32,7 @@ class CafeControllerTest extends ControllerTestSupporter {
 	void 커피콩을_사용해서_카페_정보를_열람한다() throws Exception {
 		given(cafeService.findCafeInfoById(anyLong(), eq(1L))).willReturn(CAFE_INFO_DTO);
 
-		mockMvc(new CafeController(memberService, cafeService, viewedCafeService))
+		mockMvc(new CafeController(memberService, cafeService, reviewService, viewedCafeService))
 			.perform(
 				post("/api/cafe/1")
 				.contentType(MediaType.APPLICATION_JSON_VALUE)
