@@ -23,13 +23,16 @@ public interface ReviewRepository extends JpaRepository<Review, Long> {
 		+ "WHERE r.member_id = :memberId ", nativeQuery = true)
 	List<MemberReviewProjection> findReviewsByMemberId(@Param("memberId") Long memberId);
 
-	@Query("select count(r) from Review r where r.member.memberId = :memberId")
-	long countReviewByMemberId(@Param("memberId") Long memberId);
-
 	@Query(value = "SELECT "
 		+ "r.cafe_id "
 		+ "FROM review r "
 		+ "WHERE r.member_id = :memberId "
 		+ "AND r.created_time > DATE_SUB(NOW(), INTERVAL 1 DAY) ", nativeQuery = true)
 	List<Long> findCafeIdsOfRecentReviews(@Param("memberId") Long memberId);
+
+	@Query("select count(r) from Review r where r.member.memberId = :memberId")
+	long countReviewByMemberId(@Param("memberId") Long memberId);
+
+	@Query("SELECT CASE WHEN COUNT(r) > 0 THEN true ELSE false END FROM Review r WHERE r.cafe.cafeId = :cafeId")
+	Boolean existsReviewByCafeId(@Param("cafeId") Long cafeId);
 }

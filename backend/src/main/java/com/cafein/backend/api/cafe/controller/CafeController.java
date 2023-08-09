@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.cafein.backend.api.cafe.dto.CafeDTO;
 import com.cafein.backend.domain.cafe.service.CafeService;
 import com.cafein.backend.domain.member.service.MemberService;
+import com.cafein.backend.domain.review.service.ReviewService;
 import com.cafein.backend.domain.viewedcafe.service.ViewedCafeService;
 import com.cafein.backend.global.resolver.MemberInfo;
 import com.cafein.backend.global.resolver.MemberInfoDTO;
@@ -31,6 +32,7 @@ public class CafeController {
 
 	private final MemberService	memberService;
 	private final CafeService cafeService;
+	private final ReviewService reviewService;
 	private final ViewedCafeService viewedCafeService;
 
 	@Tag(name = "cafe")
@@ -54,6 +56,7 @@ public class CafeController {
 	public ResponseEntity<CafeDTO> cafeCongestionCheck(@PathVariable Long cafeId,
 		                                               @ApiIgnore @MemberInfo MemberInfoDTO memberInfoDTO) {
 		final Long memberId = memberInfoDTO.getMemberId();
+		reviewService.validateReviewExists(cafeId);
 		viewedCafeService.validateCongestionRequest(memberId, cafeId);
 		memberService.subtractCoffeeBean(memberId);
 		viewedCafeService.addViewedCafe(memberService.findMemberByMemberId(memberId), cafeId);
