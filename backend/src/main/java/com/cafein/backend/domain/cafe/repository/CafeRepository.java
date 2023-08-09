@@ -54,6 +54,7 @@ public interface CafeRepository extends JpaRepository<Cafe, Long> {
 		+ "(SELECT COUNT(is_clean) FROM review r WHERE c.cafe_id = r.cafe_id AND r.is_clean=1) AS 'isCleanCount', "
 		+ "COALESCE(c.phone_number, '등록된 전화번호가 없습니다') AS 'phoneNumber', "
 		+ "CONCAT(c.sigungu, ' ', c.road_name, c.house_number) AS 'address', "
+		+ "(SELECT CASE WHEN COUNT(r.cafe_id) > 0 THEN 'true' ELSE 'false' END FROM  review r WHERE r.cafe_id = :cafeId) AS 'hasReviewed', "
 		+ "CASE WHEN CURRENT_TIME() BETWEEN oh.open_time AND oh.close_time THEN '영업중' ELSE '영업종료' END AS 'status', "
 		+ "CASE WHEN vc.cafe_id IS NOT NULL THEN CAST(COALESCE(avg_congestion.avg_congestion, 0) AS UNSIGNED) ELSE '0' END AS 'averageCongestion'"
 		+ "FROM cafe c "
@@ -89,4 +90,7 @@ public interface CafeRepository extends JpaRepository<Cafe, Long> {
 	Optional<Cafe> findByName(String name);
 
 	long count();
+
+	@Query("SELECT CASE WHEN COUNT(r) > 0 THEN true ELSE false END FROM Review r WHERE r.cafe.cafeId = :cafeId")
+	boolean existsReviewByCafeId(Long cafeId);
 }
