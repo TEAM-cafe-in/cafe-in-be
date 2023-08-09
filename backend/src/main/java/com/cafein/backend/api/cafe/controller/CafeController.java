@@ -34,7 +34,7 @@ public class CafeController {
 	private final ViewedCafeService viewedCafeService;
 
 	@Tag(name = "cafe")
-	@Operation(summary = "카페 상세보기 API(커피콩을 사용해서 이미 조회한 카페)", description = "카페 정보를 조회하는 API")
+	@Operation(summary = "카페 상세보기 API", description = "카페 정보를 조회하는 API")
 	@ApiResponses({
 		@ApiResponse(responseCode = "C-001", description = "해당 카페는 존재하지 않습니다.")
 	})
@@ -53,7 +53,6 @@ public class CafeController {
 	@PostMapping("/cafe/{cafeId}")
 	public ResponseEntity<CafeDTO> cafeCongestionCheck(@PathVariable Long cafeId,
 		                                               @ApiIgnore @MemberInfo MemberInfoDTO memberInfoDTO) {
-		log.debug("memberId = {}", memberInfoDTO.getMemberId());
 		final Long memberId = memberInfoDTO.getMemberId();
 		viewedCafeService.validateCongestionRequest(memberId, cafeId);
 		memberService.subtractCoffeeBean(memberId);
